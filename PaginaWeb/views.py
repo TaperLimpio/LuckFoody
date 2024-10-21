@@ -8,3 +8,6 @@ def portalpago(request):
 
 def ingresarplatillo(request):
     return render(request,"ingresarplatillo.html")
+
+def verplatillo(request):
+    return render(request, 'verplatillo.html')
