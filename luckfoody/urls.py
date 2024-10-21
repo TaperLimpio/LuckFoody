@@ -16,7 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from PaginaWeb.views import portalpago,ingresarplatillo
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('portal pago/',portalpago),
+    path('ingresar platillo/',ingresarplatillo)
 ]
