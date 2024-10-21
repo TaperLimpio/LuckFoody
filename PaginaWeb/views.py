@@ -11,3 +11,6 @@ def ingresarplatillo(request):
 
 def verplatillo(request):
     return render(request, 'verplatillo.html')
+
+def carritocompra(request):
+    return render(request,'carrito.html')

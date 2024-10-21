@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuckFoody - Ingreso de Platillos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #32CD32, #FFD700);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 600px;
+        }
+        h1 {
+            font-family: 'Lobster', cursive;
+            color: green;
+            font-size: 2.5em;
+        }
+        .shamrock {
+            font-size: 3em;
+            color: #FFD700;
+        }
+        .pedido_row{
+            text-align: left;
+            font-size: 85%;
+        }
+        .titulo {
+            display: inline;
+        }
+        .barra_busqueda {
+            margin-bottom: 20px;
+        }
+        #BarraBusqueda, #btnBuscar{
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>LuckFoody</h1>
+        <div class="shamrock">🍀</div>
+        <div class="container barra_busqueda">
+            <form method="post">
+                <div class="input-group">
+                    <input type="text" placeholder="Ingrese el ID" id="BarraBusqueda" class="form-control">
+                    <input type="submit" value="Buscar" class="btn btn-success" id="btnBuscar">
+                </div>
+            </form>
+        </div>
+        <h4 style="text-align: left; margin:10px;">1 resultado:</h4>
+        <!-- Ejemplo de pedido en compra -->
+        <div class="container pedido_row">
+            <h4 class="titulo"><b>ID: ;Fecha; Hora-de-pedido</b></h4>
+            <p><b>Direccion: </b></p>
+            <!-- lista de platillos-->
+            <p><b>Lista de platillos:</b></p>
+            <ul>
+                <li>A, <i>$0</i></li>
+                <li>B, <i>$0</i></li>
+                <li>C, <i>$0</i></li>
+            </ul>
+            <p><b>Descuenta: %0</b></p>
+            <p><b>Total:</b><i>$0</i></p>
+                                        <!-- Estado  -->
+            <!--<p><b>Estado: </b><i class="bi bi-cookie"> preparando....</i></p>-->
+            <!--<p><b>Estado: </b><i class="bi bi-person-walking"> entregando....</i></p>-->
+            <p><b>Estado: </b><i class="bi bi-house"> Entregado</i></p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
