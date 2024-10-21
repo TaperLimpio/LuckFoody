@@ -11,3 +11,13 @@ def ingresarplatillo(request):
 
 def verplatillo(request):
     return render(request, 'verplatillo.html')
+
+def pagofracaso(request):
+    return render(request,"pagofracaso.html")
+
+def pagoexitoso(request):
+    return render(request,"pago exitoso.html")
+
+def ingresarcatalogo(request):
+    return render(request,"ingresar catalogo.html")
+
