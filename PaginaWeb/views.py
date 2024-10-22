@@ -21,7 +21,8 @@ def pagoexitoso(request):
 def ingresarcatalogo(request):
     return render(request,"ingresar catalogo.html")
 
-
+def paginaprincipal(request):
+    return render(request,"paginaprincipal.html")
 
 def carritocompra(request):
     return render(request,'carrito.html')
