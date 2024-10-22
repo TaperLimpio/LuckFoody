@@ -18,6 +18,9 @@ def Administrador(request):
 def Repartidor(request):
     return render(request, "pagina-repartidor.html")
 
+def CrearCuentaAdmin(request):
+    return render(request, "crear-cuenta-admin.html")
+
 def ingresarplatillo(request):
     return render(request,"ingresarplatillo.html")
 
