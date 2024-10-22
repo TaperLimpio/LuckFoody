@@ -16,12 +16,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+<<<<<<< HEAD
 from PaginaWeb.views import portalpago,ingresarplatillo,verplatillo,pagofracaso,pagoexitoso,ingresarcatalogo,ingresarsucursal,ingresartrivia,Trivia
+=======
+from PaginaWeb.views import portalpago,ingresarplatillo,carritocompra,verplatillo,pagofracaso,pagoexitoso,ingresarcatalogo,Login, CrearCuenta,Administrador,Repartidor, CrearCuentaAdmin
+>>>>>>> d19271b79bda43467a4d1611afd430d94c2c8851
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/', Login),
+    path('crear-cuenta', CrearCuenta),
+    path('pagina-admin', Administrador),
+    path('crear-cuenta-admin', CrearCuentaAdmin),
+    path('pagina-repartidor', Repartidor),
     path('portal_pago/',portalpago),
     path('ingresar_platillo/',ingresarplatillo),
+    path('carrito_de_compra/',carritocompra),
     path('pago fracaso/',pagofracaso),
     path('pago exitoso/',pagoexitoso),
     path('ingresar catalogo/',ingresarcatalogo),
