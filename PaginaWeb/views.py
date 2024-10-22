@@ -9,6 +9,15 @@ def portalpago(request):
 def Login(request):
     return render(request, "login.html")
 
+def CrearCuenta(request):
+    return render(request, "crear-cuenta.html")
+
+def Administrador(request):
+    return render(request, "pagina-admin.html")
+
+def Repartidor(request):
+    return render(request, "pagina-repartidor.html")
+
 def ingresarplatillo(request):
     return render(request,"ingresarplatillo.html")
 
