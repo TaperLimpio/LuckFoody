@@ -6,6 +6,9 @@ import datetime
 def portalpago(request):
     return render(request,'portalpago.html')
 
+def Login(request):
+    return render(request, "login.html")
+
 def ingresarplatillo(request):
     return render(request,"ingresarplatillo.html")
 
