@@ -21,3 +21,11 @@ def pagoexitoso(request):
 def ingresarcatalogo(request):
     return render(request,"ingresar catalogo.html")
 
+def ingresarsucursal(request):
+    return render(request,"ingresar sucursal.html")
+
+def ingresartrivia(request):
+    return render(request,"ingresar trivia.html")
+
+def Trivia(request):
+    return render(request,"trivia.html")
