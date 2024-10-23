@@ -36,5 +36,16 @@ def pagoexitoso(request):
 def ingresarcatalogo(request):
     return render(request,"ingresar catalogo.html")
 
+def paginaprincipal(request):
+    return render(request,"paginaprincipal.html")
+def ingresarsucursal(request):
+    return render(request,"ingresar sucursal.html")
+
+def ingresartrivia(request):
+    return render(request,"ingresar trivia.html")
+
+def Trivia(request):
+    return render(request,"trivia.html")
+
 def carritocompra(request):
     return render(request,'carrito.html')
