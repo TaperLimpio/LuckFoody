@@ -3,10 +3,280 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Administración</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <style>
+        body{
+            background: linear-gradient(135deg, #32CD32, #FFD700);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 800px;
+            height: 830px;
+        }
+        h1 {
+            font-family: 'Lobster', cursive;
+            color: green;
+            font-size: 2.5em;
+        }
+        .JOl{
+            color: white;
+            font-weight: 500;
+            text-shadow: 2px 2px 3px rgba(155, 4, 255, 0.5);
+        }
+        .shamrock {
+            font-size: 3em;
+            color: #FFD700;
+        }
+        h5{
+            color: rgb(183, 255, 2);
+            text-shadow: 2px 2px 5px rgb(0, 0, 0);
+        }
+        .admin{
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .añadirAdmin{
+            position: relative;
+            right: 150px;
+            bottom: 1px;
+        }
+        .ActuAdmin{
+            position: relative;
+            right: 50px;
+            bottom: 38px;
+        }
+        .ConsulAdmin{
+            position: relative;
+            left: 60px;
+            bottom: 76px;
+        }
+        .DeshaAdmin{
+            position: relative;
+            left: 170px;
+            bottom: 114px;
+        }
+        .repa{
+            position: relative;
+            bottom: 100px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .añadirRepa{
+            position: relative;
+            right: 150px;
+            bottom: 105px;
+        }
+        .ActuRepa{
+            position: relative;
+            right: 50px;
+            bottom: 143px;
+        }
+        .ConsulRepa{
+            position: relative;
+            left: 59px;
+            bottom: 180px;
+        }
+        .DeshaRepa{
+            position: relative;
+            left: 173px;
+            bottom: 217px;
+        }
+        .Sucu{
+            position: relative;
+            bottom: 200px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .añadirSucu{
+            position: relative;
+            right: 150px;
+            bottom: 200px;
+        }
+        .ActuSucu{
+            position: relative;
+            right: 50px;
+            bottom: 238px;
+        }
+        .ConsulSucu{
+            position: relative;
+            left: 58px;
+            bottom: 276px;
+        }
+        .DeshaSucu{
+            position: relative;
+            left: 173px;
+            bottom: 313px;
+        }
+        .Platillo{
+            position: relative;
+            bottom: 300px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .añadirPlat{
+            position: relative;
+            right: 150px;
+            bottom: 300px;
+        }
+        .ActuPlat{
+            position: relative;
+            right: 50px;
+            bottom: 337px;
+        }
+        .ConsulPlat{
+            position: relative;
+            left: 58px;
+            bottom: 375px;
+        }
+        .DeshaPlat{
+            position: relative;
+            left: 173px;
+            bottom: 412px;
+        }
+        .Catalogo{
+            position: relative;
+            bottom: 400px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .añadirCata{
+            position: relative;
+            right: 150px;
+            bottom: 400px;
+        }
+        .ActuCata{
+            position: relative;
+            right: 50px;
+            bottom: 437px;
+        }
+        .ConsulCata{
+            position: relative;
+            left: 58px;
+            bottom: 474px;
+        }
+        .DeshaCata{
+            position: relative;
+            left: 173px;
+            bottom: 512px;
+        }
+        .volver{
+            position: relative;
+            left: 10px;
+            bottom: 470px;
+            
+        }
+    </style>
 </head>
 <body>
     <!--Botones: crud admin (consultar, crear, eliminar, editar), boton crear repartidor, 
     crud sucursal, crud platillos, crud catálogos-->
+
+    <div style="background-color: #3FBC3D;" class="container mt-5">
+        <h1>LuckFoody</h1>
+        <div class="shamrock">🍀</div>
+        <div>
+            <h2 class="JOl">Administración</h2>
+        </div>
+        <div>
+            <p>
+                <h5 class="admin">Administrador</h5>
+            </p>
+        </div>
+        
+        <div>
+            <button type="button" class="btn btn-success añadirAdmin">Añadir </button>
+        </div>
+        <div>
+            <button type="button" class="btn btn-success ActuAdmin">Actualizar </button>
+        </div>
+        <div>
+            <button type="button" class="btn btn-success ConsulAdmin">Consultar </button>
+        </div>
+        <div>
+            <button type="button" class="btn btn-success DeshaAdmin">Deshabilitar </button>
+        </div>
+        <div>
+            <p>
+                <h5 class="repa">Repartidor</h5>
+            </p>
+        </div>
+        
+        <div>
+            <button type="button" class="btn btn-success añadirRepa">Añadir </button>
+        </div>
+        <div>
+            <button type="button" class="btn btn-success ActuRepa">Actualizar </button>
+        </div>
+        <div>
+            <button type="button" class="btn btn-success ConsulRepa">Consultar </button>
+        </div>
+        <div>
+            <button type="button" class="btn btn-success DeshaRepa">Deshabilitar </button>
+        </div>
+        <div>
+            <p>
+                <h5 class="Sucu">Sucursal</h5>
+            </p>
+        </div>
+        
+        <div>
+            <button type="button" class="btn btn-success añadirSucu">Añadir </button>
+        </div>
+        <div>
+            <button type="button" class="btn btn-success ActuSucu">Actualizar </button>
+        </div>
+        <div>
+            <button type="button" class="btn btn-success ConsulSucu">Consultar </button>
+        </div>
+        <div>
+            <button type="button" class="btn btn-success DeshaSucu">Deshabilitar </button>
+        </div>
+        <div>
+            <p>
+                <h5 class="Platillo">Platillos</h5>
+            </p>
+        </div>
+        
+        <div>
+            <button type="button" class="btn btn-success añadirPlat">Añadir </button>
+        </div>
+        <div>
+            <button type="button" class="btn btn-success ActuPlat">Actualizar </button>
+        </div>
+        <div>
+            <button type="button" class="btn btn-success ConsulPlat">Consultar </button>
+        </div>
+        <div>
+            <button type="button" class="btn btn-success DeshaPlat">Deshabilitar </button>
+        </div>
+        <div>
+            <p>
+                <h5 class="Catalogo">Catálogo</h5>
+            </p>
+        </div>
+        
+        <div>
+            <button type="button" class="btn btn-success añadirCata">Añadir </button>
+        </div>
+        <div>
+            <button type="button" class="btn btn-success ActuCata">Actualizar </button>
+        </div>
+        <div>
+            <button type="button" class="btn btn-success ConsulCata">Consultar </button>
+        </div>
+        <div>
+            <button type="button" class="btn btn-success DeshaCata">Deshabilitar </button>
+        </div>
+        
+        <div>
+            <button type="button" class="btn btn-warning volver">Volver</button>
+        </div>
+    </div>
 </body>
 </html>
