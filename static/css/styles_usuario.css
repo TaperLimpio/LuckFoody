@@ -14,3 +14,20 @@ nav {
 .navbar-derecha {
     margin-right: 30px;
 }
+
+.shamrock {
+    font-size: 1.5em;
+    color: #FFD700;
+}
+
+#Bienvenida {
+    text-align: left;
+}
+.titulo-categoria, .nom-platillos {
+    font-family: 'Lobster', cursive;
+}
+
+#Titulo-pag{
+    font-family: 'Lobster', cursive;
+    margin-bottom: 15px;
+}
