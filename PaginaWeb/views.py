@@ -94,6 +94,6 @@ def Update_Usuario(request,emp_id):
         form=UsuarioForm(request.POST,instance=usuario)
         if form.is_valid():
             form.save()
-        return Repartidor(request)
+        return login(request)
     data={'form':form,'titulo':'Actualizar Repartidor'}
     return render(request,'crear-cuenta.html',data)
