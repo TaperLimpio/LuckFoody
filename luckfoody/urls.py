@@ -19,17 +19,17 @@ from django.urls import path
 
 from PaginaWeb.views import portalpago,ingresarplatillo,carritocompra
 from PaginaWeb.views import verplatillo,pagofracaso,pagoexitoso
-from PaginaWeb.views import ingresarcatalogo,Login, CrearCuenta, paginaprincipal
-from PaginaWeb.views import Administrador,Repartidor, CrearCuentaAdmin
+from PaginaWeb.views import ingresarcatalogo,login, crearcuenta, paginaprincipal
+from PaginaWeb.views import Administrador,Repartidor, crearcuentaadmin
 from PaginaWeb.views import ingresarsucursal, ingresartrivia, Trivia
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', Login),
-    path('crear-cuenta/', CrearCuenta),
-    path('pagina-admin/', Administrador),
-    path('crear-cuenta-admin/', CrearCuentaAdmin),
-    path('pagina-repartidor/', Repartidor),
+    path('login/', login, name='login'),
+    path('crear-cuenta/', crearcuenta,name='crear_cuenta'),
+    path('pagina-admin/', Administrador,name='administrador'),
+    path('crear-cuenta-admin/', crearcuentaadmin,name='crear_cuenta_admin'),
+    path('pagina-repartidor/', Repartidor,name='repartidor'),
     path('portal_pago/',portalpago),
     path('ingresar_platillo/',ingresarplatillo),
     path('carrito_de_compra/',carritocompra),
@@ -40,5 +40,5 @@ urlpatterns = [
     path('ingresar trivia/',ingresartrivia),
     path('trivia/',Trivia),
     path('ver_platillo/',verplatillo),
-    path('pagina_principal/',paginaprincipal)
+    path('pagina_principal/',paginaprincipal,name='usuario')
 ]
