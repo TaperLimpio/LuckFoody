@@ -1,0 +1,14 @@
+{% include 'headerusuario.html' %}
+    <div class="container mt-5">
+        <div class="alert alert-success display-1">MIS DATOS</div>
+        <table class="table table-striped">
+          <tr><td>Nombre</td><td>{{usuario.nombre}}</td></tr>
+          <tr><td>Email</td><td>{{usuario.email}}</td></tr>
+          <tr><td>Fono</td><td>{{usuario.fono}}</td></tr>
+          <tr><td>contraseña</td><td>{{usuario.contraseña}}</td></tr>
+          
+          
+        </table>
+        <a href="{% url 'login' %}" class="btn btn-success mt-3">Volver</a>
+    </div>
+{%include 'footer.html'%}

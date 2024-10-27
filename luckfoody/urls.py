@@ -21,7 +21,7 @@ from PaginaWeb.views import portalpago,ingresarplatillo,carritocompra
 from PaginaWeb.views import verplatillo,pagofracaso,pagoexitoso
 from PaginaWeb.views import ingresarcatalogo,login, crearcuenta, paginaprincipal
 from PaginaWeb.views import Administrador,Repartidor, crearcuentaadmin
-from PaginaWeb.views import ingresarsucursal, ingresartrivia, Trivia
+from PaginaWeb.views import ingresarsucursal, ingresartrivia,ver_usuario,Trivia
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -40,5 +40,6 @@ urlpatterns = [
     path('ingresar trivia/',ingresartrivia),
     path('trivia/',Trivia),
     path('ver_platillo/',verplatillo),
+    path('usuarios/<int:emp_id>/',ver_usuario, name='ver_usuario'),
     path('pagina_principal/',paginaprincipal,name='usuario')
 ]
