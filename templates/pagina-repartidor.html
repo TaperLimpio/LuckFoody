@@ -105,7 +105,7 @@
         <div class="shamrock">🍀</div>
         <div>
             <h3>¿Quieres gestionar su cuenta?</h3>
-            <button class="btn btn-warning gestionar">Gestionar</button>
+            <a href="{% url 'ver_usuario' request.session.usuario_id %}" class='btn btn-success gestionar'>Consultar datos</a>
         </div>
         <div>
             <h4 class="generales">Pedidos Generales</h4>

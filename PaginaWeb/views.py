@@ -86,3 +86,14 @@ def carritocompra(request):
 def ver_usuario(request, emp_id):
     usuario = get_object_or_404(Usuario, id=emp_id)
     return render(request, 'view-usuario.html', {'usuario': usuario})
+
+def Update_Usuario(request,emp_id):
+    usuario=Usuario.objects.get(id=emp_id)
+    form=UsuarioForm(instance=usuario)
+    if request.method=="POST":
+        form=UsuarioForm(request.POST,instance=usuario)
+        if form.is_valid():
+            form.save()
+        return Repartidor(request)
+    data={'form':form,'titulo':'Actualizar Repartidor'}
+    return render(request,'crear-cuenta.html',data)
