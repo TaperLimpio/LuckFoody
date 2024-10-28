@@ -5,8 +5,8 @@
         <form method="POST">
             {{form.as_p}}
             {% csrf_token %}
-            <input type="text" class="btn btn-success" value="Guardar">
-            <a href="#" class="btn btn-success">Volver</a>
+            <input type="submit" class="btn btn-success" value="Guardar">
+            <a href="../lista_sucursales/" class="btn btn-success">Volver</a>
         </form>
     </div>
 {% include 'footer.html' %}

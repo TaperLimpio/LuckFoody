@@ -12,8 +12,8 @@
                         <h3 class="nom">{{sur.nom}}</h3>
                         <p class="dir"><b>Direccion: </b>{{sur.direccion}}</p>
                         <a href="../consultar_sucursal/{{sur.id}}" class="btn btn-success"><i class="bi bi-eye"></i></a>
-                        <a href="../modificar_sucursal.html/{{sur.id}}" class="btn btn-warning"><i class="bi bi-pencil"></i></a>
-                        <a href="../eliminar_sucursal.html/{{sur.id}}" class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                        <a href="../modificar_sucursal/{{sur.id}}" class="btn btn-warning"><i class="bi bi-pencil"></i></a>
+                        <a href="../deshabilitar_sucursal/{{sur.id}}" class="btn btn-danger"><i class="bi bi-trash"></i></a>
                     </div>
                 </div>
             </div> 
@@ -21,6 +21,6 @@
             {%else%}
             <h1 id="Titulo-pag">No hay sucursales!</h1>
             {%endif%}
-            <a href="../ingresar sucursal.html" class="btn btn-success"><i class="bi bi-plus-circle"></i></a>
+            <a href="../ingresar_sucursal" class="btn btn-success"><i class="bi bi-plus-circle"></i></a>
     </div>
 {% include 'footer.html' %}

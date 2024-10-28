@@ -16,7 +16,7 @@ def ingresarsucursal(request):
         form = SucursalForm(request.POST)
         if form.is_valid():
             form.save()
-        return redirect("pagina-admin")
+        return redirect('/lista_sucursales/')
     data = {'form':form}
     return render(request,"ingresar sucursal.html", data)
 
@@ -32,11 +32,11 @@ def modificarsucursal(request,id):
         form = SucursalForm(request.POST,instance=sucursal)
         if form.is_valid():
             form.save()
-        return redirect("/pagina-admin/")
+        return redirect('/lista_sucursales/')
     data={'form':form}
     return render(request,'modificar sucursal.html',data)
 
 def deshabilitarsucursal(request,id):
     sucursal = Sucursal.objects.get(id=id)
     sucursal.delete()
-    return redirect("pagina-admin")
+    return redirect('/lista_sucursales/')
