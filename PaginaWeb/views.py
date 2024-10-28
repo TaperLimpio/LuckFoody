@@ -105,3 +105,8 @@ def delete_usuario(request, emp_id):
         usuario.estado = 'inactivo'
         usuario.save()
     return redirect('login')
+
+def Index_Usuario(request):
+    usuario = Usuario.objects.all()
+    data = {'usuario': usuario}
+    return render(request, 'usuarios.html', data)

@@ -1,0 +1,44 @@
+{%include 'headeradmin.html'%}
+    <div class="container mt-5">
+        <div class="alert alert-success display-1">usuarios</div>
+        {%if usuario%}
+         <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>nombre</th> 
+                    <th>Email</th>
+                    <th>Fono</th>
+                    <th>tipo</th>
+                    <th>estado</th>
+                    <th colspan="3">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for emp in usuario%}
+                <tr>
+                    <td>{{emp.id}}</td>
+                    <td>{{emp.nombre}}</td>
+                    <td>{{emp.email}}</td>
+                    <td>{{emp.fono}}</td>
+                    <td>{{emp.tipo}}</td>
+                    <td>{{emp.estado}}</td>
+                    
+                    
+
+                    <td>
+                        <a href="../usuarios/{{emp.id}}"
+                          class='btn btn-success'><i class="bi bi-eye"></i>
+                       </a>
+                    </td>
+                  
+                </tr>
+                {%endfor%}
+            </tbody>
+         </table>
+        {%else%}
+            <div class="alert alert-info">No Hay usuarios!!!!</div>
+        {%endif%}
+        <a href="{% url 'crear_cuenta_admin' %}" class="btn btn-success">Agregar</a>
+        </div>    
+{%include 'footer.html'%}         
