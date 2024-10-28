@@ -12,7 +12,7 @@ def login(request):
         nombre = request.POST.get('username')
         contraseña = request.POST.get('contraseña')  # Agregamos el campo fono
         usuario = Usuario.objects.filter(nombre=nombre, contraseña=contraseña).first()  # Usamos filter() y first()
-        if usuario:
+        if usuario and usuario.estado == 'activo':
             request.session['usuario_id'] = usuario.id
             if usuario.tipo == 'usuario':
                 return redirect('usuario')  # Redirigir a la URL 'usuario'
@@ -31,6 +31,7 @@ def crearcuenta(request):
         form = UsuarioForm(request.POST)
         if form.is_valid():
             usuario = form.save(commit=False)
+            usuario.estado='activo'
             usuario.tipo = 'usuario'  # Establecer el tipo a 'usuario' automáticamente
             usuario.save()
             return redirect('login')  # Redirigir al login después de crear la cuenta
@@ -47,6 +48,8 @@ def crearcuentaadmin(request):
     if request.method == 'POST':
         form = UsuarioAdminForm(request.POST)
         if form.is_valid():
+            usuario = form.save(commit=False)
+            usuario.estado='activo'
             form.save()
             return redirect('login')  # Redirigir al login después de crear la cuenta
     else:
@@ -95,3 +98,10 @@ def Update_Usuario(request,emp_id):
         return login(request)
     data={'form':form,'titulo':'Actualizar Repartidor'}
     return render(request,'crear-cuenta.html',data)
+
+def delete_usuario(request, emp_id):
+    usuario = Usuario.objects.get(id=emp_id)
+    if usuario:
+        usuario.estado = 'inactivo'
+        usuario.save()
+    return redirect('login')

@@ -21,7 +21,7 @@ from PaginaWeb.views import portalpago,ingresarplatillo,carritocompra
 from PaginaWeb.views import verplatillo,pagofracaso,pagoexitoso
 from PaginaWeb.views import ingresarcatalogo,login, crearcuenta, paginaprincipal
 from PaginaWeb.views import Administrador,Repartidor, crearcuentaadmin
-from PaginaWeb.views import ingresartrivia,ver_usuario,Trivia, Update_Usuario
+from PaginaWeb.views import ingresartrivia,ver_usuario,Trivia, Update_Usuario,delete_usuario
 
 from Sucursal_app.views import ingresarsucursal, consultarsucursal, modificarsucursal,deshabilitarsucursal
 from Sucursal_app.views import deshabilitarsucursal, listasucursal
@@ -44,6 +44,7 @@ urlpatterns = [
     path('ver_platillo/',verplatillo),
     path('usuarios/<int:emp_id>/',ver_usuario, name='ver_usuario'),
     path('pagina_principal/',paginaprincipal,name='usuario'),
+    path('delete-usuario/<int:emp_id>/',delete_usuario, name='delete_usuario'),
     path('update_usuario/<int:emp_id>/', Update_Usuario),
     path('ingresar_sucursal/',ingresarsucursal),
     path('consultar_sucursal/<int:id>',consultarsucursal),
