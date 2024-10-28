@@ -1,0 +1,13 @@
+{% include 'headeradmin.html' %}
+{% load static %}
+    <div class="container mt-5">
+        <div class="shamrock">🍀</div>
+        <div id="contenido">
+            <h4 id="nom">{{sucursal.nombre}}</h2>
+            <p id="dir"><b>Direccion: </b>{{sucursal.direccion}}</p>
+            <p id="fon"><b>Fono:</b>{{sucursal.fono}}</p>
+            <img src="{% static 'img/640x480.png' %}" alt="Imagen de la sucursal" class="img-fluid" id="img">
+        </div>
+        <a href="../pagina-admin/" class="btn btn-success imagen">Volver</a>
+    </div>
+{% include 'footer.html' %}

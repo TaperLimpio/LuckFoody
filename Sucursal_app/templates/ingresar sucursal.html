@@ -1,0 +1,12 @@
+{% include 'headeradmin.html' %}
+    <div class="container mt-5">
+        <h1 id="Titulo-pag">Ingresar Sucursal</h1>
+        <div class="shamrock">🍀</div>
+        <form method="POST">
+            {{form.as_p}}
+            {% csrf_token %}
+            <input type="text" class="btn btn-success" value="Guardar">
+            <a href="#" class="btn btn-success">Volver</a>
+        </form>
+    </div>
+{% include 'footer.html' %}

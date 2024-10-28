@@ -70,8 +70,6 @@ def ingresarcatalogo(request):
 
 def paginaprincipal(request):
     return render(request,"paginaprincipal.html")
-def ingresarsucursal(request):
-    return render(request,"ingresar sucursal.html")
 
 def ingresartrivia(request):
     return render(request,"ingresar trivia.html")

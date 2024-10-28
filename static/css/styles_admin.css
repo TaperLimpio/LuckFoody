@@ -4,6 +4,7 @@ body {
 nav {
     background-color: aliceblue;
 }
+
 .container {
     background-color: aliceblue;
     padding: 20px;
@@ -23,7 +24,12 @@ nav {
 #Bienvenida {
     text-align: left;
 }
-.titulo-categoria, .nom-platillos {
+
+.row-lista{
+    margin-bottom: 10px;
+}
+
+.titulo-categoria, .nom , .dir{
     font-family: 'Lobster', cursive;
 }
 
@@ -31,7 +37,9 @@ nav {
     font-family: 'Lobster', cursive;
     margin-bottom: 15px;
 }
-
+#contenido{
+    padding-bottom: 10px;
+}
 /*
         body {
             background: linear-gradient(135deg, #32CD32, #FFD700);
