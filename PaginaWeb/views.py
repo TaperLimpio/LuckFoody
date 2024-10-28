@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from  PaginaWeb.models import Usuario  # Asegúrate de que esta sea tu clase de usuario
 from . import forms
 from .forms import UsuarioForm,UsuarioAdminForm
@@ -13,6 +13,7 @@ def login(request):
         contraseña = request.POST.get('contraseña')  # Agregamos el campo fono
         usuario = Usuario.objects.filter(nombre=nombre, contraseña=contraseña).first()  # Usamos filter() y first()
         if usuario:
+            request.session['usuario_id'] = usuario.id
             if usuario.tipo == 'usuario':
                 return redirect('usuario')  # Redirigir a la URL 'usuario'
             elif usuario.tipo == 'administrador':
@@ -79,3 +80,18 @@ def Trivia(request):
 
 def carritocompra(request):
     return render(request,'carrito.html')
+
+def ver_usuario(request, emp_id):
+    usuario = get_object_or_404(Usuario, id=emp_id)
+    return render(request, 'view-usuario.html', {'usuario': usuario})
+
+def Update_Usuario(request,emp_id):
+    usuario=Usuario.objects.get(id=emp_id)
+    form=UsuarioForm(instance=usuario)
+    if request.method=="POST":
+        form=UsuarioForm(request.POST,instance=usuario)
+        if form.is_valid():
+            form.save()
+        return login(request)
+    data={'form':form,'titulo':'Actualizar Repartidor'}
+    return render(request,'crear-cuenta.html',data)
