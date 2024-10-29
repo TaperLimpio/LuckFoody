@@ -78,7 +78,7 @@
         <form method="post">
             {% csrf_token %}
             <input type="text" name="username" class="form-control" placeholder="Nombre de usuario" required>
-            <input type="text" name="contraseña" class="form-control" placeholder="contraseña" required>
+            <input type="password" name="contraseña" class="form-control" placeholder="contraseña" required>
             <input type="submit" class="btn btn-success" value="Iniciar sesión">
             <a href="{% url 'crear_cuenta' %}" class="btn btn-secondary">Crea tu cuenta</a>
         </form>
