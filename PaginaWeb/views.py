@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from  PaginaWeb.models import Usuario  # Asegúrate de que esta sea tu clase de usuario
 from . import forms
-from .forms import UsuarioForm,UsuarioAdminForm
+from .forms import UsuarioForm,UsuarioAdminForm,Filtro
 
 # Create your views here.
 def portalpago(request):
@@ -107,6 +107,30 @@ def delete_usuario(request, emp_id):
     return redirect('login')
 
 def Index_Usuario(request):
-    usuario = Usuario.objects.all()
-    data = {'usuario': usuario}
+    filtro = Filtro(initial={'tipo':'----','estado':'----'})
+    if request.method=="POST":
+        filtro = Filtro(request.POST)
+        if filtro.is_valid():
+            Tipo = filtro.cleaned_data['tipo']
+            Estado = filtro.cleaned_data['estado']
+            print(Tipo)
+            print(Estado)
+            if (Tipo == 'Todo' and Estado == 'Todo'):
+                print("todo")
+                usuario = Usuario.objects.all()
+                print(usuario)
+            elif(Tipo != 'Todo' and Estado == 'Todo'):
+                print("por tipo")
+                usuario = Usuario.objects.filter(tipo = Tipo)
+                print(usuario)
+            elif(Estado != 'Todo'and Tipo == 'Todo'):
+                print("por estado")
+                usuario = Usuario.objects.filter(estado = Estado)
+                print(usuario)
+            else:
+                print("por tipo y estado")
+                usuario = Usuario.objects.filter(tipo = Tipo,estado = Estado)
+    else:        
+        usuario = Usuario.objects.all()
+    data = {'usuario': usuario,'form':filtro}
     return render(request, 'usuarios.html', data)

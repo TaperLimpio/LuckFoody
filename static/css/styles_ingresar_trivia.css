@@ -1,0 +1,38 @@
+body {
+    background: linear-gradient(135deg, #32CD32, #FFD700);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    max-width: 800px;
+    width: 100%;
+}
+h1 {
+    font-family: 'Lobster', cursive;
+    color: green;
+    font-size: 3em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.shamrock {
+    font-size: 3em;
+    color: #FFD700;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.form-group {
+    margin-bottom: 20px;
+}
+.form-label {
+    font-weight: bold;
+}
+.d-flex {
+    margin-top: 30px;
+}
