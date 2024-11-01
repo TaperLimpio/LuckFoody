@@ -2,7 +2,7 @@ body {
     background: linear-gradient(135deg, #32CD32, #FFD700);
 }
 nav {
-    background-color: aliceblue;
+    background-color: rgba(217, 240, 134, 0.906);
 }
 
 .container {
@@ -16,9 +16,44 @@ nav {
     margin-right: 30px;
 }
 
+.book{
+    padding: 10px 10px 10px 10px;
+    position: relative;
+    top: 7px;
+    left: 920px;
+}
+.ME{
+    position: relative;
+    left: 1120px;
+    font-size: 20px;
+}
+
+i{
+    color: rgb(99, 78, 2);
+}
+i:hover{
+    color: rgb(0, 79, 32);
+    text-decoration: double;
+    text-shadow: 5px 5px 5px rgb(36, 71, 1);
+}
+
+.Sucu{
+    position: relative;
+    left: 900px;
+}
+
+.person{
+    position: relative;
+    left: 910px;
+}
+
 .shamrock {
     font-size: 1.5em;
     color: #FFD700;
+}
+
+a{
+    text-decoration: none;
 }
 
 #Bienvenida {
