@@ -19,9 +19,11 @@ from django.urls import path
 
 from PaginaWeb.views import portalpago,ingresarplatillo,carritocompra
 from PaginaWeb.views import verplatillo,pagofracaso,pagoexitoso
-from PaginaWeb.views import ingresarcatalogo,login, crearcuenta, paginaprincipal
-from PaginaWeb.views import Administrador,Repartidor, crearcuentaadmin
-from PaginaWeb.views import ingresartrivia,ver_usuario,Trivia, Update_Usuario,delete_usuario,Index_Usuario
+from PaginaWeb.views import ingresarcatalogo,paginaprincipal
+from PaginaWeb.views import Administrador,Repartidor
+from PaginaWeb.views import ingresartrivia,Trivia
+
+from Usuario_app.views import crearcuenta,login,crearcuentaadmin,ver_usuario,Update_Usuario,delete_usuario,Index_Usuario
 
 from Sucursal_app.views import ingresarsucursal, consultarsucursal, modificarsucursal,deshabilitarsucursal
 from Sucursal_app.views import deshabilitarsucursal, listasucursal
