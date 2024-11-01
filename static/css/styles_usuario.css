@@ -2,7 +2,7 @@ body {
     background: linear-gradient(135deg, #32CD32, #FFD700);
 }
 nav {
-    background-color: aliceblue;
+    background-color: rgba(217, 240, 134, 0.906);
 }
 .container {
     background-color: aliceblue;
@@ -18,6 +18,16 @@ nav {
 .shamrock {
     font-size: 1.5em;
     color: #FFD700;
+}
+
+.colorcito{
+    color: rgb(99, 78, 2);
+}
+
+.colorcito:hover{
+    color: rgb(0, 79, 32);
+    text-decoration: double;
+    text-shadow: 5px 5px 5px rgb(36, 71, 1);
 }
 
 #Bienvenida {

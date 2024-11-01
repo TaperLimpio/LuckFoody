@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'PaginaWeb',
-    'Sucursal_app'
+    'Sucursal_app',
+    'Usuario_app'
 ]
 
 MIDDLEWARE = [

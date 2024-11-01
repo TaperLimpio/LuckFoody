@@ -1,8 +1,24 @@
 from typing import Any
 from django import forms 
-from PaginaWeb.models import Usuario
+from Usuario_app.models import Usuario
+
+FILTRO_DECICIONES_1=(
+    ('Todo','----'),
+    ('Administrador','administrador'),
+    ('Usuario','usuario'),
+    ('Repartidor','repartidor')
+)
+
+FILTRO_DECICIONES_2=(
+    ('Todo','----'),
+    ('Activo','activo'),
+    ('Inactivo','inactivo')
+)
 
 
+class Filtro(forms.Form):
+    tipo = forms.ChoiceField(choices=FILTRO_DECICIONES_1)
+    estado = forms.ChoiceField(choices=FILTRO_DECICIONES_2)
 
 class UsuarioForm(forms.ModelForm):
     class Meta:
