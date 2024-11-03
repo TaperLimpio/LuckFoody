@@ -40,7 +40,7 @@ def login(request):
         if usuario and usuario.estado == 'activo':
             request.session['usuario_id'] = usuario.id
             if usuario.tipo == 'usuario':
-                return redirect('usuario')  # Redirigir a la URL 'usuario'
+                return redirect('pagina_principal')  # Redirigir a la URL 'usuario'
             elif usuario.tipo == 'administrador':
                 return redirect('administrador')  # Redirigir a la URL 'administrador'
             elif usuario.tipo=='repartidor':

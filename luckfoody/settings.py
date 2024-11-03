@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'PaginaWeb',
     'Sucursal_app',
-    'Usuario_app'
+    'Usuario_app',
+    'Catalogo_app',
+    'Platillo_app'
 ]
 
 MIDDLEWARE = [
@@ -130,3 +132,6 @@ STATICFILES_DIRS=[os.path.join(BASE_DIR, 'static')]
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

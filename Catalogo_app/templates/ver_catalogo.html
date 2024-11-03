@@ -1,0 +1,23 @@
+{% include 'headeradmin.html' %}
+{% load static %}
+<div class="container mt-2 mf-2">
+    <h4 id="Bienvenida">Bienvenido Usuario</h4>
+    <h1 id="Titulo-pag">{{ catalogo.nombre }}</h1>
+    <p>{{ catalogo.descripcion }}</p>
+    {% for platillo in catalogo.platillos_set.all %}
+    <div class="container row-platillo mb-4">
+        <div class="row align-items-center">
+            <div class="col-md-4">
+                <img src="{{ platillo.imagen.url }}" class="img-thumbnail foto-platillo" alt="{{ platillo.nombre }}">
+            </div>
+            <div class="col-md-8">
+                <h3 class="nom-platillos">{{ platillo.nombre }}</h3>
+                <p><b>Descripción:</b> {{ platillo.descripcion }}</p>
+                <p><b>Precio:</b> <i>${{ platillo.precio }}</i></p>
+                <a href="#" class="btn btn-success">Ver más</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+

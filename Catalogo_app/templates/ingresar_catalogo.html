@@ -13,19 +13,9 @@
     <div class="container mt-5">
         <h1>LuckFoody</h1>
         <div class="shamrock">🍀</div>
-        <form>
-            <div class="mb-3">
-                <label for="catalogName" class="form-label">Nombre del Catálogo</label>
-                <input type="text" class="form-control" id="catalogName" name="catalogName" required>
-            </div>
-            <div class="mb-3">
-                <label for="catalogDescription" class="form-label">Descripción</label>
-                <textarea class="form-control" id="catalogDescription" name="catalogDescription" rows="3" required></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="catalogDishes" class="form-label">Platillos</label>
-                <textarea class="form-control" id="catalogDishes" name="catalogDishes" rows="3" required></textarea>
-            </div>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
             <div class="d-flex justify-content-between">
                 <button type="button" class="btn btn-warning">Volver</button>
                 <button type="submit" class="btn btn-success">Agregar a la Página</button>
@@ -35,3 +25,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
