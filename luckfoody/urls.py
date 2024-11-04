@@ -3,17 +3,27 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 
-from Catalogo_app.views import paginaprincipal, ingresarcatalogo, asignar_platillo, ver_catalogo  # Importa la vista correcta desde Catalogo_app
-from PaginaWeb.views import portalpago, carritocompra, verplatillo, pagofracaso, pagoexitoso, Administrador, Repartidor, ingresartrivia, Trivia
+from Catalogo_app.views import paginaprincipal, ingresarcatalogo, asignar_platillo, ver_catalogo,paginaadmin,activar_catalogo,desactivar_catalogo,ver_catalogoadmin,actualizarcatalogo  # Importa la vista correcta desde Catalogo_app
+
+from PaginaWeb.views import portalpago, carritocompra, verplatillo, pagofracaso, pagoexitoso, Repartidor, ingresartrivia, Trivia
+
 from Usuario_app.views import crearcuenta, login, crearcuentaadmin, ver_usuario, Update_Usuario, delete_usuario, Index_Usuario
+
 from Sucursal_app.views import ingresarsucursal, consultarsucursal, modificarsucursal, deshabilitarsucursal, listasucursal
-from Platillo_app.views import ingresarplatillo  # Importa la vista para ingresar platillos
+
+from Platillo_app.views import ingresarplatillo,activar_platillo,desactivar_platillo,actualizarplatillo  # Importa la vista para ingresar platillos
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', login, name='login'),
+    path('activar_platillo/<int:platillo_id>/',activar_platillo, name='activar_platillo'),
+    path('desactivar_platillo/<int:platillo_id>/',desactivar_platillo, name='desactivar_platillo'),
+    path('actualizar_platillo/<int:platillo_id>/',actualizarplatillo, name='actualizar_platillo'),
     path('crear-cuenta/', crearcuenta, name='crear_cuenta'),
-    path('pagina-admin/', Administrador, name='administrador'),
+    path('pagina-admin/', paginaadmin, name='pagina_administrador'),
+    path('actualizar_catalogo/<int:catalogo_id>/', actualizarcatalogo, name='actualizar_catalogo'),
+    path('activar_catalogo/<int:catalogo_id>/',activar_catalogo, name='activar_catalogo'),
+    path('desactivar_catalogo/<int:catalogo_id>/',desactivar_catalogo, name='desactivar_catalogo'),
     path('crear-cuenta-admin/', crearcuentaadmin, name='crear_cuenta_admin'),
     path('pagina-repartidor/', Repartidor, name='repartidor'),
     path('portal_pago/', portalpago),
@@ -37,4 +47,5 @@ urlpatterns = [
     path('lista_sucursales/', listasucursal),
     path('asignar_platillo/<int:catalogo_id>/', asignar_platillo, name='asignar_platillo'),
     path('ver_catalogo/<int:catalogo_id>/', ver_catalogo, name='ver_catalogo'),  # Agrega esta línea
+    path('ver_catalogo_admin/<int:catalogo_id>/', ver_catalogoadmin, name='ver_catalogo_admin'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

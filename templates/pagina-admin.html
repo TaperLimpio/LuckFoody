@@ -1,32 +1,42 @@
 {% include 'headeradmin.html' %}
 {% load static %}
+<style>
+    .img-thumbnail {
+        width: 250px;
+        height: 250px;
+        object-fit: cover;
+        float: left;
+        margin-right: 20px;
+    }
+    .catalogo-text {
+        display: inline-block;
+        vertical-align: top;
+    }
+    .categoria {
+        overflow: hidden;
+    }
+</style>
 <div class="container mt-2 mf-2">
-    <h4 id="Bienvenida">Bienvenido Usuario</h4>
+    <h4 id="Bienvenida">Bienvenido administrador</h4>
     <h1 id="Titulo-pag">Catálogo de platillos</h1>
     <div id="catalogo">
         {% for catalogo in catalogos %}
         <div class="container mt-2 mf-2 categoria bg-light p-3 rounded shadow-sm">
-            <h2 class="titulo-categoria">{{ catalogo.nombre }}</h2>
-            <p>{{ catalogo.descripcion }}</p>
-            <a href="{% url 'ver_catalogo' catalogo.id %}" class="btn btn-primary mb-3">Ver más</a>
-            <a href="{% url 'asignar_platillo' catalogo.id %}" class="btn btn-secondary mb-3">Asignar Platillo</a>
-            {% for platillo in catalogo.platillos.all %}
-            <div class="container row-platillo mb-4">
-                <div class="row align-items-center">
-                    <div class="col-md-4">
-                        <img src="{{ platillo.imagen.url }}" class="img-thumbnail foto-platillo" alt="{{ platillo.nombre }}">
-                    </div>
-                    <div class="col-md-8">
-                        <h3 class="nom-platillos">{{ platillo.nombre }}</h3>
-                        <p><b>Descripción:</b> {{ platillo.descripcion }}</p>
-                        <p><b>Precio:</b> <i>${{ platillo.precio }}</i></p>
-                        <a href="#" class="btn btn-success">Ver más</a>
-                    </div>
-                </div>
+            <img src="{{ catalogo.imagen.url }}" class="img-thumbnail foto-catalogo" alt="{{ catalogo.nombre }}">
+            <div class="catalogo-text">
+                <h2 class="titulo-categoria">{{ catalogo.nombre }}</h2>
+                <p>{{ catalogo.descripcion }}</p>
+                <a href="{% url 'ver_catalogo_admin' catalogo.id %}" class="btn btn-primary mb-3">Ver más</a>
+                {% if catalogo.estado == 'Activado' %}
+                <a href="{% url 'desactivar_catalogo' catalogo.id %}" class="btn btn-warning mb-3">Desactivar Catálogo</a>
+                {% else %}
+                <a href="{% url 'activar_catalogo' catalogo.id %}" class="btn btn-success mb-3">Activar Catálogo</a>
+                {% endif %}
+                <a href="{% url 'actualizar_catalogo' catalogo.id %}" class="btn btn-info mb-3">Actualizar Catálogo</a>
             </div>
-            {% endfor %}
         </div>
         {% endfor %}
     </div>
 </div>
-{% include 'footer.html' %}
+
+

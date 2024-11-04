@@ -7,10 +7,6 @@ from .forms import UsuarioForm,UsuarioAdminForm
 def portalpago(request):
     return render(request,'portalpago.html')
 
-
-def Administrador(request):
-    return render(request, "pagina-admin.html")
-
 def Repartidor(request):
     return render(request, "pagina-repartidor.html")
 

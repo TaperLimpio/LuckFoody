@@ -42,7 +42,7 @@ def login(request):
             if usuario.tipo == 'usuario':
                 return redirect('pagina_principal')  # Redirigir a la URL 'usuario'
             elif usuario.tipo == 'administrador':
-                return redirect('administrador')  # Redirigir a la URL 'administrador'
+                return redirect('pagina_administrador')  # Redirigir a la URL 'administrador'
             elif usuario.tipo=='repartidor':
                 return redirect('repartidor')#lo mismo pero para el repartidor
         else:
