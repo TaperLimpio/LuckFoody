@@ -4,7 +4,7 @@ from Catalogo_app.models import Catalogo
 
 class Platillo(models.Model):
     nombre = models.CharField(max_length=50)
-    precio = models.DecimalField(max_digits=10, decimal_places=2)
+    precio = models.IntegerField()
     descripcion = models.TextField()
     imagen = models.ImageField(upload_to='platillo_imagenes/')
     sucursales = models.ManyToManyField(Sucursal, through='PlatilloSucursal')
