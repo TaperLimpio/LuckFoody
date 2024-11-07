@@ -2,6 +2,15 @@ from django.shortcuts import render, redirect,get_object_or_404
 from .forms import PlatilloForm,Platillo
 
 def ingresarplatillo(request):
+    form = PlatilloForm()
+    if request.method == 'POST':
+        form = PlatilloForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')  # Redirigir al login después de crear la cuenta
+    data = {'form': form, 'titulo': 'Crear cuenta'}
+    return render(request, 'crear-cuenta.html', data)
+    """
     if request.method == 'POST':
         formset = [PlatilloForm(request.POST, request.FILES, prefix=str(i)) for i in range(3)]
         valid_forms = []
@@ -21,7 +30,7 @@ def ingresarplatillo(request):
     else:
         formset = [PlatilloForm(prefix=str(i)) for i in range(3)]
     return render(request, 'ingresar_platillo.html', {'formset': formset})
-
+    """
 
 
 def activar_platillo(request, platillo_id):

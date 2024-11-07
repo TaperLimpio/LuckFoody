@@ -1,0 +1,90 @@
+{% include 'headerusuario.html' %}
+{% load static %}
+<div class="container mt-2 mb-2">
+    <h1 id="Titulo-pag">Ingresar Platillo</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div id="platillo-forms">
+            <div class="border p-3 mb-3 rounded shadow-sm">
+                <h2>Platillo 1</h2>
+                <div class="form-group">
+                    <label for="platillo-0-nombre">Nombre del platillo:</label>
+                    {{ formset.0.nombre }}
+                </div>
+                <div class="form-group">
+                    <label for="platillo-0-precio">Precio:</label>
+                    {{ formset.0.precio }}
+                </div>
+                <div class="form-group">
+                    <label for="platillo-0-descripcion">Descripción:</label>
+                    {{ formset.0.descripcion }}
+                </div>
+                <div class="form-group">
+                    <label for="platillo-0-imagen">Imagen:</label>
+                    {{ formset.0.imagen }}
+                </div>
+                <div class="form-group">
+                    <label for="platillo-0-sucursales">Sucursales:</label>
+                    {{ formset.0.sucursales }}
+                </div>
+                <div class="form-group">
+                    <label for="platillo-0-catalogo">Catálogo:</label>
+                    {{ formset.0.catalogo }}
+                </div>
+            </div>
+        </div>
+        
+        <button type="button" class="btn btn-secondary" id="add-platillo">+</button>
+        <button type="submit" class="btn btn-primary">Guardar Platillo</button>
+    </form>
+</div>
+{% include 'footer.html' %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let formCount = 1;
+    const maxForms = 3;
+    const formContainer = document.getElementById('platillo-forms');
+    const addButton = document.getElementById('add-platillo');
+    
+    addButton.addEventListener('click', function() {
+        if (formCount < maxForms) {
+            formCount++;
+            const newForm = document.createElement('div');
+            newForm.classList.add('border', 'p-3', 'mb-3', 'rounded', 'shadow-sm');
+            newForm.innerHTML = `
+                <h2>Platillo ${formCount}</h2>
+                <div class="form-group">
+                    <label for="platillo-${formCount - 1}-nombre">Nombre del platillo:</label>
+                    {{ formset.0.nombre.as_widget|safe }}
+                </div>
+                <div class="form-group">
+                    <label for="platillo-${formCount - 1}-precio">Precio:</label>
+                    {{ formset.0.precio.as_widget|safe }}
+                </div>
+                <div class="form-group">
+                    <label for="platillo-${formCount - 1}-descripcion">Descripción:</label>
+                    {{ formset.0.descripcion.as_widget|safe }}
+                </div>
+                <div class="form-group">
+                    <label for="platillo-${formCount - 1}-imagen">Imagen:</label>
+                    {{ formset.0.imagen.as_widget|safe }}
+                </div>
+                <div class="form-group">
+                    <label for="platillo-${formCount - 1}-sucursales">Sucursales:</label>
+                    {{ formset.0.sucursales.as_widget|safe }}
+                </div>
+                <div class="form-group">
+                    <label for="platillo-${formCount - 1}-catalogo">Catálogo:</label>
+                    {{ formset.0.catalogo.as_widget|safe }}
+                </div>
+            `;
+            formContainer.appendChild(newForm);
+        }
+    });
+});
+</script>
+
+
+
