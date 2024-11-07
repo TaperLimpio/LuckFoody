@@ -3,13 +3,26 @@ from .forms import PlatilloForm,Platillo
 
 def ingresarplatillo(request):
     if request.method == 'POST':
-        form = PlatilloForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
+        formset = [PlatilloForm(request.POST, request.FILES, prefix=str(i)) for i in range(3)]
+        valid_forms = []
+        any_errors = False
+        
+        for form in formset:
+            if any(form.data.get(form.prefix + '-' + field, '') for field in form.fields):
+                if form.is_valid():
+                    valid_forms.append(form)
+                else:
+                    any_errors = True
+
+        if not any_errors:
+            for form in valid_forms:
+                form.save()
             return redirect('login')  # Redirige a la página principal después de guardar
     else:
-        form = PlatilloForm()
-    return render(request, 'ingresar_platillo.html', {'form': form})
+        formset = [PlatilloForm(prefix=str(i)) for i in range(3)]
+    return render(request, 'ingresar_platillo.html', {'formset': formset})
+
+
 
 def activar_platillo(request, platillo_id):
     platillo = get_object_or_404(Platillo, id=platillo_id)
