@@ -28,6 +28,18 @@ nav {
     font-size: 20px;
 }
 
+.cafe{
+    position: relative;
+    top: 7px;
+    left: 570px;
+}
+
+.booky{
+    position: relative;
+    top: 7px;
+    left: 390px;
+}
+
 i{
     color: rgb(99, 78, 2);
 }
