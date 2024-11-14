@@ -7,6 +7,8 @@ from Catalogo_app.views import paginaprincipal, ingresarcatalogo, asignar_platil
 
 from PaginaWeb.views import portalpago, carritocompra, verplatillo, pagofracaso, pagoexitoso, Repartidor, ingresartrivia, Trivia
 
+from Pedido_app import views
+
 from Usuario_app.views import crearcuenta, login, crearcuentaadmin, ver_usuario, Update_Usuario, delete_usuario, Index_Usuario
 
 from Sucursal_app.views import ingresarsucursal, consultarsucursal, modificarsucursal, deshabilitarsucursal, listasucursal
@@ -33,6 +35,10 @@ urlpatterns = [
     path('pago exitoso/', pagoexitoso),
     path('ingresar_catalogo/', ingresarcatalogo, name='ingresar_catalogo'),
     path('ingresar trivia/', ingresartrivia),
+    path('pedidos/',views.consultar_pedidos, name='pedidos'),
+    path('ver_pedido/<int:pedido_id>/', views.ver_pedido),
+    path('mis_pedidos/', views.mis_pedidos, name='mis_pedidos'),
+    path('cancelar_pedido/<int:id_pedido>', views.cancelar_pedido, name='cancelar_pedido'),
     path('trivia/', Trivia),
     path('ver_platillo/', verplatillo),
     path('usuarios/<int:emp_id>/', ver_usuario, name='ver_usuario'),

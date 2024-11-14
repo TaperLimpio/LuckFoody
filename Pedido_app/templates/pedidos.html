@@ -1,0 +1,48 @@
+{% include 'headeradmin.html' %}
+<div class="container mt-5">
+    <div class="alert alert-success display-1">Pedidos</div>
+    <div class="container">
+        <form method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" class="btn btn-success" value="filtrar">
+        </form>
+     </div>
+    {%if pedidos%}
+     
+     <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Fecha Inicio</th> 
+                <th>Fecha Entrega</th>
+                <th>Direccion</th>
+                <th>Estado</th>
+                <th>Total</th>
+                <th colspan="3">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for ped in pedidos%}
+            <tr>
+                <td>{{ped.id}}</td>
+                <td>{{ped.fechainicio}}</td>
+                <td>{{ped.fechaentrega}}</td>
+                <td>{{ped.direccion}}</td>
+                <td>{{ped.estado}}</td>
+                <td>{{ped.Total}}</td>
+                <td>
+                    <a href="../ver_pedido/{{ped.id}}"
+                      class='btn btn-success'><i class="bi bi-eye"></i>
+                   </a>
+                </td>
+              
+            </tr>
+            {%endfor%}
+        </tbody>
+     </table>
+    {%else%}
+        <div class="alert alert-info">No Hay Pedidos!!!!</div>
+    {%endif%}
+    </div> 
+{% include 'footer.html' %}

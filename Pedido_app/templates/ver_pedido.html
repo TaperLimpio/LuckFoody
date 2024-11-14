@@ -1,0 +1,24 @@
+{% include 'headeradmin.html' %}
+    <div class="container mt-5">
+        <div class="alert alert-success display-1">Datos del pedido</div>
+        <table class="table table-striped">
+          <tr><td>Id</td><td>{{pedido.id}}</td></tr>
+          <tr><td>Fecha de Inicio</td><td>{{pedido.fechainicio}}</td></tr>
+          <tr><td>Fecha de Entrega</td><td>{{pedido.fechaentrega}}</td></tr>
+          <tr><td>Direccion</td><td>{{pedido.direccion}}</td></tr>
+          <tr><td>Descuento</td><td>%{{pedido.descuento}}</td></tr>
+          <tr><td>Estado</td><td>{{pedido.estado}}</td></tr>
+          <tr><td>Repartido</td><td>{{pedido.repartidor.nombre}}</td></tr>
+          <tr><td>Usuario</td><td>{{pedido.usuario.nombre}}</td></tr>
+          <tr><td>Productos</td><td>
+              <ul class="list-group">
+                {%for pro in lista_productos%}
+                <li class="list-group-item">{{pro.id_producto.nombre}}, {{pro.id_producto.precio}}</li>
+                {% endfor %}
+              </ul>       
+          </td></tr>
+          <tr><td>Total</td><td>{{pedido.total}}</td></tr>
+        </table>
+        <a href="{% url 'login' %}" class="btn btn-success mt-3">Volver</a>
+    </div>
+{%include 'footer.html'%}
