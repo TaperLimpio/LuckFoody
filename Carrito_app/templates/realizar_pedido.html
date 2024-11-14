@@ -1,0 +1,14 @@
+{% include 'headerusuario.html' %}
+<div class="container mt-2">
+    <div class="container">
+        <h2>LuckFoody</h2>
+        <img src="https://img.icons8.com/ios-filled/50/FF8C00/wrench.png" alt="llave inglesa">
+        <form method="POST">
+            <p><b>Ingrese sus datos para realizar el pedido</b></p>
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Realizar pedido">
+        </form>
+    </div>
+</div>
+{% include 'footer.html' %}

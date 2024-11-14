@@ -1,0 +1,36 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles_carrito.css' %}">
+    <div class="container mt-5">
+        <h1>LuckFoody</h1>
+        <div class="shamrock">🍀</div>
+        {% if carrito %}
+        <h4 style="text-align: left; margin:10px;">Carrito</h4>
+        <div class="container carrito">
+            {% for ped in carrito %}
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <img src="{{ ped.id_producto.imagen.url }}" alt="{{ped.id_producto.nombre}}" class="img-thumbnail imagen">
+                    <div class="ms-2 ">
+                        <div class=""><b>{{ped.id_producto.nombre}}</b></div>
+                        <a href="{% url 'disminuir_cantidad' ped.id %}" class=" badge btn btn-danger btn-cantidad"><i class="bi bi-dash-circle"> 1</i></a>
+                        <span class="badge cantidad">{{ped.cantidad}}</span>
+                        <a href="{% url 'aumentar_cantidad' ped.id %}" class=" badge btn btn-success btn-cantidad"><i class="bi bi-plus-circle"> 1</i></a>
+                    </div>
+                    <i>{{ped.precio}}</i>
+                </li>
+            </ul>
+            {% endfor %}
+            <h5 id="total">Total: <i>{{total}}</i></h5>
+            <a id="realizar-pedido" class="btn btn-success" href="{% url 'realizar_pedido'%}">
+                Realizar pedido
+            </a>
+        </div>
+        {% else %}
+        <div class="container carrito">
+            <h3>No hay nada en su carrito</h3>
+        </div>
+        {% endif %}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

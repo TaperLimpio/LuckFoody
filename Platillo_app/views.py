@@ -8,8 +8,8 @@ def ingresarplatillo(request):
         if form.is_valid():
             form.save()
             return redirect('login')  # Redirigir a una URL después de guardar el formulario
-    data = {'form': form, 'titulo': 'Agregar platillo'}
-    return render(request, 'ingresar_platillo.html', data)
+    data = {'form': form, 'titulo': 'Agregar catálogo'}
+    return render(request, 'ingresar_catalogo.html', data)
 
 
 def activar_platillo(request, platillo_id):
