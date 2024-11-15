@@ -7,4 +7,4 @@ class Usuario(models.Model):
         fono=models.CharField(max_length=15)
         tipo=models.CharField(max_length=50)
         contraseña=models.CharField(max_length=50)
-        estado = models.CharField(max_length=25, default='activo')
+        estado = models.CharField(max_length=25)

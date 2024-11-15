@@ -4,6 +4,7 @@ from Catalogo_app.models import Catalogo
 
 class Platillo(models.Model):
     nombre = models.CharField(max_length=50)
+    codigo = models.CharField(max_length=13,default=1)
     precio = models.IntegerField()
     descripcion = models.TextField()
     imagen = models.ImageField(upload_to='platillo_imagenes/')

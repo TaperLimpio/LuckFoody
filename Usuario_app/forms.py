@@ -34,6 +34,8 @@ class UsuarioForm(forms.ModelForm):
         email = self.cleaned_data.get('email')
         if not email.endswith('@gmail.com'):
             raise forms.ValidationError('El correo electrónico debe terminar en @gmail.com.')
+        if Usuario.objects.filter(email=email).exists():
+            raise forms.ValidationError('Este correo electrónico ya está registrado.')
         return email
     
     def clean_nombre(self):
@@ -46,11 +48,20 @@ class UsuarioAdminForm(forms.ModelForm):
     class Meta:
         model = Usuario
         fields = ['nombre', 'email', 'fono', 'tipo','contraseña']
+
+    def clean_rut(self):
+     rut = self.cleaned_data.get('rut')
+     if Usuario.objects.filter(rut=rut).exists():
+        raise forms.ValidationError('Este RUT ya está registrado.')
+
+     return rut
     
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if not email.endswith('@gmail.com'):
             raise forms.ValidationError('El correo electrónico debe terminar en @gmail.com.')
+        if Usuario.objects.filter(email=email).exists():
+            raise forms.ValidationError('Este correo electrónico ya está registrado.')
         return email
 
     def clean_nombre(self):

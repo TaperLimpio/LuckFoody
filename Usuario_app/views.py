@@ -4,34 +4,6 @@ from . import forms
 from .forms import UsuarioForm,UsuarioAdminForm,Filtro
 
 # Create your views here.
-def crearcuenta(request):
-    form = UsuarioForm()
-    if request.method == 'POST':
-        form = UsuarioForm(request.POST)
-        if form.is_valid():
-            usuario = form.save(commit=False)
-            usuario.estado='activo'
-            usuario.tipo = 'usuario'  # Establecer el tipo a 'usuario' automáticamente
-            usuario.save()
-            return redirect('login')  # Redirigir al login después de crear la cuenta
-    data = {'form': form, 'titulo': 'Crear cuenta'}
-    return render(request, 'crear-cuenta.html', data)
-
-
-
-def crearcuentaadmin(request):
-    if request.method == 'POST':
-        form = UsuarioAdminForm(request.POST)
-        if form.is_valid():
-            usuario = form.save(commit=False)
-            usuario.estado='activo'
-            form.save()
-            return redirect('login')  # Redirigir al login después de crear la cuenta
-    else:
-        form = UsuarioAdminForm()
-    data = {'form': form, 'titulo': 'Crear cuenta de administrador'}
-    return render(request, 'crear-cuenta-admin.html', data)
-
 def login(request):
     if request.method == 'POST':
         nombre = request.POST.get('username')
@@ -48,6 +20,34 @@ def login(request):
         else:
             return render(request, 'login.html', {'error': 'Usuario inválido'})
     return render(request, 'login.html')
+
+def crearcuenta(request):
+    form = UsuarioForm()
+    if request.method == 'POST':
+        form = UsuarioForm(request.POST)
+        if form.is_valid():
+            usuario = form.save(commit=False)
+            usuario.estado='activo'
+            usuario.tipo = 'usuario'  # Establecer el tipo a 'usuario' automáticamente
+            usuario.save()
+            return redirect('login')  # Redirigir al login después de crear la cuenta
+    data = {'form': form, 'titulo': 'Crear cuenta'}
+    return render(request, 'crear-cuenta.html', data)
+
+
+def crearcuentaadmin(request):
+    if request.method == 'POST':
+        form = UsuarioAdminForm(request.POST)
+        if form.is_valid():
+            usuario = form.save(commit=False)
+            usuario.estado='activo'
+            form.save()
+            return redirect('login')  # Redirigir al login después de crear la cuenta
+    else:
+        form = UsuarioAdminForm()
+    data = {'form': form, 'titulo': 'Crear cuenta de administrador'}
+    return render(request, 'crear-cuenta-admin.html', data)
+
 
 def ver_usuario(request, emp_id):
     usuario = get_object_or_404(Usuario, id=emp_id)
