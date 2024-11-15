@@ -6,8 +6,7 @@ from django.urls import path
 from Catalogo_app.views import paginaprincipal, ingresarcatalogo, asignar_platillo, ver_catalogo,paginaadmin  # Importa la vista correcta desde Catalogo_app
 from Catalogo_app.views import  activar_catalogo,desactivar_catalogo,ver_catalogoadmin,actualizarcatalogo
 
-from PaginaWeb.views import portalpago, carritocompra, verplatillo, pagofracaso
-from PaginaWeb.views import pagoexitoso, Repartidor, ingresartrivia, Trivia
+from PaginaWeb.views import Repartidor, ingresartrivia, Trivia
 
 from Pedido_app.views import consultar_pedidos, ver_pedido, mis_pedidos, cancelar_pedido
 
@@ -17,8 +16,15 @@ from Usuario_app.views import Update_Usuario, delete_usuario, Index_Usuario
 from Sucursal_app.views import ingresarsucursal, consultarsucursal, modificarsucursal
 from Sucursal_app.views import deshabilitarsucursal, listasucursal
 
-from Platillo_app.views import ingresarplatillo, activar_platillo 
+from Platillo_app.views import ingresarplatillo, activar_platillo
 from Platillo_app.views import desactivar_platillo, actualizarplatillo
+
+from Pedido_app.views import consultar_pedidos,ver_pedido,mis_pedidos
+from Pedido_app.views import cancelar_pedido
+
+from Carrito_app.views import ver_carrito, agregar_a_carrito, aumentar_cantidad
+from Carrito_app.views import disminuir_cantidad,realizar_pedido,pagoexitoso
+from Carrito_app.views import pagofracaso
 
 urlpatterns = [
 
@@ -30,7 +36,6 @@ urlpatterns = [
 
     #Platillo
     path('ingresar_platillo/', ingresarplatillo, name='ingresar_platillo'),
-    path('ver_platillo/', verplatillo),
     path('asignar_platillo/<int:catalogo_id>/', asignar_platillo, name='asignar_platillo'),
     path('actualizar_platillo/<int:platillo_id>/', actualizarplatillo, name='actualizar_platillo'),
     path('activar_platillo/<int:platillo_id>/', activar_platillo, name='activar_platillo'),
@@ -67,10 +72,13 @@ urlpatterns = [
     path('trivia/', Trivia),
 
     #Pagos
-    path('portal_pago/', portalpago),
-    path('carrito_de_compra/', carritocompra),
-    path('pago fracaso/', pagofracaso),
-    path('pago exitoso/', pagoexitoso),
+    path('mi_carrito/<int:usuario_id>',ver_carrito,name="mi_carrito"),
+    path('agregar_a_carrito/<int:platillo_id>',agregar_a_carrito,name="agregar_a_carrito"),
+    path('aumentar_cantidad/<int:pedido_carrito_id>',aumentar_cantidad,name='aumentar_cantidad'),
+    path('disminuir_cantidad/<int:pedido_carrito_id>',disminuir_cantidad,name='disminuir_cantidad'),
+    path('realizar_pedido/',realizar_pedido,name='realizar_pedido'),
+    path('pago fracaso/',pagofracaso,name='pago fracaso'),
+    path('pago exitoso/',pagoexitoso,name='pago exitoso'),
 
     #Usuario
     path('index usuario/', Index_Usuario, name='index_usuario'),

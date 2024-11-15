@@ -14,11 +14,14 @@
                 <h3 class="nom-platillos">{{ platillo.nombre }}</h3>
                 <p><b>Descripción:</b> {{ platillo.descripcion }}</p>
                 <p><b>Precio:</b> <i>${{ platillo.precio }}</i></p>
-                <a href="#" class="btn btn-success">Agregar al carro</a>
+                <a href="{% url 'agregar_a_carrito' platillo.id %}" class="btn btn-success">Agregar a carrito</a>
             </div>
         </div>
     </div>
+ 
     {% endfor %}
+
 </div>
+{% include 'footer.html' %}
 
 

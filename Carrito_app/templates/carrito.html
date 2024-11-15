@@ -9,9 +9,9 @@
             {% for ped in carrito %}
             <ul class="list-group">
                 <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <img src="{{ ped.id_producto.imagen.url }}" alt="{{ped.id_producto.nombre}}" class="img-thumbnail imagen">
+                    <img src="{{ ped.id_platillo.imagen.url }}" alt="{{ped.id_platillo.nombre}}" class="img-thumbnail imagen">
                     <div class="ms-2 ">
-                        <div class=""><b>{{ped.id_producto.nombre}}</b></div>
+                        <div class=""><b>{{ped.id_platillo.nombre}}</b></div>
                         <a href="{% url 'disminuir_cantidad' ped.id %}" class=" badge btn btn-danger btn-cantidad"><i class="bi bi-dash-circle"> 1</i></a>
                         <span class="badge cantidad">{{ped.cantidad}}</span>
                         <a href="{% url 'aumentar_cantidad' ped.id %}" class=" badge btn btn-success btn-cantidad"><i class="bi bi-plus-circle"> 1</i></a>
