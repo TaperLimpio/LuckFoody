@@ -38,32 +38,33 @@ h5{
 }
 .añadirAdmin{
     position: relative;
-    right: 110px;
+    right: 150px;
+    bottom: 1px;
     
 }
 .ActuAdmin{
     position: relative;
-    left: 15px;
-    bottom: 37px;
+    right: 50px;
+    bottom: 38px;
 }
 .ConsulAdmin{
     position: relative;
-    left: 126px;
-    bottom: 75px;
+    left: 60px;
+    bottom: 76px;
 }
 .repa{
     position: relative;
-    bottom: 80px;
+    bottom: 100px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 .añadirRepa{
     position: relative;
     
-    bottom: 90px;
+    bottom: 105px;
 }
 .Sucu{
     position: relative;
-    bottom: 90px;
+    bottom: 100px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 .añadirSucu{

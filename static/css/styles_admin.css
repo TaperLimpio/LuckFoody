@@ -87,6 +87,10 @@ a{
 #contenido{
     padding-bottom: 10px;
 }
+.foto-producto{
+    width: 200px;
+    height: 200px;
+}
 /*
         body {
             background: linear-gradient(135deg, #32CD32, #FFD700);

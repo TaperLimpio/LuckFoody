@@ -11,10 +11,34 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1>LuckFoody</h1>
+        <h1>Ferretex</h1>
         <div class="shamrock">🍀</div>
         <p style="font-family: 'Lobster', cursive; color: green;">Pago cargado exitosamente</p>
         <table class="table table-striped">
+            <tr>
+                <th>Fecha de inicio</th>
+                <td>{{pedido.fechainicio}}</td>
+            </tr>
+            <tr>
+                <th>Direccion</th>
+                <td>{{pedido.direccion}}</td>
+            </tr>
+            <tr>
+                <th>Descuento</th>
+                <td>{{pedido.descuento}}</td>
+            </tr>
+            <tr>
+                <th>Fecha de inicio</th>
+                <td>{{pedido.fechainicio}}</td>
+            </tr>
+            <tr>
+                <th>Total</th>
+                <td>{{pedido.total}}</td>
+            </tr>
+            <tr>
+                <th>Espere a que su pedido sea tomado</th>
+            </tr>
+            <!--
             <tr>
                 <th>Nombre del Cliente</th>
                 <td>Juan Pérez</td>
@@ -39,8 +63,9 @@
                 <th>tiempo estimado</th>
                 <td>40 minutos</td>
             </tr>
+            -->
         </table>
-        <button type="button" class="btn btn-warning">Volver</button>
+        <a href="{% url 'pagina_principal' %}">Volver</a>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

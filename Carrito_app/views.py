@@ -18,7 +18,7 @@ def agregar_a_carrito(request,platillo_id):
     except Carrito.DoesNotExist:
         carrito = Carrito()
         carrito.id_usuario = Usuario.objects.get(id=id)
-        carrito.id_platillo = Pedido.objects.get(id=platillo_id)
+        carrito.id_platillo = Platillo.objects.get(id=platillo_id)
         carrito.cantidad = 1
         carrito.precio = carrito.id_platillo.precio * carrito.cantidad
         carrito.save()

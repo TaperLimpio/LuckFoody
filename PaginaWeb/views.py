@@ -20,8 +20,7 @@ def verplatillo(request):
 def pagofracaso(request):
     return render(request,"pagofracaso.html")
 
-def pagoexitoso(request):
-    return render(request,"pago exitoso.html")
+
 
 def ingresarcatalogo(request):
     return render(request,"ingresar catalogo.html")
