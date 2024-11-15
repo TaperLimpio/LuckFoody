@@ -2,7 +2,17 @@
 from django import forms
 from .models import Platillo
 
-class PlatilloForm(forms.ModelForm):
-    class Meta:
-        model = Platillo
-        fields = ['nombre', 'precio', 'descripcion', 'imagen', 'sucursales','catalogo']
+FILTRO_DECICIONES_1=(
+    ('Todo','----'),
+    ('activo','activo'),
+    ('inactivo','inactivo'),
+    ('tomado','tomado'),
+    ('entregado','entregado')
+)
+
+class FiltroPlatillo(forms.Form):
+    estado = forms.ChoiceField(choices=FILTRO_DECICIONES_1)
+    
+class PlatilloForm(forms.Form):
+    n_tarjeta = forms.CharField(max_length=10)
+    direccion = forms.CharField(max_length=40)
