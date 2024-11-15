@@ -3,8 +3,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 
-from Catalogo_app.views import paginaprincipal, ingresarcatalogo, asignar_platillo, ver_catalogo,paginaadmin  # Importa la vista correcta desde Catalogo_app
-from Catalogo_app.views import  activar_catalogo,desactivar_catalogo,ver_catalogoadmin,actualizarcatalogo
+from Catalogo_app.views import paginaprincipal, ingresarcatalogo, ver_catalogoadmin  # Importa la vista correcta desde Catalogo_app
+from Catalogo_app.views import  activar_catalogo,desactivar_catalogo,paginaadmin
+from Catalogo_app.views import asignar_platillo, ver_catalogo,actualizarcatalogo
 
 from PaginaWeb.views import Repartidor, ingresartrivia, Trivia
 
