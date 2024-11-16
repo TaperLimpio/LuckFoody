@@ -16,7 +16,7 @@ def login(request):
             elif usuario.tipo == 'administrador':
                 return redirect('pagina_administrador')  # Redirigir a la URL 'administrador'
             elif usuario.tipo=='repartidor':
-                return redirect('repartidor')#lo mismo pero para el repartidor
+                return redirect('pagina-repartidor')#lo mismo pero para el repartidor
         else:
             return render(request, 'login.html', {'error': 'Usuario inválido'})
     return render(request, 'login.html')

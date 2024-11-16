@@ -6,6 +6,7 @@ from django.urls import path
 from Catalogo_app.views import paginaprincipal, ingresarcatalogo, ver_catalogoadmin  # Importa la vista correcta desde Catalogo_app
 from Catalogo_app.views import  activar_catalogo,desactivar_catalogo,paginaadmin
 from Catalogo_app.views import asignar_platillo, ver_catalogo,actualizarcatalogo
+from Catalogo_app.views import paginarepartidor
 
 from PaginaWeb.views import Repartidor, ingresartrivia, Trivia
 
@@ -22,6 +23,8 @@ from Platillo_app.views import desactivar_platillo, actualizarplatillo
 
 from Pedido_app.views import consultar_pedidos,ver_pedido,mis_pedidos
 from Pedido_app.views import cancelar_pedido
+
+from TomarPedido_app.views import aceptar_pedido,entregar_pedido
 
 from Carrito_app.views import ver_carrito, agregar_a_carrito, aumentar_cantidad
 from Carrito_app.views import disminuir_cantidad,realizar_pedido,pagoexitoso
@@ -58,7 +61,7 @@ urlpatterns = [
     path('deshabilitar_sucursal/<int:id>/', deshabilitarsucursal),
 
     #Páginas
-    path('pagina-repartidor/', Repartidor, name='pagina-repartidor'),
+    path('pagina-repartidor/', paginarepartidor, name='pagina-repartidor'),
     path('pagina-admin/', paginaadmin, name='pagina_administrador'),
     path('pagina_principal/', paginaprincipal, name='pagina_principal'),
 
@@ -87,4 +90,7 @@ urlpatterns = [
     path('delete-usuario/<int:emp_id>/', delete_usuario, name='delete_usuario'),
     path('update_usuario/<int:emp_id>/', Update_Usuario),
     
+    path('aceptar_pedido/<int:id_pedido>',aceptar_pedido,name='aceptar_pedido'),
+    path('entregar_pedido/<int:id_pedido>',entregar_pedido,name='entregar_pedido'),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

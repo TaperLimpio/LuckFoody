@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CatalogoForm
 from .models import Catalogo
 from Platillo_app.models import Platillo
+from Pedido_app.models import Pedido
 
 def ingresarcatalogo(request):
     form = CatalogoForm()
@@ -22,6 +23,13 @@ def paginaprincipal(request):
 def paginaadmin(request):
     catalogos = Catalogo.objects.prefetch_related('platillos_set').all()
     return render(request, 'pagina-admin.html', {'catalogos': catalogos})
+
+def paginarepartidor(request):
+    id = request.session['usuario_id']
+    pedidos_generales = Pedido.objects.filter(estado = "activo")
+    pedidos_aceptados = Pedido.objects.filter(repartidor__id = id, estado = "tomado")
+    return render(request, 'pagina-repartidor.html',{'ped_generales':pedidos_generales,
+                                                     'ped_aceptados':pedidos_aceptados})
 
 def actualizarcatalogo(request, catalogo_id):
     catalogo = get_object_or_404(Catalogo, id=catalogo_id)
