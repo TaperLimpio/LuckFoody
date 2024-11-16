@@ -1,13 +1,10 @@
 {% include 'header-repartidor.html' %}
 {% load static %}
-
-
-
     <!--botones arriba para que el repartidor pueda administrar su cuenta-->
     <!--Abajo estaría para tomar el pedido, dos tablas, una de pedidos generales y otra de pedidos 
     que tomo el repartidor-->
 
-    <div style="background-color: #3FBC3D;" class="container mt-5">
+    <div class="container mt-5">
         <h1>LuckFoody</h1>
         <div class="shamrock">🍀</div>
         
@@ -17,32 +14,28 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Nombre</th>
+                        <th>Fecha y Hora</th>
                         <th>Dirección</th>
-                        <th>Hora</th>
+                        <th>Usuario</th>
+                        <th>Total</th>
                         <th colspan="2">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    {% for ped in ped_generales %}
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{ped.id}}</td>
+                        <td>{{ped.fechainicio}}</td>
+                        <td>{{ped.direccion}}</td>
+                        <td>{{ped.usuario.nombre}}</td>
+                        <th>{{ped.total}}</th>
                         <td>
-                            <button class="btn btn-success"><i class="bi bi-plus-lg"></i></button>
-                           
-                        </td>
-                        <td>
-                            <button class='btn btn-warning'><i class="bi bi-x-lg"></i></button>
-                           
-                        </td>
-                        <td>
-                            
+                            <a href="{% url 'aceptar_pedido' ped.id %}" class="btn btn-success ">
+                                <i class="bi bi-basket boton"></i>
+                            </a>
                         </td>
                     </tr>
-                    
+                    {% endfor %}
                 </tbody>
              </table>
 
@@ -51,34 +44,30 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Nombre</th>
+                        <th>Fecha y Hora</th>
                         <th>Dirección</th>
-                        <th>Hora</th>
-                        <th>Acciones</th>
+                        <th>Usuario</th>
+                        <th>Total</th>
+                        <th colspan="2">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    {% for ped in ped_aceptados %}
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        
+                        <td>{{ped.id}}</td>
+                        <td>{{ped.fechainicio}}</td>
+                        <td>{{ped.direccion}}</td>
+                        <td>{{ped.usuario.nombre}}</td>
+                        <th>{{ped.total}}</th>
                         <td>
-                            <button class='btn btn-warning'><i class="bi bi-hand-thumbs-up"></i></button>
-                           
-                        </td>
-                        <td>
-                            
+                            <a href="{% url 'entregar_pedido' ped.id %}" class="btn btn-success ">
+                                <i class="bi bi-basket-fill boton"></i>
+                            </a>
                         </td>
                     </tr>
-                    
+                    {% endfor %}
                 </tbody>
              </table>
-                
-            <button class="btn btn-warning back">Volver</button>
-            
             </div>    
         </div>
     </div>

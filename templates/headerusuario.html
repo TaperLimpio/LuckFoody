@@ -10,25 +10,26 @@
     <link rel="stylesheet" href="{% static 'css/styles_usuario.css' %}">
 </head>
 <body>
+    <!--
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#"><div class="shamrock">🍀</div></a>
+          <a class="navbar-brand" href="{% url 'pagina_principal' %}"><div class="shamrock">🛠️</div></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle colorcito" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Mis Trivias <i class="bi bi-patch-question"></i>
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item colorcito" href="#">Realizar un Trivia <i class="bi bi-check"></i></a></li>
-                      <li><a class="dropdown-item colorcito" href="#">Ver mis Trivias <i class="bi bi-card-checklist"></i></a></li>
+                      <li><a class="dropdown-item" href="#">Realizar un Trivia <i class="bi bi-check"></i></a></li>
+                      <li><a class="dropdown-item" href="#">Ver mis Trivias <i class="bi bi-card-checklist"></i></a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active colorcito" aria-current="page" href="#">Mis Pedidos <i class="bi bi-truck"></i></a>
+                    <a class="nav-link active" aria-current="page" href="#">Mis Pedidos <i class="bi bi-truck"></i></a>
                 </li>
             </ul>
           </div>
@@ -39,11 +40,33 @@
                     Usuario
                 </b>
                 <li class="nav-item">
-                    <a class="nav-link active colorcito" aria-current="page" href="{% url 'ver_usuario' request.session.usuario_id %}"><i class="bi bi-person-circle"></i></a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'ver_usuario' request.session.usuario_id %}"><i class="bi bi-person-circle"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active colorcito" aria-current="page" class="navbar-derecha" href="#"><i class="bi bi-cart"></i></a>
+                    <a class="nav-link active" aria-current="page" class="navbar-derecha" href="{% url 'mi_carrito' request.session.usuario_id %}"><i class="bi bi-cart"></i></a>
                 </li>
             </ul>
         </div>
     </nav>
+    -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{% url 'pagina_principal' %}"><div class="shamrock">🍀</div></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"><i class="bi bi-list"></i></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'mis_pedidos' %}"><i class="bi bi-truck"> Mis Pedidos</i></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'ver_usuario' request.session.usuario_id %}"><i class="bi bi-person-circle"> Yo</i></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" class="navbar-derecha" href="{% url 'mi_carrito' request.session.usuario_id %}"><i class="bi bi-cart"> Carrito</i></a>
+              </li>
+            </ul>
+          </div> 
+        </div>
+      </nav>

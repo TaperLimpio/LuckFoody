@@ -52,13 +52,13 @@ urlpatterns = [
 
     #Sucursal
     path('ingresar_sucursal/', ingresarsucursal),
-    path('lista_sucursales/', listasucursal),
+    path('lista_sucursales/', listasucursal, name='lista sucursales'),
     path('consultar_sucursal/<int:id>/', consultarsucursal),
     path('modificar_sucursal/<int:id>/', modificarsucursal),
     path('deshabilitar_sucursal/<int:id>/', deshabilitarsucursal),
 
     #Páginas
-    path('pagina-repartidor/', Repartidor, name='repartidor'),
+    path('pagina-repartidor/', Repartidor, name='pagina-repartidor'),
     path('pagina-admin/', paginaadmin, name='pagina_administrador'),
     path('pagina_principal/', paginaprincipal, name='pagina_principal'),
 

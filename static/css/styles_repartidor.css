@@ -1,0 +1,68 @@
+body {
+    background: linear-gradient(135deg, #32CD32, #FFD700);
+}
+nav {
+    background-color: rgba(217, 240, 134, 0.906);
+    color: black;
+}
+
+.container {
+    background-color: aliceblue;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.navbar-derecha {
+    margin-right: 30px;
+}
+
+.boton{
+    color: white;
+}
+.boton:hover{
+    color: whitesmoke;
+}
+
+i{
+    color: rgb(99, 78, 2);
+}
+i:hover{
+    color: rgb(0, 79, 32);
+    text-decoration: double;
+    text-shadow: 5px 5px 5px rgb(36, 71, 1);
+}
+
+.shamrock {
+    font-size: 1.5em;
+    color: #FFD700;
+}
+
+a{
+    text-decoration: none;
+}
+
+#Bienvenida {
+    text-align: left;
+}
+
+.row-lista{
+    margin-bottom: 10px;
+}
+
+.titulo-categoria, .nom , .dir{
+    font-family: 'Lobster', cursive;
+}
+
+#Titulo-pag{
+    font-family: 'Lobster', cursive;
+    margin-bottom: 15px;
+}
+#contenido{
+    padding-bottom: 10px;
+}
+.foto-producto{
+    width: 200px;
+    height: 200px;
+}
