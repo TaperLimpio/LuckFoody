@@ -10,7 +10,7 @@ def ingresarcatalogo(request):
         form = CatalogoForm(request.POST, request.FILES)  # Asegúrate de manejar archivos
         if form.is_valid():
             form.save()
-            return redirect('login')  # Redirigir a una URL después de guardar el formulario
+            return redirect('pagina_administrador')  # Redirigir a una URL después de guardar el formulario
     data = {'form': form, 'titulo': 'Agregar catálogo'}
     return render(request, 'ingresar_catalogo.html', data)
 
@@ -37,7 +37,7 @@ def actualizarcatalogo(request, catalogo_id):
         form = CatalogoForm(request.POST, request.FILES, instance=catalogo)  # Vincula el formulario con el catálogo existente
         if form.is_valid():
             form.save()
-            return redirect('login')  # Redirigir a una URL después de actualizar el formulario
+            return redirect('pagina_administrador')  # Redirigir a una URL después de actualizar el formulario
     else:
         form = CatalogoForm(instance=catalogo)
     data = {'form': form, 'titulo': 'Actualizar catálogo'}

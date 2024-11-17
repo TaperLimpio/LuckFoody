@@ -7,7 +7,7 @@ def ingresarplatillo(request):
         form = PlatilloForm(request.POST, request.FILES)  # Asegúrate de manejar archivos
         if form.is_valid():
             form.save()
-            return redirect('login')  # Redirigir a una URL después de guardar el formulario
+            return redirect('pagina_administrador')  # Redirigir a una URL después de guardar el formulario
     data = {'form': form, 'titulo': 'Agregar catálogo'}
     return render(request, 'ingresar_catalogo.html', data)
 
