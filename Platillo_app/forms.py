@@ -8,8 +8,8 @@ class PlatilloForm(forms.ModelForm):
         model = Platillo
         fields = ['nombre', 'codigo', 'precio', 'descripcion', 'imagen', 'sucursales', 'catalogo']
     #filtra las sucursales para que solo puedas enlazar platillo con sucursales activas 
-    def init(self, args, **kwargs):
-        super(PlatilloForm, self).init(args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        super(PlatilloForm, self).__init__(*args, **kwargs)
         self.fields['sucursales'].queryset = Sucursal.objects.filter(estado='activo')
     
     #evita ingresar dos veces un platillo con el mismo nombre
