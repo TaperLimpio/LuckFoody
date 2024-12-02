@@ -1,6 +1,7 @@
 from django.db import models
 
 # Create your models here.
+#modelo de usuario
 class Usuario(models.Model):
         rut=models.CharField(max_length=15,default='NOTRUT')
         nombre=models.CharField(max_length=50)

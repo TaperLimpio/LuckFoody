@@ -4,6 +4,9 @@ from . import forms
 from .forms import UsuarioForm,UsuarioAdminForm,Filtro
 
 # Create your views here.
+
+#es el login aqui dependiendo de tu tipo de usuario te enviara a una pagina especifica tambien recuerda tu id para poder hacer las operaciones
+#respectivas dependiendo del tipo de usuario
 def login(request):
     if request.method == 'POST':
         nombre = request.POST.get('username')
@@ -20,7 +23,7 @@ def login(request):
         else:
             return render(request, 'login.html', {'error': 'Usuario inválido'})
     return render(request, 'login.html')
-
+#crea la cuenta del usuario siempre la creara con el tipo "usuario"(usuario=cliente)
 def crearcuenta(request):
     form = UsuarioForm()
     if request.method == 'POST':
@@ -34,7 +37,7 @@ def crearcuenta(request):
     data = {'form': form, 'titulo': 'Crear cuenta'}
     return render(request, 'crear-cuenta.html', data)
 
-
+#le permite crear cuentas al administrador
 def crearcuentaadmin(request):
     if request.method == 'POST':
         form = UsuarioAdminForm(request.POST)
@@ -48,12 +51,12 @@ def crearcuentaadmin(request):
     data = {'form': form, 'titulo': 'Crear cuenta de administrador'}
     return render(request, 'crear-cuenta-admin.html', data)
 
-
+#le permite ver sus datos al a todos los tipos usuario 
 def ver_usuario(request, emp_id):
     usuario = get_object_or_404(Usuario, id=emp_id)
     return render(request, 'view-usuario.html', {'usuario': usuario})
 
-
+#le permite actualizar a todos los tipos de usuarios
 def Update_Usuario(request, emp_id):
     usuario = Usuario.objects.get(id=emp_id)
     form = UsuarioForm(instance=usuario)
@@ -67,6 +70,7 @@ def Update_Usuario(request, emp_id):
     data = {'form': form, 'titulo': 'Actualizar usuario'}
     return render(request, 'crear-cuenta.html', data)
 
+#cambia el estado del usuario a inactivo
 def delete_usuario(request, emp_id):
     usuario = Usuario.objects.get(id=emp_id)
     if usuario:
@@ -74,6 +78,7 @@ def delete_usuario(request, emp_id):
         usuario.save()
     return redirect('login')
 
+#permite ver una lista con todos los usuarios registrados tanto cliente,repartidores y administradores
 def Index_Usuario(request):
     filtro = Filtro(initial={'tipo':'----','estado':'----'})
     if request.method=="POST":

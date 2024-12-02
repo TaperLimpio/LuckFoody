@@ -1,9 +1,11 @@
+#importaciones para el funcionamiento
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 
-from Catalogo_app.views import paginaprincipal, ingresarcatalogo, ver_catalogoadmin  # Importa la vista correcta desde Catalogo_app
+# urls de las distintas apps
+from Catalogo_app.views import paginaprincipal, ingresarcatalogo, ver_catalogoadmin  
 from Catalogo_app.views import  activar_catalogo,desactivar_catalogo,paginaadmin
 from Catalogo_app.views import asignar_platillo, ver_catalogo,actualizarcatalogo
 from Catalogo_app.views import paginarepartidor
@@ -93,4 +95,4 @@ urlpatterns = [
     path('aceptar_pedido/<int:id_pedido>',aceptar_pedido,name='aceptar_pedido'),
     path('entregar_pedido/<int:id_pedido>',entregar_pedido,name='entregar_pedido'),
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)#para poder cargar la imagenes

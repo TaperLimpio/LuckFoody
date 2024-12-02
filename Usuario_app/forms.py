@@ -2,6 +2,8 @@ from typing import Any
 from django import forms 
 from Usuario_app.models import Usuario
 
+
+#filtro de busqueda para encontrar ciertos tipos de usuarios
 FILTRO_DECICIONES_1=(
     ('Todo','----'),
     ('Administrador','administrador'),
@@ -20,16 +22,18 @@ class Filtro(forms.Form):
     tipo = forms.ChoiceField(choices=FILTRO_DECICIONES_1)
     estado = forms.ChoiceField(choices=FILTRO_DECICIONES_2)
 
+#formulario para ingresar usuario de tipo cliente
 class UsuarioForm(forms.ModelForm):
     class Meta:
         model = Usuario
         fields = ['nombre', 'email', 'fono','contraseña']
+    #evita ingresar un fono que no contenga numeros y "+"
     def clean_fono(self):
         fono = self.cleaned_data.get('fono')
         if not fono.startswith('+') or not fono[1:].replace(' ', '').isdigit():
             raise forms.ValidationError('El número de teléfono debe ser numérico y puede incluir un código de país con +.')
         return fono
-
+    #evita ingresar un correro ya registrado y que no termine en "@gmail.com"
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if not email.endswith('@gmail.com'):
@@ -38,17 +42,19 @@ class UsuarioForm(forms.ModelForm):
             raise forms.ValidationError('Este correo electrónico ya está registrado.')
         return email
     
+    #evita crear una cuento con el mismo nombre de usuario
     def clean_nombre(self):
         nombre= self.cleaned_data.get('nombre')
         if Usuario.objects.filter(nombre=nombre).exists():
              raise forms.ValidationError('utilize otro nombre')
         return nombre
 
+#formulario para crear cuentas por parte del administrador
 class UsuarioAdminForm(forms.ModelForm):
     class Meta:
         model = Usuario
         fields = ['nombre', 'email', 'fono', 'tipo','contraseña']
-
+    #permite no ingresar dos veces el mismo rut
     def clean_rut(self):
      rut = self.cleaned_data.get('rut')
      if Usuario.objects.filter(rut=rut).exists():
@@ -56,6 +62,7 @@ class UsuarioAdminForm(forms.ModelForm):
 
      return rut
     
+    #evita ingresar un correro ya registrado y que no termine en "@gmail.com"
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if not email.endswith('@gmail.com'):
@@ -63,18 +70,22 @@ class UsuarioAdminForm(forms.ModelForm):
         if Usuario.objects.filter(email=email).exists():
             raise forms.ValidationError('Este correo electrónico ya está registrado.')
         return email
-
+    
+    #no permite ingresar una cuenta con el mismo nombre de usuario
     def clean_nombre(self):
         nombre= self.cleaned_data.get('nombre')
         if Usuario.objects.filter(nombre=nombre).exists():
              raise forms.ValidationError('utilize otro nombre')
         return nombre    
     
+    #permite solo el ingreso en "tipo" las palabras administrador y repartidor
     def clean_tipo(self):
         tipo = self.cleaned_data.get('tipo')
         if tipo not in ['administrador', 'repartidor']:
             raise forms.ValidationError('Tipo de usuario inválido.')
         return tipo
+    
+    #evita ingresar un fono que no contenga numeros y "+"
     def clean_fono(self):
         fono = self.cleaned_data.get('fono')
         if not fono.startswith('+') or not fono[1:].replace(' ', '').isdigit():

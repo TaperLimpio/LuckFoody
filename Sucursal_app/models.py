@@ -1,6 +1,7 @@
 from django.db import models
 
 # Create your models here.
+#modelo de la sucursal
 class Sucursal(models.Model):
         nombre=models.CharField(max_length=50)
         direccion=models.CharField(max_length=70)
