@@ -1,0 +1,21 @@
+{% include 'headeradmin.html' %}
+    <div class="container">
+        <h1>las Preguntas</h1>
+        <div class="shamrock">🍀</div>
+        {% if preguntas %}
+        <ul class="list-group">
+            {% for pre in preguntas %}
+            <li class="list-group-item">
+                <h1>Pregunta {{pre.nOrden}}:</h1>
+                <p>{{pre.descripcion}}</p>
+                <a href="{% url 'respuestas' pre.id %}" class="btn btn-success mt-1 mb-1">Ver Respuestas</a>
+                <a href="{% url 'editar_pregunta' pre.id %}" class="btn btn-warning">Editar</a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <div class="alert alert-danger">Esta trivia no tiene preguntas</div>
+        {% endif %}
+        <a href="{% url 'crear_preguntas' trivia %}" class="btn btn-success mt-3">Crear Pregunta</a>
+    </div>
+{% include 'footer.html' %}

@@ -17,6 +17,7 @@ nav {
 .navbar-derecha {
     margin-right: 30px;
 }
+
 /*
 .book{
     padding: 10px 10px 10px 10px;
@@ -79,7 +80,7 @@ a{
     margin-bottom: 10px;
 }
 
-.titulo-categoria, .nom , .dir{
+.titulo-categoria, .nom , .dir, .titulo-tarjeta{
     font-family: 'Lobster', cursive;
 }
 

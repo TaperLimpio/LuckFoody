@@ -1,0 +1,33 @@
+{% include 'headerusuario.html' %}
+    <div class="container">
+        {% if trivia %}
+            <div class="row align-items-center">
+                <p class="col fs-6" >Quedan: {{tiempo_restante}} para resolver la trivia</p>
+                <h4 class="col">Responde la trivia</h4>
+                <p class="col"></p>
+            </div>
+            <form method="POST">
+                {% csrf_token %}
+        {% for pregunta in preguntas %}
+                <div class="container mt-2">
+                    <h3>Pregunta {{forloop.counter}}</h3>
+                    <fieldset id="pregunta{{forloop.counter}}">
+                        <legend>{{pregunta.descripcion}}</legend>
+                    {% for respuesta in pregunta.Respuestas.all %}
+                        <div class="row justify-content-evenly m-1">
+                            <label for="group1" class="col mt-1 text-start">{{respuesta.descripcion}}</label>
+                            <input type="radio" name="{{respuesta.id}}" class="col mt-1">
+                        </div>
+                    {% endfor %}
+                    </fieldset>
+                </div>
+        {% endfor %}
+                <input type="submit" value="Terminar" class="btn btn-success mt-3">
+            </form>
+        {% else %}
+            <div class="alert alert-danger">
+                Error, no hay trivia
+            </div>
+        {% endif %}
+    </div>
+{% include 'footer.html' %}

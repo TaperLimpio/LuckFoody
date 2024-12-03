@@ -1,0 +1,38 @@
+{% include 'headerusuario.html' %}
+    <div class="container mt-3">
+        <h3>Trivias</h3>
+        {% if trivias_disponibles %}
+            <div class="container">
+            <h4>Trivias Disponibles</h4>
+            {% for trivia in trivias_disponibles %}
+                <div class="card" style="width: 20rem;">
+                    <div class="card-body">
+                    <h5 class="card-title titulo-tarjeta">{{trivia.titulo}}</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Hasta: {{trivia.fechaTermino}}</h6>
+                    <p class="card-text">{{trivia.descripcion}}</p>
+                    <a href="{% url 'realizar_trivia' trivia.id %}" class="card-link btn btn-success"
+                    >Realizar la Trivia <i class="bi bi-check-all"></i></a>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-danger">No hay trivias</div>
+        {% endif %}
+        {% if mis_trivias %}
+            <div class="container">
+                <div class="card" style="width: 20rem;">
+                    <div class="card-body">
+                    <h5 class="card-title titulo-tarjeta">{{trivia.titulo}}</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">{{trivia.estado}}</h6>
+                    <p class="card-text">{{trivia.descripcion}}</p>
+                    <a href="" class="card-link btn btn-success">Ver resultados<i class="bi bi-check-all"></i></a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="alert alert-danger mt-3">No has realizado trivias :(</div>
+        {% endif %}
+        <a href="{% url 'crear_trivia' %}" class="btn btn-success m-3"><i class="bi bi-plus-circle"></i></a>
+    </div>
+{% include 'footer.html' %}
