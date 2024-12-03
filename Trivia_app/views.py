@@ -3,6 +3,7 @@ from django.db.models import Q
 from .models import Trivia,Pregunta,Respuesta,Descuentos
 from Usuario_app.models import Usuario
 from django.utils import timezone
+import datetime
 
 # Admin.
 def Trivias(request):
@@ -181,14 +182,17 @@ def actualizar_tiempo():
 def Mis_trivias(request):
     id_usuario = request.session['usuario_id']
     actualizar_tiempo()
-    trivias = Trivia.objects.filter(estado = "activo")
+    trivias = Trivia.objects.filter(estado = "activo").exclude(usuarioRealizados__id = id_usuario)
+    print(trivias)
     mis_trivias = Usuario.objects.get(id = id_usuario).descuentos.all()
     data = {'trivias_disponibles':trivias,
-            'mis_trivias':mis_trivias}
+            'descuentos':mis_trivias}
     return render(request,'trivias_usuario.html',data)
 
 def Responder_Trivia(request,id_trivia):
     if request.method == "POST":
+        pre_respondidas_cor = []
+        pts = 0
         trivia = Trivia.objects.get(id = id_trivia)
         preguntas = trivia.Preguntas.all()
         for x,pregunta in enumerate(preguntas):
@@ -196,7 +200,29 @@ def Responder_Trivia(request,id_trivia):
             for re in respuestas:
                 if re.escorrecto:
                     if request.POST.get(str(re.id)) == "on":
-                        None
+                        pre_respondidas_cor.append(True)
+                    else:
+                        pre_respondidas_cor.append(False)
+        for x in pre_respondidas_cor:
+            if x:
+                pts += 1
+        pts_esperados = len(pre_respondidas_cor)
+        porcentaje_obtenido = ((pts * 100)/pts_esperados)
+        print(porcentaje_obtenido)
+        if porcentaje_obtenido >= 50:
+            pre_descuento = Descuentos()
+            pre_descuento.id_trivia = trivia
+            print(pre_descuento.id_trivia)
+            pre_descuento.usuPropietario = Usuario.objects.get(id = request.session['usuario_id'])
+            print(pre_descuento.usuPropietario)
+            pre_descuento.fechaCreacion = timezone.now()
+            pre_descuento.fechaTermino = timezone.now()+datetime.timedelta(days=3)
+            pre_descuento.valor = round(trivia.descuentoofrecido,2)
+            pre_descuento.porcentajeCorrecto = porcentaje_obtenido
+            pre_descuento.estado = "valido"
+            trivia.usuarioRealizados.add(Usuario.objects.get(id = request.session['usuario_id']))
+            pre_descuento.save()
+            trivia.save()
         return redirect('mis_trivias')
     else:
         trivia = Trivia.objects.get(id = id_trivia)
@@ -216,7 +242,6 @@ def Responder_Trivia(request,id_trivia):
 def Ver_trivia(request,tri_id):
     trivia = Trivia.objects.get(id = tri_id)
     return render(request,"ver_trivia.html")
-
 
 def smooth_timedelta(timedeltaobj):
     secs = timedeltaobj.total_seconds()

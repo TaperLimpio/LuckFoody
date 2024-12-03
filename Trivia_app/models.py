@@ -9,7 +9,6 @@ class Trivia(models.Model):
     estado = models.CharField(max_length=25)
     fechaCreacion = models.DateTimeField(default=timezone.now)
     fechaTermino = models.DateTimeField()
-    fechaResuelto = models.DateTimeField(null=True)
     descuentoofrecido = models.FloatField(default=0.0)
     titulo = models.CharField(max_length=40)
     descripcion = models.TextField()
