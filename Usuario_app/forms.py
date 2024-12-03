@@ -42,12 +42,12 @@ class UsuarioForm(forms.ModelForm):
             raise forms.ValidationError('Este correo electrónico ya está registrado.')
         return email
     
-    #evita crear una cuento con el mismo nombre de usuario
-    def clean_nombre(self):
-        nombre= self.cleaned_data.get('nombre')
-        if Usuario.objects.filter(nombre=nombre).exists():
-             raise forms.ValidationError('utilize otro nombre')
-        return nombre
+    #evita crear una cuento con la misma contraseña
+    def clean_contraseña(self):
+        contraseña = self.cleaned_data.get('contraseña')
+        if Usuario.objects.filter(contraseña=contraseña).exists():
+            raise forms.ValidationError('Utilice otra contraseña.')
+        return contraseña  
 
 #formulario para crear cuentas por parte del administrador
 class UsuarioAdminForm(forms.ModelForm):
@@ -71,12 +71,12 @@ class UsuarioAdminForm(forms.ModelForm):
             raise forms.ValidationError('Este correo electrónico ya está registrado.')
         return email
     
-    #no permite ingresar una cuenta con el mismo nombre de usuario
-    def clean_nombre(self):
-        nombre= self.cleaned_data.get('nombre')
-        if Usuario.objects.filter(nombre=nombre).exists():
-             raise forms.ValidationError('utilize otro nombre')
-        return nombre    
+    #evita crear una cuenta con la misma contraseña
+    def clean_contraseña(self):
+        contraseña = self.cleaned_data.get('contraseña')
+        if Usuario.objects.filter(contraseña=contraseña).exists():
+            raise forms.ValidationError('Utilice otra contraseña.')
+        return contraseña     
     
     #permite solo el ingreso en "tipo" las palabras administrador y repartidor
     def clean_tipo(self):
