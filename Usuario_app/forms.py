@@ -53,7 +53,7 @@ class UsuarioForm(forms.ModelForm):
 class UsuarioAdminForm(forms.ModelForm):
     class Meta:
         model = Usuario
-        fields = ['nombre', 'email', 'fono', 'tipo','contraseña']
+        fields = ['nombre', 'email', 'fono', 'tipo','contraseña','ciudad']
     #permite no ingresar dos veces el mismo rut
     def clean_rut(self):
      rut = self.cleaned_data.get('rut')

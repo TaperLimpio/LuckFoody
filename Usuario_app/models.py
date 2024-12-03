@@ -10,3 +10,4 @@ class Usuario(models.Model):
         tipo=models.CharField(max_length=50)
         contraseña=models.CharField(max_length=50)
         estado = models.CharField(max_length=25)
+        ciudad=models.CharField(max_length=20,default="osorno")

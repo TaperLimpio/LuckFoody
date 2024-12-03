@@ -81,29 +81,29 @@ def delete_usuario(request, emp_id):
 #permite ver una lista con todos los usuarios registrados tanto cliente,repartidores y administradores
 def Index_Usuario(request):
     filtro = Filtro(initial={'tipo':'----','estado':'----'})
-    if request.method=="POST":
+    ciudad_filtro = ""
+    if request.method == "POST":
         filtro = Filtro(request.POST)
+        ciudad_filtro = request.POST.get('ciudad')
         if filtro.is_valid():
             Tipo = filtro.cleaned_data['tipo']
             Estado = filtro.cleaned_data['estado']
-            print(Tipo)
-            print(Estado)
-            if (Tipo == 'Todo' and Estado == 'Todo'):
-                print("todo")
-                usuario = Usuario.objects.all()
-                print(usuario)
-            elif(Tipo != 'Todo' and Estado == 'Todo'):
-                print("por tipo")
-                usuario = Usuario.objects.filter(tipo = Tipo)
-                print(usuario)
-            elif(Estado != 'Todo'and Tipo == 'Todo'):
-                print("por estado")
-                usuario = Usuario.objects.filter(estado = Estado)
-                print(usuario)
-            else:
-                print("por tipo y estado")
-                usuario = Usuario.objects.filter(tipo = Tipo,estado = Estado)
+            Ciudad = ciudad_filtro if ciudad_filtro else '----'
+            
+            usuario = Usuario.objects.all()
+            
+            if Tipo != '----':
+                usuario = usuario.filter(tipo=Tipo)
+            if Estado != '----':
+                usuario = usuario.filter(estado=Estado)
+            if Ciudad != '----':
+                usuario = usuario.filter(ciudad=Ciudad)
+            
     else:        
         usuario = Usuario.objects.all()
-    data = {'usuario': usuario,'form':filtro}
+        
+    data = {'usuario': usuario, 'form': filtro, 'ciudad_filtro': ciudad_filtro}
     return render(request, 'usuarios.html', data)
+
+
+
