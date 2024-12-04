@@ -1,0 +1,13 @@
+{% include 'headeradmin.html' %}
+    <div class="container">
+        <h1>Crear Pregunta</h1>
+        <div class="shamrock">🍀</div>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="txt_descripcion">Descripcion</label>
+            <textarea name="txt_descripcion" id="txt_descripcion"
+                      cols="50" required>{% if pregunta %}{{pregunta.descripcion}}{% endif %}</textarea>
+            <input type="submit" value="Guardar" class="btn btn-success">
+        </form>
+    </div>
+{% include 'footer.html' %}

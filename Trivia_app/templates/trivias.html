@@ -1,0 +1,28 @@
+{% include 'headeradmin.html' %}
+    <div class="container mt-3">
+        <h3>Trivias</h3>
+        {% if trivias %}
+            <div class="container">
+            {% for trivia in trivias %}
+                <div class="card" style="width: 20rem;">
+                    <div class="card-body">
+                    <h5 class="card-title titulo-tarjeta">{{trivia.titulo}}</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">{{trivia.estado}}</h6>
+                    <p class="card-text">{{trivia.descripcion}}</p>
+                    <a href="{% url 'preguntas' trivia.id %}" class="card-link btn btn-success">Preguntas</a>
+                    <a href="{% url 'editar_trivia' trivia.id %}" class="card-link btn btn-warning">Editar</a>
+                    {% if trivia.estado == "inactivo" %}
+                        <a href="{% url 'activar_trivia' trivia.id %}" class="card-link btn btn-success">Activar</a>
+                    {% else %}
+                        <a href="{% url 'desactivar_trivia' trivia.id %}" class="card-link mt-2 btn btn-danger">Deactivar</a>
+                    {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-danger">No hay trivias</div>
+        {% endif %}
+        <a href="{% url 'crear_trivia' %}" class="btn btn-success m-3"><i class="bi bi-plus-circle"></i></a>
+    </div>
+{% include 'footer.html' %}

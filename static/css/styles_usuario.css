@@ -42,6 +42,15 @@ nav {
     margin-bottom: 15px;
 }
 
+i{
+    color: rgb(99, 78, 2);
+}
+i:hover{
+    color: rgb(0, 79, 32);
+    text-decoration: double;
+    text-shadow: 5px 5px 5px rgb(36, 71, 1);
+}
+
 /*
         body {
             background: linear-gradient(135deg, #32CD32, #FFD700);

@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'Platillo_app',
     'Pedido_app',
     'TomarPedido_app',
-    'Carrito_app'
+    'Carrito_app',
+    'Trivia_app'
 ]
 
 MIDDLEWARE = [

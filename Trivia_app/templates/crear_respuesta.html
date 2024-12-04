@@ -1,0 +1,26 @@
+{% include 'headeradmin.html' %}
+    <div class="container">
+        <h1>Crear Respuesta</h1>
+        <div class="shamrock">🍀</div>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <label for="txt_descripcion">Descripcion</label>
+                        <textarea name="txt_descripcion" id="txt_descripcion" class="form-control"
+                                  cols="50" required>{% if respuesta %}{{respuesta.descripcion}}{% endif %}</textarea>
+                    </div>
+                    {% if existeCorrecta == False %}
+                    <div class="col">
+                        <label for="check_correcto">Es la respuesta correcta?</label>
+                        <input type="checkbox" id="check_correcto" name="check_correcto"
+                                class="form-check-input" value="true">
+                    </div>
+                    {% endif %}
+                </div>
+                <input type="submit" value="Guardar" class="btn btn-success mt-2">
+            </div>
+        </form>
+    </div>
+{% include 'footer.html' %}

@@ -1,0 +1,47 @@
+{% include 'headerusuario.html' %}
+    <div class="container mt-3">
+        <h3>Trivias</h3>
+        {% if trivias_disponibles %}
+            <div class="container">
+            <h4>Trivias Disponibles</h4>
+            {% for trivia in trivias_disponibles %}
+                <div class="card" style="width: 20rem;">
+                    <div class="card-body">
+                    <h5 class="card-title titulo-tarjeta">{{trivia.titulo}}</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Hasta: {{trivia.fechaTermino}}</h6>
+                    <p class="card-text">{{trivia.descripcion}}</p>
+                    <a href="{% url 'realizar_trivia' trivia.id %}" class="card-link btn btn-success"
+                    >Realizar la Trivia <i class="bi bi-check-all"></i></a>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-danger">No hay trivias disponibles</div>
+        {% endif %}
+        {% if descuentos %}
+            <div class="container">
+                <h4>Descuento obtenido</h4>
+                {% for descuento in descuentos %}
+                <div class="card" style="width: 20rem;">
+                    <div class="card-body">
+                    <h5 class="card-title titulo-tarjeta">{{descuento.id_trivia.titulo}}</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Respuesta correctamente en un: <span 
+                        class="badge bg-info">%{{descuento.porcentajeCorrecto}}</span></h6>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Descuento de: <span 
+                        class="badge bg-info">%{{descuento.valor}}</span></h6>
+                    <p class="card-text">Apartir de: {{descuento.fechaCreacion}}</p>
+                    <p class="card-text">Hasta: {{descuento.fechaTermino}}</p>
+                    <p class="card-text"><b>El descuento esta <span 
+                        class="badge 
+                        bg-{%if descuento.estado == 'valido'%}success{%else%}danger{%endif%}"
+                        >{{descuento.estado}}</span></b></p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-danger mt-3">No tiene descuentos :(</div>
+        {% endif %}
+    </div>
+{% include 'footer.html' %}

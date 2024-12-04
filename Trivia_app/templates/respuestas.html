@@ -1,0 +1,23 @@
+{% include 'headeradmin.html' %}
+    <div class="container">
+        <h1>Las respuestas</h1>
+        <div class="shamrock">🍀</div>
+        {% if respuestas %}
+        <ol class="list-group">
+            {% for res in respuestas %}
+            <li class="list-group-item">
+                <p><b>{{res.descripcion}}</b></p>
+                <p>¿Es la correcta?: <b>{% if res.escorrecto %}Si{% else %}No{% endif %}</b></p>
+                <a href="{% url 'editar_respuesta' res.id %}" class="btn btn-warning">Editar Respuesta</a>
+                {% if res.escorrecto == False %}
+                <a href="{% url 'establecer_respuesta' res.id %}" class="btn btn-warning">Seleccionar como correcta</a>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ol>
+        {% else %}
+        <div class="alert alert-danger">Esta Pregunta no tiene Respuestas</div>
+        {% endif %}
+        <a href="{% url 'crear_respuestas' pregunta %}" class="btn btn-success mt-3">Crear Respuestas</a>
+    </div>
+{% include 'footer.html' %}
