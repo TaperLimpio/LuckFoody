@@ -7,7 +7,7 @@ from Platillo_app.models import Platillo
 from Pedido_app.models import Pedido, lista_de_pedidos
 from Pedido_app.forms import PedidoForm
 
-
+#Permite agregar un platillo al carro
 def agregar_a_carrito(request,platillo_id):
     id = request.session['usuario_id']
     try:
@@ -24,11 +24,13 @@ def agregar_a_carrito(request,platillo_id):
         carrito.save()
     return redirect('mi_carrito', usuario_id = id)
 
+#Permite ver el carrito
 def ver_carrito(request,usuario_id):
     carrito = Carrito.objects.filter(id_usuario = usuario_id)
     total = carrito.aggregate(Sum('precio'))
     return render(request, 'carrito.html',{'carrito':carrito,'total':total['precio__sum']})
 
+#Permite aumentar la cantidad de pedidos en el carro
 def aumentar_cantidad(request,pedido_carrito_id):
     id = request.session['usuario_id']
     try:
@@ -40,6 +42,7 @@ def aumentar_cantidad(request,pedido_carrito_id):
         print("no existe")
     return redirect('mi_carrito',usuario_id = id)
 
+#Permite disminuir la cantidad de pedidos en el carro
 def disminuir_cantidad(request,pedido_carrito_id):
     id = request.session['usuario_id']
     try:
@@ -53,7 +56,7 @@ def disminuir_cantidad(request,pedido_carrito_id):
     except Carrito.DoesNotExist:
         print("no existe")
     return redirect('mi_carrito',usuario_id = id)
-
+#Permite realizar el pedido
 def realizar_pedido(request):
     id = request.session['usuario_id']
     carrito = Carrito.objects.filter(id_usuario = id)
@@ -64,7 +67,7 @@ def realizar_pedido(request):
             pedir(request,data = {'direccion':request.POST['direccion']})
             return redirect('pago exitoso')
     return render(request,'realizar_pedido.html',{'form':form})
-
+#Permite pedir el pedido
 def pedir(request,data):
     print("se esta generando el pedido")
     id = request.session['usuario_id']
@@ -87,11 +90,11 @@ def pedir(request,data):
         lista.save()
     print("Se termino y guardo el pedido")
     carrito.delete()
-
+#Envia el pago exitoso del pedido
 def pagoexitoso(request):
     id = request.session['usuario_id']
     pedido = Pedido.objects.get(usuario = id, estado = 'activo')
     return render(request,"pagoexitoso.html",{'pedido':pedido})
-
+#Envia el fallo del pago del pedido
 def pagofracaso(request):
     return render(request,"pagofracaso.html")

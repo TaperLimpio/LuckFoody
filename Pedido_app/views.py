@@ -5,7 +5,7 @@ from .forms import FiltroPedido
 from Usuario_app.models import Usuario
 
 
-# Create your views here.
+# Permite Consultar el pedido
 def consultar_pedidos(request):
     filtro = FiltroPedido()
     if request.method == "POST":
@@ -20,12 +20,13 @@ def consultar_pedidos(request):
         pedidos = Pedido.objects.all()
     data = {'pedidos':pedidos,'form':filtro}
     return render(request,'pedidos.html',data)
-
+#Permite ver el pedido
 def ver_pedido(request,pedido_id):
     pedido = get_object_or_404(Pedido, id=pedido_id)
     lista_productos = lista_de_pedidos.objects.filter(id_pedido = pedido.id)
     return render(request, 'ver_pedido.html', {'pedido':pedido,'lista_productos':lista_productos})
 
+#Permite ver los pedidos del usuario
 def mis_pedidos(request):
     usuario_id = request.session['usuario_id']
     pedidos_activos = Pedido.objects.filter(
@@ -36,7 +37,7 @@ def mis_pedidos(request):
         Q(usuario = Usuario.objects.get(id=usuario_id)) & Q(estado = "inactivo") | Q(estado = 'entregado'))
     return render(request,'mis_pedidos.html',{'ped_activos':pedidos_activos,
                                               'ped_pasados':pedidos_pasados})
-
+#Permite cancelar los pedidos
 def cancelar_pedido(request,id_pedido):
     pedido_tomado = Pedido.objects.get(id = id_pedido)
     pedido_tomado.estado = 'inactivo'
