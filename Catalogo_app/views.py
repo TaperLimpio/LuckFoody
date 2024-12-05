@@ -4,6 +4,7 @@ from .models import Catalogo
 from Platillo_app.models import Platillo
 from Pedido_app.models import Pedido
 
+#Permite Ingresar el Catalogo
 def ingresarcatalogo(request):
     form = CatalogoForm()
     if request.method == 'POST':
@@ -14,23 +15,24 @@ def ingresarcatalogo(request):
     data = {'form': form, 'titulo': 'Agregar catálogo'}
     return render(request, 'ingresar_catalogo.html', data)
 
-
+#Envia a la Pagina principal del Catalogo
 def paginaprincipal(request): 
     catalogos = Catalogo.objects.filter(estado='Activado').prefetch_related('platillos_set').all() 
     return render(request, 'pagina_principal.html', {'catalogos': catalogos})
 
-
+#Envia a la Pagina del Admin
 def paginaadmin(request):
     catalogos = Catalogo.objects.prefetch_related('platillos_set').all()
     return render(request, 'pagina-admin.html', {'catalogos': catalogos})
 
+#Envia a la Pagina del Repartidor
 def paginarepartidor(request):
     id = request.session['usuario_id']
     pedidos_generales = Pedido.objects.filter(estado = "activo")
     pedidos_aceptados = Pedido.objects.filter(repartidor__id = id, estado = "tomado")
     return render(request, 'pagina-repartidor.html',{'ped_generales':pedidos_generales,
                                                      'ped_aceptados':pedidos_aceptados})
-
+#Permite actualizar el catalogo
 def actualizarcatalogo(request, catalogo_id):
     catalogo = get_object_or_404(Catalogo, id=catalogo_id)
     if request.method == 'POST':
@@ -44,7 +46,7 @@ def actualizarcatalogo(request, catalogo_id):
     return render(request, 'ingresar_catalogo.html', data)
 
 
-
+#Permite asignar un Platillo
 def asignar_platillo(request, catalogo_id):
     catalogo = get_object_or_404(Catalogo, id=catalogo_id)
     platillos = Platillo.objects.filter(catalogo__isnull=True)  # solo platillos sin catálogo asignado
@@ -56,23 +58,24 @@ def asignar_platillo(request, catalogo_id):
         return redirect('login')  # Redirige a la página de administración
     return render(request, 'asignar_platillo.html', {'catalogo': catalogo, 'platillos': platillos})
 
+#Permite ver el catalogo
 def ver_catalogo(request, catalogo_id):
     catalogo = get_object_or_404(Catalogo, id=catalogo_id)
     platillos_activados = catalogo.platillos_set.filter(estado='Activado')
     return render(request, 'ver_catalogo.html', {'catalogo': catalogo, 'platillos': platillos_activados})
 
-
+#Permite ver los catalogos desde el administrador
 def ver_catalogoadmin(request, catalogo_id):
     catalogo = get_object_or_404(Catalogo, id=catalogo_id)
     return render(request, 'ver_catalogo_admin.html', {'catalogo': catalogo})
 
-
+#Permite activar un catalogo
 def activar_catalogo(request, catalogo_id): 
     catalogo = get_object_or_404(Catalogo, id=catalogo_id) 
     catalogo.estado = 'Activado' 
     catalogo.save() 
     return redirect('pagina_administrador')
-
+#Permite desactivar un catalogo
 def desactivar_catalogo(request, catalogo_id):
     catalogo = get_object_or_404(Catalogo, id=catalogo_id)
     catalogo.estado = 'Desactivado'
