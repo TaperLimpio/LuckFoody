@@ -10,6 +10,7 @@ from Catalogo_app.views import  activar_catalogo,desactivar_catalogo,paginaadmin
 from Catalogo_app.views import asignar_platillo, ver_catalogo,actualizarcatalogo
 from Catalogo_app.views import paginarepartidor
 
+from PaginaWeb.views import dashboard
 
 from Pedido_app.views import consultar_pedidos, ver_pedido, mis_pedidos, cancelar_pedido
 
@@ -112,6 +113,9 @@ urlpatterns = [
     #Tomar pedido
     path('aceptar_pedido/<int:id_pedido>',aceptar_pedido,name='aceptar_pedido'),
     path('entregar_pedido/<int:id_pedido>',entregar_pedido,name='entregar_pedido'),
+
+    path('dashboard/',dashboard,name="dashboard")#dashboad
+
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)#para poder cargar la imagenes

@@ -2,19 +2,19 @@
     <div class="container mt-3">
         <h3>Trivias</h3>
         {% if trivias %}
-            <div class="container">
+            <div class="container d-block">
             {% for trivia in trivias %}
-                <div class="card" style="width: 20rem;">
+                <div class="card d-inline-block mt-2 w-40 h-40">
                     <div class="card-body">
                     <h5 class="card-title titulo-tarjeta">{{trivia.titulo}}</h5>
                     <h6 class="card-subtitle mb-2 text-body-secondary">{{trivia.estado}}</h6>
                     <p class="card-text">{{trivia.descripcion}}</p>
-                    <a href="{% url 'preguntas' trivia.id %}" class="card-link btn btn-success">Preguntas</a>
-                    <a href="{% url 'editar_trivia' trivia.id %}" class="card-link btn btn-warning">Editar</a>
+                    <a href="{% url 'preguntas' trivia.id %}" class="card-link btn btn-success mt-1">Preguntas</a>
+                    <a href="{% url 'editar_trivia' trivia.id %}" class="card-link btn btn-warning mt-1">Editar</a>
                     {% if trivia.estado == "inactivo" %}
-                        <a href="{% url 'activar_trivia' trivia.id %}" class="card-link btn btn-success">Activar</a>
+                        <a href="{% url 'activar_trivia' trivia.id %}" class="card-link btn btn-success mt-1">Activar</a>
                     {% else %}
-                        <a href="{% url 'desactivar_trivia' trivia.id %}" class="card-link mt-2 btn btn-danger">Deactivar</a>
+                        <a href="{% url 'desactivar_trivia' trivia.id %}" class="card-link btn btn-danger m-1">Desactivar</a>
                     {% endif %}
                     </div>
                 </div>

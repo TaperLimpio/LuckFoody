@@ -69,8 +69,7 @@ def realizar_pedido(request):
                 'direccion':request.POST['direccion'],
                 'descuento': request.POST['descuentos']
                 })
-            #return redirect('pago exitoso')
-            return redirect('realizar_pedido')
+            return redirect('pago exitoso')
     return render(request,'realizar_pedido.html',{'form':form,'descuentos':descuentos})
 
 def pedir(request,data):

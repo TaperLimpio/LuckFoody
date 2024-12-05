@@ -2,10 +2,10 @@
     <div class="container mt-3">
         <h3>Trivias</h3>
         {% if trivias_disponibles %}
-            <div class="container">
+            <div class="container d-block">
             <h4>Trivias Disponibles</h4>
             {% for trivia in trivias_disponibles %}
-                <div class="card" style="width: 20rem;">
+                <div class="card d-inline-block mt-2 w-40 h-40">
                     <div class="card-body">
                     <h5 class="card-title titulo-tarjeta">{{trivia.titulo}}</h5>
                     <h6 class="card-subtitle mb-2 text-body-secondary">Hasta: {{trivia.fechaTermino}}</h6>
@@ -20,12 +20,12 @@
             <div class="alert alert-danger">No hay trivias disponibles</div>
         {% endif %}
         {% if descuentos %}
-            <div class="container">
+            <div class="container d-block">
                 <h4>Descuento obtenido</h4>
                 {% for descuento in descuentos %}
-                <div class="card" style="width: 20rem;">
+                <div class="card d-inline-block mt-2 w-40 h-40" style="width: 20rem;">
                     <div class="card-body">
-                    <h5 class="card-title titulo-tarjeta">{{descuento.id_trivia.titulo}}</h5>
+                    <h5 class= "card-title titulo-tarjeta">{{descuento.id_trivia.titulo}}</h5>
                     <h6 class="card-subtitle mb-2 text-body-secondary">Respuesta correctamente en un: <span 
                         class="badge bg-info">%{{descuento.porcentajeCorrecto}}</span></h6>
                     <h6 class="card-subtitle mb-2 text-body-secondary">Descuento de: <span 
