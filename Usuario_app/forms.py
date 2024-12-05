@@ -18,8 +18,8 @@ FILTRO_DECICIONES_2=(
 )
 
 tipos_de_usuario=(
-    ('Administrador','administrador'),
-    ('Repartidor','repartidor')
+    ('administrador','administrador'),
+    ('repartidor','repartidor')
 )
 
 class Filtro(forms.Form):

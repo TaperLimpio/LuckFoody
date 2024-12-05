@@ -45,7 +45,7 @@ def crearcuentaadmin(request):
             usuario = form.save(commit=False)
             usuario.estado='activo'
             form.save()
-            return redirect('login')  # Redirigir al login después de crear la cuenta
+            return redirect('index_usuario')  # Redirigir al login después de crear la cuenta
     else:
         form = UsuarioAdminForm()
     data = {'form': form, 'titulo': 'Crear cuenta de administrador'}

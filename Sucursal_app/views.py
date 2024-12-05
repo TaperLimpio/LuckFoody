@@ -15,7 +15,7 @@ def listasucursal(request):
 def ingresarsucursal(request):
     form=SucursalForm()
     if request.method == 'POST':
-        form = SucursalForm(request.POST)
+        form = SucursalForm(request.POST,request.FILES)
         if form.is_valid():
             sucursal = form.save(commit=False)
             sucursal.estado = "activo"
@@ -35,7 +35,7 @@ def modificarsucursal(request,id):
     sucursal = Sucursal.objects.get(id=id)
     form = SucursalForm(instance=sucursal)
     if request.method == 'POST':
-        form = SucursalForm(request.POST,instance=sucursal)
+        form = SucursalForm(request.POST,request.FILES,instance=sucursal)
         if form.is_valid():
             form.save()
         return redirect('/lista_sucursales/')

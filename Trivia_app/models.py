@@ -25,7 +25,7 @@ class Respuesta(models.Model):
     seleccionado = models.BooleanField(default= False)
 
 class Descuentos(models.Model):
-    id_trivia = models.OneToOneField(Trivia,on_delete=models.CASCADE,related_name="descuento")
+    id_trivia = models.ForeignKey(Trivia,on_delete=models.CASCADE,related_name="descuento")
     usuPropietario = models.ForeignKey(Usuario,on_delete=models.CASCADE,related_name="descuentos")
     fechaCreacion = models.DateTimeField(default=timezone.now)
     fechaTermino = models.DateTimeField()
