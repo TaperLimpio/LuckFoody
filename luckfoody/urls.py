@@ -18,7 +18,7 @@ from Usuario_app.views import crearcuenta, login, crearcuentaadmin, ver_usuario
 from Usuario_app.views import Update_Usuario, delete_usuario, Index_Usuario
 
 from Sucursal_app.views import ingresarsucursal, consultarsucursal, modificarsucursal
-from Sucursal_app.views import deshabilitarsucursal, listasucursal
+from Sucursal_app.views import deshabilitarsucursal, listasucursal, habilitarsucursal
 
 from Platillo_app.views import ingresarplatillo, activar_platillo
 from Platillo_app.views import desactivar_platillo, actualizarplatillo
@@ -66,7 +66,8 @@ urlpatterns = [
     path('lista_sucursales/', listasucursal, name='lista sucursales'),
     path('consultar_sucursal/<int:id>/', consultarsucursal),
     path('modificar_sucursal/<int:id>/', modificarsucursal),
-    path('deshabilitar_sucursal/<int:id>/', deshabilitarsucursal),
+    path('deshabilitar_sucursal/<int:id>/', deshabilitarsucursal,name="deshabilitar_sucursal"),
+    path('habilitar_sucursal/<int:id>/',habilitarsucursal,name="habilitar_sucursal"),
 
     #Páginas
     path('pagina-repartidor/', paginarepartidor, name='pagina-repartidor'),

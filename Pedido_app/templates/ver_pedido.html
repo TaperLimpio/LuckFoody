@@ -13,12 +13,12 @@
           <tr><td>Productos</td><td>
               <ul class="list-group">
                 {%for pro in lista_productos%}
-                <li class="list-group-item">{{pro.id_producto.nombre}}, {{pro.id_producto.precio}}</li>
+                <li class="list-group-item">{{pro.id_platillo.nombre}}, {{pro.id_platillo.precio}}</li>
                 {% endfor %}
               </ul>       
           </td></tr>
           <tr><td>Total</td><td>{{pedido.total}}</td></tr>
         </table>
-        <a href="{% url 'login' %}" class="btn btn-success mt-3">Volver</a>
+        <a href="{% url 'pedidos' %}" class="btn btn-success mt-3">Volver</a>
     </div>
 {%include 'footer.html'%}

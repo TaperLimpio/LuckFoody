@@ -6,7 +6,7 @@
             {{form.as_p}}
             {% csrf_token %}
             <input type="submit" class="btn btn-success" value="Guardar">
-            <a href="../lista_sucursales/" class="btn btn-success">Volver</a>
+            <a href="{% url 'lista sucursales' %}" class="btn btn-success">Volver</a>
         </form>
     </div>
 {% include 'footer.html' %}

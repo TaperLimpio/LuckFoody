@@ -49,3 +49,10 @@ def deshabilitarsucursal(request,id):
         sucursal.estado = "inactivo"
         sucursal.save()
     return redirect('/lista_sucursales/')
+
+def habilitarsucursal(request,id):
+    sucursal = Sucursal.objects.get(id=id)
+    if sucursal:
+        sucursal.estado = "activo"
+        sucursal.save()
+    return redirect('/lista_sucursales/')

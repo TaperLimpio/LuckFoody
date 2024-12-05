@@ -17,6 +17,10 @@ FILTRO_DECICIONES_2=(
     ('Inactivo','inactivo')
 )
 
+tipos_de_usuario=(
+    ('Administrador','administrador'),
+    ('Repartidor','repartidor')
+)
 
 class Filtro(forms.Form):
     tipo = forms.ChoiceField(choices=FILTRO_DECICIONES_1)
@@ -59,7 +63,8 @@ class UsuarioAdminForm(forms.ModelForm):
         model = Usuario
         fields = ['nombre', 'email', 'fono', 'tipo','contraseña','ciudad']
         widgets={
-            'contraseña':forms.TextInput(attrs={'type':'password'})
+            'contraseña':forms.TextInput(attrs={'type':'password'}),
+            'tipo':forms.Select(choices=tipos_de_usuario)
         }
     #permite no ingresar dos veces el mismo rut
     def clean_rut(self):
