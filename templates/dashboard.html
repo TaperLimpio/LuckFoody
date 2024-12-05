@@ -40,8 +40,10 @@
                     <div class="d-inline-block">
                         <div class="card-body">
                             <h5 class="card-title">Pedidos</h5>
-                            <p class="card-text">Platillos más vendido: <span class="badge bg-info">{{platillo_mas_vendido.0}}</span> total: <span class="badge bg-info">{{platillo_mas_vendido.1}}</span></p>
-                            <p class="card-text">Platillos vendidos este més: <span class="badge bg-success">{{platillos_vendidos_mes}}</span></p>
+                            <p class="card-text">Pedidos este mes: <span class="badge bg-info">{{pedidos_hechos_mes}}</span></p>
+                            <p class="card-text">Pedidos activos este mes: <span class="badge bg-success">{{pedidos_activos_mes}}</span></p>
+                            <p class="card-text">Pedidos entregados este mes: <span class="badge bg-info">{{pedidos_entregados_mes}}</span></p>
+                            <p class="card-text">Pedidos inactivos este mes: <span class="badge bg-danger">{{pedidos_inactivos_mes}}</span></p>
                             <div id="grafico">
                                 <canvas id="grafico_pedidos"></canvas>
                             </div>
@@ -51,20 +53,8 @@
             </div>
             <div class="card d-inline-block w-65">
                 <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title">Trivias</h5>
                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
-            </div>
-            <div class="card d-inline-block w-65">
-                <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
-            </div>
-            <div class="card d-inline-block w-75">
-                <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p></div>
                 </div>
             </div>
         </div>
@@ -116,7 +106,7 @@
         data: {
             labels: labels_platillos,
             datasets: [{
-            label: 'Platillos',
+            label: 'Los 5 platillos mas pedidos',
             data: data_platillos,
             backgroundColor: [
                 'rgba(54, 162, 235, 0.2)',
@@ -146,7 +136,11 @@
 
 
 
-        var data_pedidos = []
+        var data_pedidos = {{pedidos_por_mes}}
+
+        {% for mes in pedidos_por_mes %}
+                
+        {% endfor %}
         const grafLine = document.getElementById('grafico_pedidos');
         new Chart(grafLine, {
         type: 'line',
@@ -155,7 +149,7 @@
                      'Mayo','Junio','Julio','Agosto',
                      'Septiembre','Octubre','Noviembre','Diciembre'],
             datasets: [{
-            label: 'Pedidos',
+            label: 'Pedidos por mes',
             data: data_pedidos,
             backgroundColor: [
                 'rgba(54, 162, 235, 0.2)',

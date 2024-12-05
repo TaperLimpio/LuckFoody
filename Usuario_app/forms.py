@@ -27,6 +27,10 @@ class UsuarioForm(forms.ModelForm):
     class Meta:
         model = Usuario
         fields = ['nombre', 'email', 'fono','contraseña']
+        
+        widgets={
+            'contraseña':forms.TextInput(attrs={'type':'password'})
+        }
     #evita ingresar un fono que no contenga numeros y "+"
     def clean_fono(self):
         fono = self.cleaned_data.get('fono')
@@ -54,6 +58,9 @@ class UsuarioAdminForm(forms.ModelForm):
     class Meta:
         model = Usuario
         fields = ['nombre', 'email', 'fono', 'tipo','contraseña','ciudad']
+        widgets={
+            'contraseña':forms.TextInput(attrs={'type':'password'})
+        }
     #permite no ingresar dos veces el mismo rut
     def clean_rut(self):
      rut = self.cleaned_data.get('rut')
