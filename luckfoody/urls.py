@@ -10,7 +10,6 @@ from Catalogo_app.views import  activar_catalogo,desactivar_catalogo,paginaadmin
 from Catalogo_app.views import asignar_platillo, ver_catalogo,actualizarcatalogo
 from Catalogo_app.views import paginarepartidor
 
-from PaginaWeb.views import Repartidor, ingresartrivia, Trivia
 
 from Pedido_app.views import consultar_pedidos, ver_pedido, mis_pedidos, cancelar_pedido
 
@@ -31,6 +30,12 @@ from TomarPedido_app.views import aceptar_pedido,entregar_pedido
 from Carrito_app.views import ver_carrito, agregar_a_carrito, aumentar_cantidad
 from Carrito_app.views import disminuir_cantidad,realizar_pedido,pagoexitoso
 from Carrito_app.views import pagofracaso
+
+from Trivia_app.views import Trivias,Crear_trivia,Editar_Trivia,Preguntas
+from Trivia_app.views import Crear_Preguntas,Editar_Pregunta,Respuestas
+from Trivia_app.views import Crear_Respuesta,Editar_Respuesta,EstablecerCorrecta
+from Trivia_app.views import Activar_Trivia,Desactiva_Trivia,Mis_trivias
+from Trivia_app.views import Responder_Trivia
 
 urlpatterns = [
 
@@ -74,8 +79,20 @@ urlpatterns = [
     path('cancelar_pedido/<int:id_pedido>', cancelar_pedido, name='cancelar_pedido'),
     
     #Trivia
-    path('ingresar trivia/', ingresartrivia),
-    path('trivia/', Trivia),
+    path('trivias/', Trivias,name='trivias'),
+    path('crear_trivia/', Crear_trivia,name='crear_trivia'),
+    path('editar_trivia/<int:id_trivia>',Editar_Trivia,name="editar_trivia"),
+    path('preguntas/<int:id_trivia>',Preguntas,name='preguntas'),
+    path('crear_preguntas/<int:id_trivia>',Crear_Preguntas,name='crear_preguntas'),
+    path('editar_pregunta/<int:id_pregunta>',Editar_Pregunta,name='editar_pregunta'),
+    path('respuestas/<int:id_pregunta>',Respuestas,name='respuestas'),
+    path('crear_respuestas/<int:id_pregunta>',Crear_Respuesta,name="crear_respuestas"),
+    path('editar_respuestas/<int:id_respuesta>',Editar_Respuesta,name="editar_respuesta"),
+    path('establecer_respuesta/<int:id_respuesta>',EstablecerCorrecta,name="establecer_respuesta"),
+    path('activar_trivia/<int:id_trivia>',Activar_Trivia,name="activar_trivia"),
+    path('desactivar_trivia/<int:id_trivia>',Desactiva_Trivia,name="desactivar_trivia"),
+    path('mis_trivias',Mis_trivias,name="mis_trivias"),
+    path('realizar_trivia/<int:id_trivia>',Responder_Trivia,name="realizar_trivia"),
 
     #Pagos
     path('mi_carrito/<int:usuario_id>',ver_carrito,name="mi_carrito"),
@@ -92,7 +109,9 @@ urlpatterns = [
     path('delete-usuario/<int:emp_id>/', delete_usuario, name='delete_usuario'),
     path('update_usuario/<int:emp_id>/', Update_Usuario),
     
+    #Tomar pedido
     path('aceptar_pedido/<int:id_pedido>',aceptar_pedido,name='aceptar_pedido'),
     path('entregar_pedido/<int:id_pedido>',entregar_pedido,name='entregar_pedido'),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)#para poder cargar la imagenes

@@ -7,7 +7,16 @@
             <p><b>Ingrese sus datos para realizar el pedido</b></p>
             {% csrf_token %}
             {{form.as_p}}
-            <input type="submit" value="Realizar pedido">
+            {% if descuentos %}
+            <label for="descuentos">Descuentos</label>
+            <select class="form-select" name="descuentos" id="descuentos">
+                <option value="-1">No usare un descuento</option>
+                {% for des in descuentos %}
+                <option value="{{des.id}}">-%{{des.valor}}-termina el:{{des.fechaTermino}}-</option>
+                {% endfor %}
+            </select>
+            {% endif %}
+            <input type="submit" value="Realizar pedido" class="btn btn-success mt-2">
         </form>
     </div>
 </div>

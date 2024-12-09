@@ -6,7 +6,7 @@ from Platillo_app.models import Platillo
 #Creacion Modelo Pedido
 class Pedido(models.Model):
     fechainicio = models.DateTimeField(default=timezone.now)
-    fechaentrega = models.DateTimeField()
+    fechaentrega = models.DateTimeField(null=True)
     direccion = models.CharField(max_length=40)
     descuento = models.FloatField()
     estado = models.CharField(max_length=25)

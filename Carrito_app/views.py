@@ -6,6 +6,7 @@ from Usuario_app.models import Usuario
 from Platillo_app.models import Platillo
 from Pedido_app.models import Pedido, lista_de_pedidos
 from Pedido_app.forms import PedidoForm
+from Trivia_app.models import Descuentos
 
 #Permite agregar un platillo al carro
 def agregar_a_carrito(request,platillo_id):
@@ -60,28 +61,43 @@ def disminuir_cantidad(request,pedido_carrito_id):
 def realizar_pedido(request):
     id = request.session['usuario_id']
     carrito = Carrito.objects.filter(id_usuario = id)
+    descuentos = Descuentos.objects.filter(usuPropietario = id,estado = "valido")
+    print(descuentos)
     form = PedidoForm()
     if request.method == "POST":
         print(request.POST)
         if form.is_valid:
-            pedir(request,data = {'direccion':request.POST['direccion']})
-            return redirect('pago exitoso')
-    return render(request,'realizar_pedido.html',{'form':form})
+            print(request.POST.get('descuentos'))
+            pedir(request,data = {
+                'direccion':request.POST['direccion'],
+                'descuento': request.POST['descuentos']
+                })
+            #return redirect('pago exitoso')
+            return redirect('realizar_pedido')
+    return render(request,'realizar_pedido.html',{'form':form,'descuentos':descuentos})
 #Permite pedir el pedido
 def pedir(request,data):
     print("se esta generando el pedido")
     id = request.session['usuario_id']
+    
+    if request.POST['descuentos'] != "-1":
+        descuento = Descuentos.objects.get(id = request.POST['descuentos'])
     carrito = Carrito.objects.filter(id_usuario = id)
     pre_pedido = Pedido()
     pre_pedido.repartidor = Usuario.objects.get(id = 2)
     pre_pedido.usuario = Usuario.objects.get(id = id)
     pre_pedido.estado = "activo"
     pre_pedido.fechaentrega = timezone.now()
-    pre_pedido.descuento = 0.0
+    pre_pedido.descuento = descuento.valor
+    #((pts * 100)/pts_esperados)
     pre_pedido.direccion = data["direccion"]
     print(carrito.aggregate(Sum('precio')))
     pre_pedido.total = carrito.aggregate(Sum('precio'))['precio__sum']
+    des_calculo = pre_pedido.total*(pre_pedido.descuento/100)
+    pre_pedido.total = pre_pedido.total - des_calculo
     pre_pedido.save()
+    descuento.estado = "invalido"
+    descuento.save()
     for car in carrito:
         lista = lista_de_pedidos()
         lista.id_pedido = pre_pedido

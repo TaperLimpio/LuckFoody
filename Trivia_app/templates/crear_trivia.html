@@ -1,0 +1,55 @@
+{% include 'headeradmin.html' %}
+    <div class="container">
+        
+        <h1>Ingresar Trivia</h1>
+        <div class="shamrock">🍀</div>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="txt_titulo" class="form-label">Titulo</label>
+                <input type="text" name="txt_titulo" id="txt_titulo" 
+                       class="form-control" placeholder="Titulo"
+                       required value="{% if trivia.titulo %}{{trivia.titulo}}{% endif %}">
+            </div>
+            <div class="form-group">
+                <label for="txt_descripcion" class="form-label">Descripcion</label>
+                <textarea class="form-control" name="txt_descripcion" 
+                          required cols="55" id="txt_descripcion"
+                          >{% if trivia.descripcion %}{{trivia.descripcion}}{% endif %}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="txt_descuento" class="form-label">Descuento</label>
+                <input type="number" step="any" name="txt_descuento" class="form-control"
+                       required id="txt_descuento" 
+                       value="{% if trivia.descuentoofrecido %}{{trivia.descuentoofrecido}}{% endif %}">
+            </div>
+            <div class="form-group">
+                <label for="txt_fecha_maxima" class="form-label">Fecha Termino</label>
+                <input type="datetime-local" name="txt_fecha_maxima" class="form-control"
+                       required id="txt_fecha_maxima" 
+                       value="{% if trivia.fechaTermino %}{{trivia.fechaTermino|date:'Y-m-d H:i'}}{% endif %}">
+            </div>
+            <!--
+            <div class="form-group m-3" >
+                <a href="" class="btn btn-success">Preguntas</a>
+            </div>
+            
+            <div class="form-group">
+                <h4>Pregunta:</h4>
+                <label for="txt_des_pregunta">Descripcion</label>
+                <textarea class="form-control" name="txt_des_pregunta" 
+                id="txt_des_pregunta">{% if pre.descripcion %} {{pre.descripcion}} {% endif %}</textarea>
+                <div class="form-group">
+                    <ul class="list-group">
+                        <li class="list-group-item"></li>
+                    </ul>
+                </div>
+            </div>
+            -->
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-success mt-3">
+            </div>
+
+        </form>
+    </div>
+{% include 'footer.html' %}
