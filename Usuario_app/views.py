@@ -14,7 +14,12 @@ def login(request):
         contraseña = request.POST.get('contraseña')  # Agregamos el campo fono
         usuario = Usuario.objects.filter(nombre=nombre).first()  # Usamos filter() y first()
         if usuario and usuario.estado == 'activo':
+            print("el usuario esta activo")
+            print(contraseña)
+            print(usuario.contraseña)
+            print(check_password(contraseña,usuario.contraseña))
             if check_password(contraseña,usuario.contraseña):
+                print("la contraseña se proceso correctamente")
                 request.session['usuario_id'] = usuario.id
                 if usuario.tipo == 'usuario':
                     return redirect('pagina_principal')  # Redirigir a la URL 'usuario'
@@ -23,8 +28,10 @@ def login(request):
                 elif usuario.tipo=='repartidor':
                     return redirect('pagina-repartidor')#lo mismo pero para el repartidor
             else:
+                print("la contraseña no se proceso correctamente")
                 return render(request, 'login.html', {'error': 'Usuario inválido'})
         else:
+            print("el usuario no esta activo")
             return render(request, 'login.html', {'error': 'Usuario inválido'})
     return render(request, 'login.html')
 
