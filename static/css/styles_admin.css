@@ -91,6 +91,10 @@ a{
 #contenido{
     padding-bottom: 10px;
 }
+#img-con-suc{
+    width: 800px;
+    height: 600px;
+}
 .foto-producto{
     width: 200px;
     height: 200px;

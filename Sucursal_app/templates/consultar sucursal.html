@@ -6,7 +6,7 @@
             <h4 id="nom">{{sucursal.nombre}}</h2>
             <p id="dir"><b>Direccion: </b>{{sucursal.direccion}}</p>
             <p id="fon"><b>Fono:</b>{{sucursal.fono}}</p>
-            <img src="{% static 'img/640x480.png' %}" alt="Imagen de la sucursal" class="img-fluid" id="img">
+            <img src="{{ sucursal.imagen.url }}" alt="Imagen de la sucursal" class="img-fluid" id="img-con-suc">
         </div>
         <a href="{% url 'lista sucursales' %}" class="btn btn-success imagen">Volver</a>
     </div>
