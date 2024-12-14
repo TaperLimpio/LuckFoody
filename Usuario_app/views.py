@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect,get_object_or_404
 from  Usuario_app.models import Usuario  # Asegúrate de que esta sea tu clase de usuario
 from . import forms
 from .forms import UsuarioForm,UsuarioAdminForm,Filtro
+from django.contrib.auth.hashers import check_password,make_password
 
 # Create your views here.
 
@@ -11,18 +12,22 @@ def login(request):
     if request.method == 'POST':
         nombre = request.POST.get('username')
         contraseña = request.POST.get('contraseña')  # Agregamos el campo fono
-        usuario = Usuario.objects.filter(nombre=nombre, contraseña=contraseña).first()  # Usamos filter() y first()
+        usuario = Usuario.objects.filter(nombre=nombre).first()  # Usamos filter() y first()
         if usuario and usuario.estado == 'activo':
-            request.session['usuario_id'] = usuario.id
-            if usuario.tipo == 'usuario':
-                return redirect('pagina_principal')  # Redirigir a la URL 'usuario'
-            elif usuario.tipo == 'administrador':
-                return redirect('pagina_administrador')  # Redirigir a la URL 'administrador'
-            elif usuario.tipo=='repartidor':
-                return redirect('pagina-repartidor')#lo mismo pero para el repartidor
+            if check_password(contraseña,usuario.contraseña):
+                request.session['usuario_id'] = usuario.id
+                if usuario.tipo == 'usuario':
+                    return redirect('pagina_principal')  # Redirigir a la URL 'usuario'
+                elif usuario.tipo == 'administrador':
+                    return redirect('pagina_administrador')  # Redirigir a la URL 'administrador'
+                elif usuario.tipo=='repartidor':
+                    return redirect('pagina-repartidor')#lo mismo pero para el repartidor
+            else:
+                return render(request, 'login.html', {'error': 'Usuario inválido'})
         else:
             return render(request, 'login.html', {'error': 'Usuario inválido'})
     return render(request, 'login.html')
+
 #crea la cuenta del usuario siempre la creara con el tipo "usuario"(usuario=cliente)
 def crearcuenta(request):
     form = UsuarioForm()
@@ -31,7 +36,8 @@ def crearcuenta(request):
         if form.is_valid():
             usuario = form.save(commit=False)
             usuario.estado='activo'
-            usuario.tipo = 'usuario'  # Establecer el tipo a 'usuario' automáticamente
+            usuario.tipo = 'usuario'
+            usuario.contraseña = make_password(usuario.contraseña)  # Establecer el tipo a 'usuario' automáticamente
             usuario.save()
             return redirect('login')  # Redirigir al login después de crear la cuenta
     data = {'form': form, 'titulo': 'Crear cuenta'}
@@ -44,6 +50,7 @@ def crearcuentaadmin(request):
         if form.is_valid():
             usuario = form.save(commit=False)
             usuario.estado='activo'
+            usuario.contraseña = make_password(usuario.contraseña)
             form.save()
             return redirect('index_usuario')  # Redirigir al login después de crear la cuenta
     else:
