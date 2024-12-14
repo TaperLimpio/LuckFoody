@@ -8,6 +8,6 @@ class Usuario(models.Model):
         email=models.CharField(max_length=60)
         fono=models.CharField(max_length=15)
         tipo=models.CharField(max_length=50)
-        contraseña=models.CharField(max_length=50)
+        contraseña=models.CharField(max_length=76)
         estado = models.CharField(max_length=25)
         ciudad=models.CharField(max_length=20,default="osorno")
