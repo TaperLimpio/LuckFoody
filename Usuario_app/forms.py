@@ -17,6 +17,10 @@ FILTRO_DECICIONES_2=(
     ('Inactivo','inactivo')
 )
 
+tipos_de_usuario=(
+    ('administrador','administrador'),
+    ('repartidor','repartidor')
+)
 
 class Filtro(forms.Form):
     tipo = forms.ChoiceField(choices=FILTRO_DECICIONES_1)
@@ -27,6 +31,10 @@ class UsuarioForm(forms.ModelForm):
     class Meta:
         model = Usuario
         fields = ['nombre', 'email', 'fono','contraseña']
+        
+        widgets={
+            'contraseña':forms.TextInput(attrs={'type':'password'})
+        }
     #evita ingresar un fono que no contenga numeros y "+"
     def clean_fono(self):
         fono = self.cleaned_data.get('fono')
@@ -54,6 +62,10 @@ class UsuarioAdminForm(forms.ModelForm):
     class Meta:
         model = Usuario
         fields = ['nombre', 'email', 'fono', 'tipo','contraseña','ciudad']
+        widgets={
+            'contraseña':forms.TextInput(attrs={'type':'password'}),
+            'tipo':forms.Select(choices=tipos_de_usuario)
+        }
     #permite no ingresar dos veces el mismo rut
     def clean_rut(self):
      rut = self.cleaned_data.get('rut')

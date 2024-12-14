@@ -10,6 +10,7 @@ from Catalogo_app.views import  activar_catalogo,desactivar_catalogo,paginaadmin
 from Catalogo_app.views import asignar_platillo, ver_catalogo,actualizarcatalogo
 from Catalogo_app.views import paginarepartidor
 
+from PaginaWeb.views import dashboard
 
 from Pedido_app.views import consultar_pedidos, ver_pedido, mis_pedidos, cancelar_pedido
 
@@ -17,7 +18,7 @@ from Usuario_app.views import crearcuenta, login, crearcuentaadmin, ver_usuario
 from Usuario_app.views import Update_Usuario, delete_usuario, Index_Usuario
 
 from Sucursal_app.views import ingresarsucursal, consultarsucursal, modificarsucursal
-from Sucursal_app.views import deshabilitarsucursal, listasucursal
+from Sucursal_app.views import deshabilitarsucursal, listasucursal, habilitarsucursal
 
 from Platillo_app.views import ingresarplatillo, activar_platillo
 from Platillo_app.views import desactivar_platillo, actualizarplatillo
@@ -65,7 +66,8 @@ urlpatterns = [
     path('lista_sucursales/', listasucursal, name='lista sucursales'),
     path('consultar_sucursal/<int:id>/', consultarsucursal),
     path('modificar_sucursal/<int:id>/', modificarsucursal),
-    path('deshabilitar_sucursal/<int:id>/', deshabilitarsucursal),
+    path('deshabilitar_sucursal/<int:id>/', deshabilitarsucursal,name="deshabilitar_sucursal"),
+    path('habilitar_sucursal/<int:id>/',habilitarsucursal,name="habilitar_sucursal"),
 
     #Páginas
     path('pagina-repartidor/', paginarepartidor, name='pagina-repartidor'),
@@ -112,6 +114,9 @@ urlpatterns = [
     #Tomar pedido
     path('aceptar_pedido/<int:id_pedido>',aceptar_pedido,name='aceptar_pedido'),
     path('entregar_pedido/<int:id_pedido>',entregar_pedido,name='entregar_pedido'),
+
+    path('dashboard/',dashboard,name="dashboard")#dashboad
+
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)#para poder cargar la imagenes

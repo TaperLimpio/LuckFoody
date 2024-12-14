@@ -1,0 +1,167 @@
+{% include 'headeradmin.html' %}
+    <div class="container d-block ">
+        <div id="bloques_superiores">
+            <div class="card d-inline-block w-75 text-center">
+                <div class="d-block m-0">
+                    <div class="d-inline-block text-center">
+                        <div class="card-body">
+                            <h5 class="card-title">Usuarios</h5>
+                            <p class="card-text">Usuarios totales: <span class="badge bg-info">{{usuarios_totales}}</span></p>
+                            <p class="card-text">Usuarios activos: <span class="badge bg-success">{{usuarios_activos}}</span></p>
+                            <p class="card-text">Usuarios inactivos: <span class="badge bg-danger">{{usuarios_inactivos}}</span></p>
+                            <h5 class="card-title">Usuarios del mes:</h5>
+                            <p class="card-text">Usuario del més: <span class="badge bg-info">{{usuario_del_mes.0}}</span> pedidos hechos: <span class="badge bg-info">{{usuario_del_mes.1}}</span></p>
+                            <p class="card-text">Repartidor del més: <span class="badge bg-info">{{repartidor_del_mes.0}}</span> pedidos tomados: <span class="badge bg-info">{{repartidor_del_mes.1}}</span></p>
+                        </div>
+                    </div>
+                    <div class="d-inline-block m-1 ">
+                        <div id="grafico">
+                            <canvas id="grafico_usuarios"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card d-inline-block w-75 text-center">
+                <div class="d-block m-0">
+                    <div class="d-inline-block">
+                        <div class="card-body">
+                            <h5 class="card-title">Platillos</h5>
+                            <p class="card-text">Platillos más vendido: <span class="badge bg-info">{{platillo_mas_vendido.0}}</span> total: <span class="badge bg-info">{{platillo_mas_vendido.1}}</span></p>
+                            <p class="card-text">Platillos vendidos este més: <span class="badge bg-success">{{platillos_vendidos_mes}}</span></p>
+                            <div id="grafico">
+                                <canvas id="grafico_platillos"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card d-inline-block w-75">
+                <div class="d-block m-0">
+                    <div class="d-inline-block">
+                        <div class="card-body">
+                            <h5 class="card-title">Pedidos</h5>
+                            <p class="card-text">Pedidos este mes: <span class="badge bg-info">{{pedidos_hechos_mes}}</span></p>
+                            <p class="card-text">Pedidos activos este mes: <span class="badge bg-success">{{pedidos_activos_mes}}</span></p>
+                            <p class="card-text">Pedidos entregados este mes: <span class="badge bg-info">{{pedidos_entregados_mes}}</span></p>
+                            <p class="card-text">Pedidos inactivos este mes: <span class="badge bg-danger">{{pedidos_inactivos_mes}}</span></p>
+                            <div id="grafico">
+                                <canvas id="grafico_pedidos"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>4
+    <script>
+        const grafUsu = document.getElementById('grafico_usuarios');
+        new Chart(grafUsu, {
+        type: 'bar',
+        data: {
+            labels: ['Total','Activos', 'Inactivos'],
+            datasets: [{
+            label: 'Usuarios',
+            data: ['{{usuarios_totales}}','{{usuarios_activos}}', '{{usuarios_inactivos}}'],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(116, 255, 51, 0.2)',
+                'rgba(255, 99, 132, 0.2)'
+            ],
+            borderColor: [
+                'rgb(54, 162, 235)',
+                'rgb(116, 255, 51)',
+                'rgb(255, 99, 132)'
+            ],
+            borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+            y: {
+                beginAtZero: true
+            }
+            }
+        }
+        });
+
+        var data_platillos = []
+        var labels_platillos = []
+
+        {% if platillos_mas_populares %}
+            {% for platillo in platillos_mas_populares %}
+                labels_platillos.push("{{platillo.0}}")
+                data_platillos.push("{{platillo.1}}")
+            {% endfor %}
+        {% endif %}
+        const grafPla = document.getElementById('grafico_platillos');
+        new Chart(grafPla, {
+        type: 'bar',
+        data: {
+            labels: labels_platillos,
+            datasets: [{
+            label: 'Los 5 platillos mas pedidos',
+            data: data_platillos,
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(116, 255, 51, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(51, 94, 255, 0.2)',
+                'rgba(162, 51, 255, 0.2)'
+            ],
+            borderColor: [
+                'rgb(54, 162, 235)',
+                'rgb(116, 255, 51)',
+                'rgb(255, 99, 132)',
+                'rgb(51, 94, 255)',
+                'rgb(162, 51, 255)'
+            ],
+            borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+            y: {
+                beginAtZero: true
+            }
+            }
+        }
+        });
+
+
+
+        var data_pedidos = {{pedidos_por_mes}}
+
+        {% for mes in pedidos_por_mes %}
+                
+        {% endfor %}
+        const grafLine = document.getElementById('grafico_pedidos');
+        new Chart(grafLine, {
+        type: 'line',
+        data: {
+            labels: ['Enero','Febrero','Marzo','Abril',
+                     'Mayo','Junio','Julio','Agosto',
+                     'Septiembre','Octubre','Noviembre','Diciembre'],
+            datasets: [{
+            label: 'Pedidos por mes',
+            data: data_pedidos,
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.2)',
+            ],
+            borderColor: [
+                'rgb(54, 162, 235)',
+            ],
+            borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+            y: {
+                beginAtZero: true
+            }
+            }
+        }
+        });
+
+    </script>
+{% include 'footer.html' %}

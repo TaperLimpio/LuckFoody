@@ -131,7 +131,7 @@ def Editar_Respuesta(request,id_respuesta):
         if ExisteRespuestaCorrecta(respuesta.id_pregunta.id):
             respuesta.escorrecto = False
         else:
-            if request.POST["check_correcto"] == "true":
+            if request.POST.get("check_correcto",False):
                     respuesta.escorrecto = True
             else:
                 respuesta.escorrecto = False

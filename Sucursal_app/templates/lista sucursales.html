@@ -6,14 +6,18 @@
             <div class="container row-lista">
                 <div class="row">
                     <div class="col">
-                        <img src="{% static 'img/200x200.png' %}" class="img-thumbnail foto-lista" alt="imagen" >
+                        <img src="{{sur.imagen.url}}" class="img-thumbnail w-50" alt="imagen" >
                     </div>
                     <div class="col">
-                        <h3 class="nom">{{sur.nom}}</h3>
+                        <h3 class="nom">{{sur.nombre}}</h3>
                         <p class="dir"><b>Direccion: </b>{{sur.direccion}}</p>
                         <a href="../consultar_sucursal/{{sur.id}}" class="btn btn-success"><i class="bi bi-eye"></i></a>
                         <a href="../modificar_sucursal/{{sur.id}}" class="btn btn-warning"><i class="bi bi-pencil"></i></a>
-                        <a href="../deshabilitar_sucursal/{{sur.id}}" class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                        {% if sur.estado == 'activo' %}
+                        <a href="{% url 'deshabilitar_sucursal' sur.id %}" class="btn btn-danger"><i class="bi bi-x-circle"></i></a>
+                        {% else %}
+                        <a href="{% url 'habilitar_sucursal' sur.id %}" class="btn btn-info"><i class="bi bi-check-circle"></i></a>
+                        {% endif %}
                     </div>
                 </div>
             </div> 

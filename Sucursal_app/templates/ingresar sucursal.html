@@ -2,7 +2,7 @@
     <div class="container mt-5">
         <h1 id="Titulo-pag">Ingresar Sucursal</h1>
         <div class="shamrock">🍀</div>
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             {{form.as_p}}
             {% csrf_token %}
             <input type="submit" class="btn btn-success" value="Guardar">

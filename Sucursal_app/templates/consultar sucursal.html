@@ -8,6 +8,6 @@
             <p id="fon"><b>Fono:</b>{{sucursal.fono}}</p>
             <img src="{% static 'img/640x480.png' %}" alt="Imagen de la sucursal" class="img-fluid" id="img">
         </div>
-        <a href="../lista_sucursales/" class="btn btn-success imagen">Volver</a>
+        <a href="{% url 'lista sucursales' %}" class="btn btn-success imagen">Volver</a>
     </div>
 {% include 'footer.html' %}

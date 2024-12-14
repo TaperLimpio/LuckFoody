@@ -1,4 +1,10 @@
-{% include 'header-principal.html' %}
+{% if usuario.tipo == "administrador" %}
+{% include "headeradmin.html" %}
+{% elif usuario.tipo == "repartidor" %}
+{% include 'header-repartidor.html' %}
+{% else %}
+{% include 'headerusuario.html' %}
+{% endif %}
     <div class="container mt-5">
         <div class="alert alert-success display-1">MIS DATOS</div>
         <table class="table table-striped">
@@ -14,6 +20,13 @@
           
           
         </table>
-        <a href="{% url 'login' %}" class="btn btn-success mt-3">Volver</a>
+        <a href="{% url 'login' %}" class="btn btn-danger mt-3">Cerrar sesion</a>
+        {% if usuario.tipo == "administrador" %}
+        <a href="{% url 'pagina_administrador' %}" class="btn btn-success mt-3">Volver</a>
+        {% elif usuario.tipo == "repartidor" %}
+        <a href="{% url 'pagina-repartidor' %}" class="btn btn-success mt-3">Volver</a>
+        {% else %}
+        <a href="{% url 'pagina_principal' %}" class="btn btn-success mt-3">Volver</a>
+        {% endif %}
     </div>
 {%include 'footer.html'%}
