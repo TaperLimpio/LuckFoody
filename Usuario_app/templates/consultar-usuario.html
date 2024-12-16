@@ -1,26 +1,18 @@
 {% include 'headeradmin.html' %}
-    <div class="container mt-5">
-        <div class="alert alert-success display-1">MIS DATOS</div>
-        <table class="table table-striped">
-          <tr><td>Nombre</td><td>{{usuario.nombre}}</td></tr>
-          <tr><td>Email</td><td>{{usuario.email}}</td></tr>
-          <tr><td>Fono</td><td>{{usuario.fono}}</td></tr>
-          <tr><td>contraseña</td><td>{{usuario.contraseña}}</td></tr>
-          <tr><td>Acciones</td><td><a href="/update_usuario/{{usuario.id}}"
-            class='btn btn-warning'><i class="bi bi-pencil"></i>
-         </a> <a href="{% url 'delete_usuario' usuario.id %}"
-         class='btn btn-danger'><i class="bi bi-trash"></i>
-      </a></td></tr>
-          
-          
-        </table>
-        <a href="{% url 'login' %}" class="btn btn-danger mt-3">Cerrar sesion</a>
-        {% if usuario.tipo == "administrador" %}
-        <a href="{% url 'pagina_administrador' %}" class="btn btn-success mt-3">Volver</a>
-        {% elif usuario.tipo == "repartidor" %}
-        <a href="{% url 'pagina-repartidor' %}" class="btn btn-success mt-3">Volver</a>
-        {% else %}
-        <a href="{% url 'pagina_principal' %}" class="btn btn-success mt-3">Volver</a>
-        {% endif %}
-    </div>
+  <div class="container mt-5 text-start">
+    <h3>Datos del usuario</h3>
+      <div class="col">
+        <ul class="list-group">
+          <li class="list-group-item">Nombre: {{usuario.nombre}}</li>
+          <li class="list-group-item">Email: {{usuario.email}}</li>
+          <li class="list-group-item">Fono: {{usuario.fono}}</li>
+        </ul>
+      </div>
+      <div class="col text-center mt-3">
+          <a href="/update_usuario/{{usuario.id}}"
+          class='btn btn-warning'><i class="bi bi-pencil"></i></a> 
+          <a href="{% url 'delete_usuario' usuario.id %}"
+          class='btn btn-danger'><i class="bi bi-trash"></i></a>
+      </div>
+  </div>
 {%include 'footer.html'%}

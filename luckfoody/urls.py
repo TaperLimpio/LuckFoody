@@ -14,8 +14,9 @@ from PaginaWeb.views import dashboard
 
 from Pedido_app.views import consultar_pedidos, ver_pedido, mis_pedidos, cancelar_pedido
 
-from Usuario_app.views import crearcuenta, login, crearcuentaadmin, ver_usuario 
+from Usuario_app.views import crearcuenta, login, crearcuentaadmin
 from Usuario_app.views import Update_Usuario, delete_usuario, Index_Usuario
+from Usuario_app.views import ver_usuario,mi_cuenta
 
 from Sucursal_app.views import ingresarsucursal, consultarsucursal, modificarsucursal
 from Sucursal_app.views import deshabilitarsucursal, listasucursal, habilitarsucursal
@@ -110,6 +111,7 @@ urlpatterns = [
     path('usuarios/<int:emp_id>/', ver_usuario, name='ver_usuario'), 
     path('delete-usuario/<int:emp_id>/', delete_usuario, name='delete_usuario'),
     path('update_usuario/<int:emp_id>/', Update_Usuario),
+    path('mi_cuenta',mi_cuenta,name='mi_cuenta'),
     
     #Tomar pedido
     path('aceptar_pedido/<int:id_pedido>',aceptar_pedido,name='aceptar_pedido'),

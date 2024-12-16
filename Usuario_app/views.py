@@ -68,14 +68,12 @@ def crearcuentaadmin(request):
 #le permite ver sus datos al a todos los tipos usuario 
 def ver_usuario(request, emp_id):
     usuario = get_object_or_404(Usuario, id=emp_id)
-    tipo_usuario_consultor = Usuario.objects.get(id=request.session['usuario_id']).tipo
-    return render(request, 'view-usuario.html', {'usuario': usuario,
-                                                 'tipo_usuario_consultor':tipo_usuario_consultor})
+    return render(request, 'consultar-usuario.html', {'usuario': usuario})
 
 def mi_cuenta(request):
     usuario = get_object_or_404(Usuario, id=request.session['usuario_id'])
     tipo_usuario_consultor = usuario.tipo
-    return render(request, 'consultar-usuario.html', {'usuario': usuario,
+    return render(request, 'view-usuario.html', {'usuario': usuario,
                                                  'tipo_usuario_consultor':tipo_usuario_consultor})
 
 #le permite actualizar a todos los tipos de usuarios
