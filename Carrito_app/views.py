@@ -78,6 +78,7 @@ def realizar_pedido(request):
                 })
             return redirect('pago exitoso')
     return render(request,'realizar_pedido.html',{'form':form,'descuentos':descuentos})
+    
 #Permite pedir el pedido
 def pedir(request,data):
     print("se esta generando el pedido")
@@ -90,7 +91,9 @@ def pedir(request,data):
     pre_pedido.usuario = Usuario.objects.get(id = id)
     pre_pedido.estado = "activo"
     pre_pedido.fechaentrega = timezone.now()
-    if data["descuento"] != False or data["descuento"] != "-1":
+    print((type(data["descuento"]) is str) and data["descuento"] != "-1")
+    if (data["descuento"] != False or 
+        ((type(data["descuento"]) is str) and data["descuento"] != "-1")):
         descuento = Descuentos.objects.get(id = data["descuento"])
         print(descuento.valor)
         pre_pedido.descuento = descuento.valor
