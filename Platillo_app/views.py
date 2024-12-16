@@ -10,7 +10,7 @@ def ingresarplatillo(request):
             form.save()
             return redirect('pagina_administrador')  
     data = {'form': form, 'titulo': 'Agregar catálogo'}
-    return render(request, 'ingresar_catalogo.html', data)
+    return render(request, 'ingresar_platillo.html', data)
 
 #permite cambiar el estado de un platillo a activo
 def activar_platillo(request, platillo_id):
