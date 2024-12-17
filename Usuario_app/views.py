@@ -52,6 +52,7 @@ def crearcuenta(request):
 
 #le permite crear cuentas al administrador
 def crearcuentaadmin(request):
+    form = UsuarioAdminForm()
     if request.method == 'POST':
         form = UsuarioAdminForm(request.POST)
         if form.is_valid():
@@ -60,8 +61,6 @@ def crearcuentaadmin(request):
             usuario.contraseña = make_password(usuario.contraseña)
             form.save()
             return redirect('index_usuario')  # Redirigir al login después de crear la cuenta
-    else:
-        form = UsuarioAdminForm()
     data = {'form': form, 'titulo': 'Crear cuenta de administrador'}
     return render(request, 'crear-cuenta-admin.html', data)
 

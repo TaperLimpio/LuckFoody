@@ -26,8 +26,7 @@
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" class="btn btn-success mt-3" value="Ingresar platillo">
-            <a href="{% url 'login' %}" class="btn btn-success mt-3">Volver</a>
+            <a href="{% url 'pagina_administrador' %}" class="btn btn-success mt-3">Volver</a>
         </form>
     </div>
-    </body>
-    </html>
+{% include 'footer.html' %}
