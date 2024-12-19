@@ -3,47 +3,87 @@
         <div class="alert alert-success display-1">Datos de los pedidos</div>
         {% if ped_activos or ped_pasados %}
         <div class="">
-          <h3>Pedido Activos</h3>
-        {% for pedido in ped_activos %}
-        <table class="table table-striped">
-          <tr><th>Campos</th><th>Datos</th></tr>
-          <tr><td>Id</td><td>{{pedido.id}}</td></tr>
-          <tr><td>Fecha de Inicio</td><td>{{pedido.fechainicio}}</td></tr>
-          <tr><td>Fecha de Entrega</td><td>{{pedido.fechaentrega}}</td></tr>
-          <tr><td>Direccion</td><td>{{pedido.direccion}}</td></tr>
-          <tr><td>Descuento</td><td>%{{pedido.descuento}}</td></tr>
-          <tr><td>Estado</td><td>{{pedido.estado}}</td></tr>
-          <tr><td>Repartido</td><td>{{pedido.repartidor.nombre}}</td></tr>
-          <tr><td>Usuario</td><td>{{pedido.usuario.nombre}}</td></tr>
-          <tr><td>Total</td><td>{{pedido.total}}</td></tr>
-          <tr><td>Acciones</td><td>
-            <a href="{% url 'cancelar_pedido' pedido.id %}" class="btn btn-danger">
-              <i class="bi bi-x-circle-fill boton"></i>
-            </a>
-          </td></tr>
-        </table>
-        {% endfor %}
+          <h3>Pedidos Activos</h3>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Fecha de inicio</th>
+                <th>Fecha de entrega</th>
+                <th>Direccion</th>
+                <th>Descuento</th>
+                <th>Estado</th>
+                <th>Repartidor</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% if ped_activos %}
+              {% for pedido in ped_activos %}           
+              <tr>
+                <td>{{pedido.id}}</td>
+                <td>{{pedido.fechainicio}}</td>
+                <td>{{pedido.fechaentrega}}</td>
+                <td>{{pedido.direccion}}</td>
+                <td>{{pedido.descuento}}</td>
+                <td>{{pedido.estado}}</td>
+                <td>{{pedido.repartidor.nombre}}</td>
+                <td>{{pedido.total}}</td>
+                <td>
+                  <a href="{% url 'cancelar_pedido' pedido.id %}" class="btn btn-danger">
+                    <i class="bi bi-x-circle-fill boton"></i>
+                  </a>
+                </td>
+              </tr>
+              {% endfor %}
+            {% else %}
+              <tr>
+                <td colspan="8">No hay registros activos</td>
+              </tr>
+            {% endif %}
+            </tbody>
+          </table>
         </div>
         <div class="">
           <h3>Pedidos Pasados</h3>
-          {% for pedido in ped_pasados %}
           <table class="table table-striped">
-            <tr><th>Campos</th><th>Datos</th></tr>
-            <tr><td>Id</td><td>{{pedido.id}}</td></tr>
-            <tr><td>Fecha de Inicio</td><td>{{pedido.fechainicio}}</td></tr>
-            <tr><td>Fecha de Entrega</td><td>{{pedido.fechaentrega}}</td></tr>
-            <tr><td>Direccion</td><td>{{pedido.direccion}}</td></tr>
-            <tr><td>Descuento</td><td>%{{pedido.descuento}}</td></tr>
-            <tr><td>Estado</td><td>{{pedido.estado}}</td></tr>
-            <tr><td>Repartido</td><td>{{pedido.repartidor.nombre}}</td></tr>
-            <tr><td>Usuario</td><td>{{pedido.usuario.nombre}}</td></tr>
-            <tr><td>Total</td><td>{{pedido.total}}</td></tr>
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Fecha de inicio</th>
+                <th>Fecha de entrega</th>
+                <th>Direccion</th>
+                <th>Descuento</th>
+                <th>Estado</th>
+                <th>Repartidor</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if ped_pasados %}
+                {% for pedido in ped_pasados %}
+                <tr>
+                  <td>{{pedido.id}}</td>
+                  <td>{{pedido.fechainicio}}</td>
+                  <td>{{pedido.fechaentrega}}</td>
+                  <td>{{pedido.direccion}}</td>
+                  <td>{{pedido.descuento}}</td>
+                  <td>{{pedido.estado}}</td>
+                  <td>{{pedido.repartidor.nombre}}</td>
+                  <td>{{pedido.total}}</td>
+                </tr>
+                {% endfor %}
+              {% else %}
+                <tr>
+                  <td colspan="8">No hay registros pasados</td>
+                </tr>
+              {% endif %}
+            </tbody>
           </table>
-          {% endfor %}
         </div>
         {% else %}
         <h1>No ha realizado pedidos</h1>
         {% endif %}
-        <a href="{% url 'pagina_principal' %}" class="btn btn-success mt-3">Volver</a>
+        <a href="{% url 'pagina_principal' %}" class="btn btn-success mt-3 boton">Volver</a>
     </div>
 {%include 'footer.html'%}
