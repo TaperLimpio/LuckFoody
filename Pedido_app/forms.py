@@ -15,6 +15,6 @@ class FiltroPedido(forms.Form):
 
 #Creacion de los Pedidos
 class PedidoForm(forms.Form):
-    n_tarjeta = forms.CharField(max_length=10)
+    n_tarjeta = forms.CharField(max_length=19)
     direccion = forms.CharField(max_length=40)
     

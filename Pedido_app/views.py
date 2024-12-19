@@ -29,12 +29,14 @@ def ver_pedido(request,pedido_id):
 #Permite ver los pedidos del usuario
 def mis_pedidos(request):
     usuario_id = request.session['usuario_id']
+    print(usuario_id)
     pedidos_activos = Pedido.objects.filter(
         Q(usuario = Usuario.objects.get(id=usuario_id)) & (Q(estado = 'activo') | Q(estado = 'tomado')))
     print(pedidos_activos)
         # estado = "activo",usuario = Usuario.objects.get(id=usuario_id)
     pedidos_pasados = Pedido.objects.filter(
-        Q(usuario = Usuario.objects.get(id=usuario_id)) & Q(estado = "inactivo") | Q(estado = 'entregado'))
+        Q(usuario = Usuario.objects.get(id=usuario_id)) & (Q(estado = "inactivo") | Q(estado = 'entregado')))
+    print(pedidos_pasados)
     return render(request,'mis_pedidos.html',{'ped_activos':pedidos_activos,
                                               'ped_pasados':pedidos_pasados})
 #Permite cancelar los pedidos

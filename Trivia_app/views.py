@@ -3,12 +3,12 @@ from django.db.models import Q
 from .models import Trivia,Pregunta,Respuesta,Descuentos
 from Usuario_app.models import Usuario
 from django.utils import timezone
-import datetime
+from datetime import datetime, timedelta
 
 # Admin.
 def Trivias(request):
     trivias = Trivia.objects.all()
-    actualizar_tiempo()
+    actualizar_tiempo_admin()
     data = {'trivias':trivias}
     return render(request,'trivias.html',data)
 
@@ -172,11 +172,25 @@ def EstablecerCorrecta(request,id_trivia,id_respuesta):
     return redirect('respuestas', id_trivia,id_pregunta)
     
 def actualizar_tiempo():
+    print("se actualizan las trivias")
     trivias_activas = Trivia.objects.filter(estado = "activo")
-    ahora = timezone.now()
+    ahora = datetime.strptime(datetime.now().strftime('%Y-%m-%d %H:%M:%S'),'%Y-%m-%d %H:%M:%S')
     for trivia in trivias_activas:
-        if trivia.fechaTermino.astimezone() >= ahora:
+        if trivia.fechaTermino.astimezone() <= ahora.astimezone():
             trivia.estado = 'inactivo' 
+            trivia.save()
+
+def actualizar_tiempo_admin():
+    print("se actualizan las trivias")
+    trivias = Trivia.objects.all()
+    ahora = datetime.strptime(datetime.now().strftime('%Y-%m-%d %H:%M:%S'),'%Y-%m-%d %H:%M:%S')
+    for trivia in trivias:
+        if trivia.fechaTermino.astimezone() <= ahora.astimezone():
+            trivia.estado = 'inactivo' 
+            trivia.save()
+        else:
+            trivia.estado = 'activo'
+            trivia.save()
 
 #usuario
 def Mis_trivias(request):
@@ -216,7 +230,7 @@ def Responder_Trivia(request,id_trivia):
             pre_descuento.usuPropietario = Usuario.objects.get(id = request.session['usuario_id'])
             print(pre_descuento.usuPropietario)
             pre_descuento.fechaCreacion = timezone.now()
-            pre_descuento.fechaTermino = timezone.now()+datetime.timedelta(days=3)
+            pre_descuento.fechaTermino = timezone.now()+timedelta(days=3)
             pre_descuento.valor = round(trivia.descuentoofrecido,2)
             pre_descuento.porcentajeCorrecto = porcentaje_obtenido
             pre_descuento.estado = "valido"

@@ -155,14 +155,16 @@ def Index_Usuario(request):
         ciudad_filtro = request.POST.get('ciudad')
         if filtro.is_valid():
             Tipo = filtro.cleaned_data['tipo']
+            print(Tipo)
             Estado = filtro.cleaned_data['estado']
+            print(Estado)
             Ciudad = ciudad_filtro if ciudad_filtro else '----'
             
             usuario = Usuario.objects.all()
             
-            if Tipo != '----':
+            if Tipo != 'Todo':
                 usuario = usuario.filter(tipo=Tipo)
-            if Estado != '----':
+            if Estado != 'Todo':
                 usuario = usuario.filter(estado=Estado)
             if Ciudad != '----':
                 usuario = usuario.filter(ciudad=Ciudad)

@@ -17,7 +17,23 @@ nav {
 .navbar-derecha {
     margin-right: 30px;
 }
-
+input[type="text"], input[type="password"],textarea, input[type="file"], select {
+    border-radius: 10px;
+    border: 2px solid #6c757d;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    width: 100%;
+    background-color: #f8f9fa;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus, input[type="file"]:focus, select:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+}
+input[type="text"]:hover, input[type="password"]:hover, textarea:hover, input[type="file"]:hover, select:hover {
+    border-color: #28a745;
+}
 /*
 .book{
     padding: 10px 10px 10px 10px;

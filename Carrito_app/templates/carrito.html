@@ -2,10 +2,9 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/styles_carrito.css' %}">
     <div class="container mt-5">
-        <h1>LuckFoody</h1>
         <div class="shamrock">🍀</div>
+        <h1 id="Titulo-pag">Carrito</h1>
         {% if carrito %}
-        <h4 style="text-align: left; margin:10px;">Carrito</h4>
         <div class="container carrito">
             {% for ped in carrito %}
             <ul class="list-group">

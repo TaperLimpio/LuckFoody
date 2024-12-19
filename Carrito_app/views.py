@@ -91,9 +91,10 @@ def pedir(request,data):
     pre_pedido.usuario = Usuario.objects.get(id = id)
     pre_pedido.estado = "activo"
     pre_pedido.fechaentrega = timezone.now()
-    print((type(data["descuento"]) is str) and data["descuento"] != "-1")
-    if (data["descuento"] != False or 
-        ((type(data["descuento"]) is str) and data["descuento"] != "-1")):
+    print(data["descuento"] != False and 
+        ((type(data["descuento"]) is str) and data["descuento"] != '-1'))
+    if (data["descuento"] != False and
+        ((type(data["descuento"]) is str) and data["descuento"] != '-1')):
         descuento = Descuentos.objects.get(id = data["descuento"])
         print(descuento.valor)
         pre_pedido.descuento = descuento.valor

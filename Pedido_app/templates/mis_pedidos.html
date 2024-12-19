@@ -1,6 +1,7 @@
 {% include 'headerusuario.html' %}
     <div class="container mt-5">
-        <div class="alert alert-success display-1">Datos de los pedidos</div>
+        <div class="shamrock">🍀</div>
+        <h1 id="Titulo-pag">Datos de los pedidos</h1>
         {% if ped_activos or ped_pasados %}
         <div class="">
           <h3>Pedidos Activos</h3>
@@ -82,7 +83,7 @@
           </table>
         </div>
         {% else %}
-        <h1>No ha realizado pedidos</h1>
+        <h4>No ha realizado pedidos</h1>
         {% endif %}
         <a href="{% url 'pagina_principal' %}" class="btn btn-success mt-3 boton">Volver</a>
     </div>
