@@ -4,10 +4,10 @@
         <div class="shamrock">🍀</div>
         <form method="POST">
             {% csrf_token %}
-            <label for="txt_descripcion">Descripcion</label>
-            <textarea name="txt_descripcion" id="txt_descripcion"
+            <label for="txt_descripcion" class="form-label">Descripcion</label>
+            <textarea name="txt_descripcion" id="txt_descripcion" class="form-control"
                       cols="50" required>{% if pregunta %}{{pregunta.descripcion}}{% endif %}</textarea>
-            <input type="submit" value="Guardar" class="btn btn-success">
+            <input type="submit" value="Guardar" class="btn btn-success mt-2">
         </form>
     </div>
 {% include 'footer.html' %}

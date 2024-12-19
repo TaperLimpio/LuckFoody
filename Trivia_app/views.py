@@ -98,15 +98,15 @@ def Editar_Pregunta(request,id_pregunta):
         data = {'pregunta':pregunta}
         return render(request,'crear_pregunta.html',data)
 
-def Respuestas(request,id_pregunta):
+def Respuestas(request,id_trivia,id_pregunta):
     try:
         respuestas = Respuesta.objects.filter(id_pregunta = Pregunta.objects.get(id = id_pregunta))
-        data = {'respuestas':respuestas, 'pregunta': id_pregunta}
+        data = {'respuestas':respuestas, 'pregunta': id_pregunta, 'trivia':id_trivia}
         return render(request,"respuestas.html",data)
     except Pregunta.DoesNotExist:
         return render(request,"respuestas.html")
 
-def Crear_Respuesta(request,id_pregunta):
+def Crear_Respuesta(request,id_trivia,id_pregunta):
     existeCorrecta = ExisteRespuestaCorrecta(id_pregunta)
     if request.method == "POST":
         pre_respuesta = Respuesta()
@@ -118,12 +118,12 @@ def Crear_Respuesta(request,id_pregunta):
         else:
             pre_respuesta.escorrecto = False
         pre_respuesta.save()
-        return redirect('respuestas', id_pregunta)
+        return redirect('respuestas', id_trivia,id_pregunta)
     else:
         data = {'existeCorrecta': existeCorrecta}
         return render(request,'crear_respuesta.html',data)
     
-def Editar_Respuesta(request,id_respuesta):
+def Editar_Respuesta(request,id_trivia,id_respuesta):
     if request.method == "POST":
         respuesta = Respuesta.objects.get(id = id_respuesta)
         respuesta.descripcion = request.POST["txt_descripcion"]
@@ -136,7 +136,7 @@ def Editar_Respuesta(request,id_respuesta):
             else:
                 respuesta.escorrecto = False
         respuesta.save()
-        return redirect('respuestas', respuesta.id_pregunta.id)
+        return redirect('respuestas', id_trivia,respuesta.id_pregunta.id)
     else:
         respuesta = Respuesta.objects.get(id = id_respuesta)
         data = {'respuesta':respuesta}
@@ -149,7 +149,7 @@ def ExisteRespuestaCorrecta(id_pregunta):
             return True
     return False
 
-def EstablecerCorrecta(request,id_respuesta):
+def EstablecerCorrecta(request,id_trivia,id_respuesta):
     print(id_respuesta)
     respuesta_correcta = Respuesta.objects.get(id = id_respuesta)
     print(respuesta_correcta.descripcion)
@@ -169,7 +169,7 @@ def EstablecerCorrecta(request,id_respuesta):
     print("--------")
     for re in respuestas:
         print(re.escorrecto)
-    return redirect('respuestas', id_pregunta)
+    return redirect('respuestas', id_trivia,id_pregunta)
     
 def actualizar_tiempo():
     trivias_activas = Trivia.objects.filter(estado = "activo")

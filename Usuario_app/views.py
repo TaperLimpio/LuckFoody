@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect,get_object_or_404
 from  Usuario_app.models import Usuario  # Asegúrate de que esta sea tu clase de usuario
 from . import forms
 from .forms import UsuarioForm,UsuarioAdminForm,Filtro,ActualizarUsuarioAdminForm
-from .forms import ActualizarContraseñaUsuario,ActualizarUsuarioForm
+from .forms import ActualizarUsuarioForm
 from django.contrib.auth.hashers import check_password,make_password
 
 # Create your views here.
@@ -80,16 +80,26 @@ def mi_cuenta(request):
 def actualizar_contraseña(request):
     usuario = get_object_or_404(Usuario, id=request.session['usuario_id'])
     tipo_usuario_consultor = usuario.tipo
-    form = ActualizarContraseñaUsuario()
+    data = {'tipo_usuario_consultor':tipo_usuario_consultor}
     if request.method == 'POST':
-        form = ActualizarContraseñaUsuario(request.POST, instance=usuario)
-        if form.is_valid():
-            usuario = form.save(commit=False)
-            usuario.contraseña = make_password(usuario.contraseña)
-            usuario.save()
-            return redirect('pagina_principal')
-    data = {'form':form,'tipo_usuario_consultor':tipo_usuario_consultor}
-    return render(request,'actualizar-mi-cuenta.html',data)
+        contraseña_nueva = request.POST.get('contraseña_nueva')
+        contraseña_nueva_2 = request.POST.get('contraseña_nueva_2')
+        if contraseña_nueva != "" or contraseña_nueva_2 != "":
+            if contraseña_nueva == contraseña_nueva_2:
+                print(usuario.nombre)
+                usuario.contraseña = make_password(contraseña_nueva)
+                usuario.save()
+                print(tipo_usuario_consultor)
+                if tipo_usuario_consultor == "usuario":
+                    return redirect('pagina_principal')
+                elif tipo_usuario_consultor == "administrador":
+                    return redirect('pagina_administrador')
+                else:
+                    return redirect('pagina-repartidor')
+            else:
+                data['error'] = 'Ingrese la misma nueva contraseña en los dos campos'
+    
+    return render(request, 'actualizar-contraseña.html',data)
 
 #le permite actualizar a todos los tipos de usuarios
 def Update_Usuario(request, emp_id):
@@ -115,7 +125,7 @@ def Update_mi_cuenta(request):
         form = ActualizarUsuarioForm(request.POST, instance=usuario)
         if form.is_valid():
             form.save()
-            return redirect('pagina_principal')
+            return redirect('mi_cuenta')
         
     data = {'form':form,'tipo_usuario_consultor':tipo_usuario_consultor}
     return render(request, 'actualizar-mi-cuenta.html', data)

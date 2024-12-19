@@ -8,7 +8,7 @@
             <li class="list-group-item">
                 <h1>Pregunta {{pre.nOrden}}:</h1>
                 <p>{{pre.descripcion}}</p>
-                <a href="{% url 'respuestas' pre.id %}" class="btn btn-success mt-1 mb-1">Ver Respuestas</a>
+                <a href="{% url 'respuestas' trivia pre.id %}" class="btn btn-success mt-1 mb-1">Ver Respuestas</a>
                 <a href="{% url 'editar_pregunta' pre.id %}" class="btn btn-warning">Editar</a>
             </li>
             {% endfor %}
@@ -17,5 +17,6 @@
         <div class="alert alert-danger">Esta trivia no tiene preguntas</div>
         {% endif %}
         <a href="{% url 'crear_preguntas' trivia %}" class="btn btn-success mt-3">Crear Pregunta</a>
+        <a href="{% url 'trivias' %}" class="btn btn-success mt-3">Volver</a>
     </div>
 {% include 'footer.html' %}

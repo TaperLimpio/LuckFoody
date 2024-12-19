@@ -6,28 +6,27 @@
 {% include 'header-repartidor.html' %}
 {% endif %}
     <div class="container mt-5">
-        <h1 class="logo">Editar cuenta</h1>
-        {% if form.errors %}
+        <h1 class="logo">Actualizar contraseña</h1>
+        {% if error %}
             <div class="alert alert-danger">
-                {% for field in form %}
-                    {% for error in field.errors %}
-                        <p>{{ error }}</p>
-                    {% endfor %}
-                {% endfor %}
-                {% for error in form.non_field_errors %}
-                    <p>{{ error }}</p>
-                {% endfor %}
+                {{error}}
             </div>
         {% endif %}
         <form method="post">
             {% csrf_token %}
-            {% for field in form %}
-                <label for="{{field.id_for_label}}" class="form-label">{{field.label}}</label>
-                {{field}}
-                {{field.errors}}
-            {% endfor %}
-            <input type="submit" class="btn btn-success mt-3" value="actualizar">
-            <a href="{% url 'index_usuario' %}" class="btn btn-success mt-3">volver</a>
+
+            <label for="contraseña_nueva" class="form-label"
+            >Contraseña Nueva</label>
+            <input type="password" name="contraseña_nueva" id="contraseña_nueva" 
+                   class="form-control" required>
+
+            <label for="contraseña_nueva_2" class="form-label"
+            >Ingrese la nueva contraseña denuevo</label>
+            <input type="password" name="contraseña_nueva_2" id="contraseña_nueva" 
+                   class="form-control" required>
+
+            <input type="submit" class="btn btn-success mt-3" value="Actualizar">
+            <a href="{% url 'mi_cuenta' %}" class="btn btn-success mt-3">volver</a>
         </form>
     </div>
 {% include 'footer.html' %}

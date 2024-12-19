@@ -8,9 +8,9 @@
             <li class="list-group-item">
                 <p><b>{{res.descripcion}}</b></p>
                 <p>¿Es la correcta?: <b>{% if res.escorrecto %}Si{% else %}No{% endif %}</b></p>
-                <a href="{% url 'editar_respuesta' res.id %}" class="btn btn-warning">Editar Respuesta</a>
+                <a href="{% url 'editar_respuesta' trivia res.id %}" class="btn btn-warning">Editar Respuesta</a>
                 {% if res.escorrecto == False %}
-                <a href="{% url 'establecer_respuesta' res.id %}" class="btn btn-warning">Seleccionar como correcta</a>
+                <a href="{% url 'establecer_respuesta' trivia res.id %}" class="btn btn-warning">Seleccionar como correcta</a>
                 {% endif %}
             </li>
             {% endfor %}
@@ -18,6 +18,7 @@
         {% else %}
         <div class="alert alert-danger">Esta Pregunta no tiene Respuestas</div>
         {% endif %}
-        <a href="{% url 'crear_respuestas' pregunta %}" class="btn btn-success mt-3">Crear Respuestas</a>
+        <a href="{% url 'crear_respuestas' trivia pregunta %}" class="btn btn-success mt-3">Crear Respuestas</a>
+        <a href="{% url 'preguntas' trivia %}" class="btn btn-success mt-3">Volver</a>
     </div>
 {% include 'footer.html' %}

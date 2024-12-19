@@ -132,10 +132,12 @@ class ActualizarUsuarioForm(forms.ModelForm):
     #evita ingresar un correro ya registrado y que no termine en "@gmail.com"
     def clean_email(self):
         email = self.cleaned_data.get('email')
-        if not email.endswith('@gmail.com'):
-            raise forms.ValidationError('El correo electrónico debe terminar en @gmail.com.')
-        if Usuario.objects.filter(email=email).exists():
-            raise forms.ValidationError('Este correo electrónico ya está registrado.')
+        email_anterior = Usuario.objects.get(id = self.instance.id).email
+        if email != email_anterior:
+            if not email.endswith('@gmail.com'):
+                raise forms.ValidationError('El correo electrónico debe terminar en @gmail.com.')
+            if Usuario.objects.filter(email=email).exists():
+                raise forms.ValidationError('Este correo electrónico ya está registrado.')
         return email
     
     #evita crear una cuenta con el mismo nombre
@@ -147,6 +149,7 @@ class ActualizarUsuarioForm(forms.ModelForm):
                 raise forms.ValidationError('Utilice otro nombre.')
         return nombre  
 
+"""
 class ActualizarContraseñaUsuario(forms.ModelForm):
     class Meta:
         model = Usuario
@@ -164,7 +167,7 @@ class ActualizarContraseñaUsuario(forms.ModelForm):
         if check_password(contraseña,contraseña_anterior):
             raise forms.ValidationError('Ingreso la misma contraseña')
         return contraseña
-    
+"""   
 #formulario para actualizar cuentas por parte del administrador
 class ActualizarUsuarioAdminForm(forms.ModelForm):
     class Meta:
