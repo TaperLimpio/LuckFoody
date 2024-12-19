@@ -14,8 +14,10 @@ from PaginaWeb.views import dashboard
 
 from Pedido_app.views import consultar_pedidos, ver_pedido, mis_pedidos, cancelar_pedido
 
-from Usuario_app.views import crearcuenta, login, crearcuentaadmin, ver_usuario 
-from Usuario_app.views import Update_Usuario, delete_usuario, Index_Usuario
+from Usuario_app.views import crearcuenta, login, crearcuentaadmin
+from Usuario_app.views import Update_Usuario, desactivar_usuario, Index_Usuario
+from Usuario_app.views import ver_usuario, mi_cuenta, activar_usuario
+from Usuario_app.views import Update_mi_cuenta,actualizar_contraseña
 
 from Sucursal_app.views import ingresarsucursal, consultarsucursal, modificarsucursal
 from Sucursal_app.views import deshabilitarsucursal, listasucursal, habilitarsucursal
@@ -108,8 +110,12 @@ urlpatterns = [
     #Usuario
     path('index usuario/', Index_Usuario, name='index_usuario'),
     path('usuarios/<int:emp_id>/', ver_usuario, name='ver_usuario'), 
-    path('delete-usuario/<int:emp_id>/', delete_usuario, name='delete_usuario'),
+    path('desactivar-usuario/<int:emp_id>/', desactivar_usuario, name='desactivar_usuario'),
+    path('activar-usuario/<int:emp_id>/', activar_usuario, name='activar_usuario'),
     path('update_usuario/<int:emp_id>/', Update_Usuario),
+    path('mi_cuenta',mi_cuenta,name='mi_cuenta'),
+    path('update_mi_cuenta',Update_mi_cuenta,name="update_mi_cuenta"),
+    path('updata_contraseña_mi_cuenta',actualizar_contraseña,name='actualizar_contraseña'),
     
     #Tomar pedido
     path('aceptar_pedido/<int:id_pedido>',aceptar_pedido,name='aceptar_pedido'),

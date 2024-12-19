@@ -1,0 +1,28 @@
+{% include 'headeradmin.html' %}
+  <div class="container mt-5 text-start">
+    <h3>Datos del usuario</h3>
+      <div class="col">
+        <ul class="list-group">
+          <li class="list-group-item">Nombre: {{usuario.nombre}}</li>
+          <li class="list-group-item">Email: {{usuario.email}}</li>
+          <li class="list-group-item">Fono: {{usuario.fono}}</li>
+          <li class="list-group-item">Estado: {{usuario.estado}}</li>
+        </ul>
+      </div>
+      <div class="col text-center mt-3">
+          <a href="/update_usuario/{{usuario.id}}"
+          class='btn btn-warning'><i class="bi bi-pencil"></i></a>
+          {% if usuario.estado == "activo" %}
+          <a href="{% url 'desactivar_usuario' usuario.id %}"
+          class='btn btn-danger'><i class="bi bi-x-circle"></i></a>
+          {% else %}
+          <a href="{% url 'activar_usuario' usuario.id %}"
+          class='btn btn-primary'><i class="bi bi-check-circle"></i></a>
+          {% endif %}
+      </div>
+      <div class="col text-center mt-3">
+        <a href="{% url 'index_usuario' %}"
+        class="btn btn-success">Volver</a>
+      </div>
+  </div>
+{%include 'footer.html'%}
