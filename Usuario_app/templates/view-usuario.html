@@ -6,20 +6,18 @@
 {% include 'headerusuario.html' %}
 {% endif %}
     <div class="container mt-5">
-      <div class="alert alert-success display-1">MIS DATOS</div>
-        <table class="table table-striped">
-          <tr><td>Nombre</td><td>{{usuario.nombre}}</td></tr>
-          <tr><td>Email</td><td>{{usuario.email}}</td></tr>
-          <tr><td>Fono</td><td>{{usuario.fono}}</td></tr>
-          <tr><td>contraseña</td><td>{{usuario.contraseña}}</td></tr>
-          <tr><td>Acciones</td><td><a href="/update_usuario/{{usuario.id}}"
-            class='btn btn-warning'><i class="bi bi-pencil"></i>
-         </a> <a href="{% url 'delete_usuario' usuario.id %}"
-         class='btn btn-danger'><i class="bi bi-trash"></i>
-      </a></td></tr>
-          
-          
-        </table>
+      <h3>Mi cuenta</h3>
+      <div class="col">
+        <ul class="list-group">
+          <li class="list-group-item"><b>Nombre:</b> {{usuario.nombre}}</li>
+          <li class="list-group-item"><b>Email:</b> {{usuario.email}}</li>
+          <li class="list-group-item"><b>Fono:</b> {{usuario.fono}}</li>
+          <li class="list-group-item"><b>Estado:</b> {{usuario.estado}}</li>
+        </ul>
+      </div>
+        <a href="{% url 'actualizar_contraseña' %}" class="btn btn-warning mt-3"
+        >actualizar contraseña</a>
+        <a href="{% url 'update_mi_cuenta' %}" class="btn btn-warning mt-3">actualizar datos</a>
         <a href="{% url 'login' %}" class="btn btn-danger mt-3">Cerrar sesion</a>
         {% if usuario.tipo == "administrador" %}
         <a href="{% url 'pagina_administrador' %}" class="btn btn-success mt-3">Volver</a>

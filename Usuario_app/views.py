@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from  Usuario_app.models import Usuario  # Asegúrate de que esta sea tu clase de usuario
 from . import forms
-from .forms import UsuarioForm,UsuarioAdminForm,Filtro
+from .forms import UsuarioForm,UsuarioAdminForm,Filtro,ActualizarUsuarioAdminForm
+from .forms import ActualizarContraseñaUsuario,ActualizarUsuarioForm
 from django.contrib.auth.hashers import check_password,make_password
 
 # Create your views here.
@@ -70,33 +71,71 @@ def ver_usuario(request, emp_id):
     usuario = get_object_or_404(Usuario, id=emp_id)
     return render(request, 'consultar-usuario.html', {'usuario': usuario})
 
+#permite ver los datos de la cuenta en la que estas registrada
 def mi_cuenta(request):
     usuario = get_object_or_404(Usuario, id=request.session['usuario_id'])
     tipo_usuario_consultor = usuario.tipo
     return render(request, 'view-usuario.html', {'usuario': usuario,
                                                  'tipo_usuario_consultor':tipo_usuario_consultor})
 
+def actualizar_contraseña(request):
+    usuario = get_object_or_404(Usuario, id=request.session['usuario_id'])
+    tipo_usuario_consultor = usuario.tipo
+    form = ActualizarContraseñaUsuario()
+    if request.method == 'POST':
+        form = ActualizarContraseñaUsuario(request.POST, instance=usuario)
+        if form.is_valid():
+            usuario = form.save(commit=False)
+            usuario.contraseña = make_password(usuario.contraseña)
+            usuario.save()
+            return redirect('pagina_principal')
+    data = {'form':form,'tipo_usuario_consultor':tipo_usuario_consultor}
+    return render(request,'actualizar-mi-cuenta.html',data)
+
 #le permite actualizar a todos los tipos de usuarios
 def Update_Usuario(request, emp_id):
     usuario = Usuario.objects.get(id=emp_id)
-    form = UsuarioForm(instance=usuario)
+    form = ActualizarUsuarioAdminForm(instance=usuario)
     
     if request.method == "POST":
-        form = UsuarioForm(request.POST, instance=usuario)
+        form = ActualizarUsuarioAdminForm(request.POST, instance=usuario)
         if form.is_valid():
             form.save()
-            return redirect('login')  # Redirigir al login después de actualizar
+            return redirect('ver_usuario', emp_id)  # Redirigir al login después de actualizar
         
     data = {'form': form, 'titulo': 'Actualizar usuario'}
-    return render(request, 'crear-cuenta.html', data)
+    return render(request, 'actualizar-cuenta.html', data)
+
+#le permite actualizar los datos de la cuenta registrada
+def Update_mi_cuenta(request):
+    usuario = get_object_or_404(Usuario, id=request.session['usuario_id'])
+    tipo_usuario_consultor = usuario.tipo
+    form = ActualizarUsuarioForm(instance=usuario)
+
+    if request.method == "POST":
+        form = ActualizarUsuarioForm(request.POST, instance=usuario)
+        if form.is_valid():
+            form.save()
+            return redirect('pagina_principal')
+        
+    data = {'form':form,'tipo_usuario_consultor':tipo_usuario_consultor}
+    return render(request, 'actualizar-mi-cuenta.html', data)
 
 #cambia el estado del usuario a inactivo
-def delete_usuario(request, emp_id):
+def desactivar_usuario(request, emp_id):
     usuario = Usuario.objects.get(id=emp_id)
     if usuario:
         usuario.estado = 'inactivo'
         usuario.save()
-    return redirect('login')
+    return redirect('ver_usuario',emp_id)
+
+#cambia el estado del usuario a activo
+def activar_usuario(request, emp_id):
+    usuario = Usuario.objects.get(id=emp_id)
+    if usuario:
+        usuario.estado = 'activo'
+        usuario.save()
+    return redirect('ver_usuario',emp_id)
 
 #permite ver una lista con todos los usuarios registrados tanto cliente,repartidores y administradores
 def Index_Usuario(request):
